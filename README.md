@@ -164,10 +164,6 @@ lots of forms and form flows, so styling these was important to not have the sit
 
 [Back to Top](##Contents)
 
-## Planning
-
-[Back to Top](##Contents)
-
 ## Wireframes
 
 [Back to Top](##Contents)
@@ -186,10 +182,6 @@ lots of forms and form flows, so styling these was important to not have the sit
 
 ## Features
 
-In this section, you should go over the different parts of your project, and describe each in a sentence or so.
-
-[Back to Top](##Contents)
-
 ### Existing Features
 
 - Feature 1 - allows users X to achieve Y, by having them fill out Z
@@ -203,7 +195,10 @@ In addition, you may also use this section to discuss plans for additional featu
 
 ### Features Left to Implement
 
-- Another feature idea
+- Option for multiple engineers to create some sort of 'engineer profile' to market themselves to their own clients / get their own work / get their own income stream.
+- Extended artist profile of Nullanion back catalogue.
+- More services offered - such as live event engineer services or on-location studio tracking.
+- Collaboration portal.
 
 [Back to Top](##Contents)
 
@@ -218,6 +213,14 @@ In this section, you should mention all of the languages, frameworks, libraries,
 
 ## Planning + Testing
 
+Since a lot of the technologies I used in this project are brand new to me, planning in the intitial pahses were very important. Making sure that wireframes, user stories, user journies and expected outcome had their expectations managed, was my top priority.
+
+I knew I wanted to make a website to provide a portal for musicans to purchase these services, so as long as that goal is met then I'd be happy.
+
+A brand had to be created for the look and the intricicies of the service I wanted to provide had to be understood before any code was written.
+
+
+----
 In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
 
 Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
