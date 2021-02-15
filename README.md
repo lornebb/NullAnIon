@@ -12,6 +12,8 @@ At Nullanion, one can order a mix or master of a song, EP or full length LP (Alb
     - [Site Owner Goals](###Site-OwnerGoals)
     - [User Stories](###User-Stories)
     - [User Requirements and Expectations](###User-Requirements-and-Expectations)
+        - [Requirements](####Requirements)
+        - [Expectations](####Expectations)
 2. [Design Choices](###Design-Choices)
     - [Fonts](###Fonts)
     - [Icons](###Icons)
@@ -111,9 +113,30 @@ The Nullanion project's purpose is to offer multiple music services to customers
 
 ### User Requirements and Expectations
 
+Audio art is an amazingly personal product and achieving the techincal requirements to present it publicly have grown more accessible than ever, however, some artists require more experienced technical engineers to get the best out of their creations. Luckily, these days, experienced engineers can be reached from all over the world.
+
+Proving some experience and a legitiate web site to sell these services is the number one priority in creating long lasting customer relationships and quality services.
+
+#### Requirements
+
+- An easy to use design.
+- Access to all features on all screensizes.
+- Transparent pricing structure with visual representaition of quote amount.
+- Safe purchasing of products.
+- Feedback of purchase success / failure.
+- Communicate with business.
+
+#### Expectations
+
+- The website will not store customers payment details in the database.
+- The website will uphold the privacy and expected security of customer personal data.
+- The website will be usable on any viewing screen.
+
 [Back to Top](##Contents)
 
 ## Design Choices
+
+lots of forms and form flows, so styling these was important to not have the site appear to dreaery. littered with icons and big button.
 
 [Back to Top](##Contents)
 
