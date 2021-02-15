@@ -40,17 +40,32 @@ At Nullanion, one can order a mix or master of a song, EP or full length LP (Alb
 
 ## UX
 
-[Back to Top](##Contents)
-
 ### Project Goals
+
+The Nullanion project's purpose is to offer multiple music services to customers that need high quality delivery on mix, master, additional production, soundtrack and sound design products. Customers will be able to create a bespoke order, pay their quote, communicate directly with their engingeer and upload / download high quality files. All in an easy to follow user journey and secure environment.
 
 [Back to Top](##Contents)
 
 ### Target Audience Goals
 
+- See reference material of previous work in all fields.
+- Select a service from a list.
+- Customise order and get real time updates on quote price with each change.
+- Pay securely for services.
+- Upload and download high quality files securely.
+- Communicate with their engineer on edits / references / progress.
+- Check on progress of product from a user portal.
+- Navigate the website easily on any device size.
+
 [Back to Top](##Contents)
 
 ### Site Owner Goals
+
+- Create a safe and secure e-commerce site, that can generate revenue.
+- Provide clear pricing and service descriptions.
+- Demonstrate industry experience to users via a showcase area.
+- Maintain account product history for optimising future experiences.
+- Use work generated from sales as examples on the site.
 
 [Back to Top](##Contents)
 
@@ -58,11 +73,39 @@ At Nullanion, one can order a mix or master of a song, EP or full length LP (Alb
 
 #### First-time user
 
+1. As a first-time user, I want to quickly and easily nagivate around the site to understand what this company does / can do for me.
+2. As a first-time user, I want to hear examples of work.
+3. As a first-time user, I want to select a service and follow an easy to use form to customise my order.
+4. As a first-time user, I want to see clear chanegs to quote price, and transparant pricing so as to not feel slighted on price.
+5. As a first-time user, I want to make sure I create an account before I pay to ensure a relation between order and my account.
+6. As a first-time user, I want to make sure that after I pay, I get a confirmation of payment.
+7. As a first-time user, I want to make sure that after I have paid, my files can be uploaded securely.
+8. As a first-time user, I want to have an easy communication process with the engineer working on my material.
+
 #### Returning Customer
+
+1. As a returning customer, I want to be able to log in to an account to see the progress of my order.
+2. As a returning customer, I want to be able to easily communicate with my engineer.
+3. As a returning customer, I want to only share relevant personal details.
+4. As a returning customer, I want to have my personal details in my account to be private.
+5. As a returning customer, I want to take delivery of versions of my order easily.
+6. As a returning customer, I want to be able to share notes and suggested edits on versions easliy with the engineer.
 
 #### Browsing customer
 
+1. As a browsing customer, I want to be able to look around the site without making an account.
+2. As a browsing customer, I want to be able to check out the services freely and see how much things would cost withotu commiting to a price.
+
 #### Engineer (Super User)
+
+1. As an engineer, I want to be able to recieve an order in an understandable format.
+2. As an engineer, I want to be able to access the user files to work on as soon as the order opens.
+3. As an engineer, I want to see a clear deadline for an order.
+4. As an engineer, I want to see reference text and links from the customer.
+5. As an engineer, I want to know what format the cusomter is expecting their order to come back in.
+6. As an engineer, I want to be able to communicate directly with the customer.
+7. As an engineer, I want to be able to upload versions to the customer.
+8. as an engineer, I want to be able to mark an order as completed/fulfilled.
 
 [Back to Top](##Contents)
 
