@@ -199,6 +199,7 @@ In addition, you may also use this section to discuss plans for additional featu
 - Extended artist profile of Nullanion back catalogue.
 - More services offered - such as live event engineer services or on-location studio tracking.
 - Collaboration portal.
+- Other art types showcased / service offers - eg artwork, music video etc
 
 [Back to Top](##Contents)
 
