@@ -168,6 +168,10 @@ lots of forms and form flows, so styling these was important to not have the sit
 
 ![LandingPage](static/wireframes/desktop-landing-page.png)
 
+I used [Goodnotes](https://www.goodnotes.com/) to hand draw the wireframes and user flows before commiting anything to [balsamiq](https://balsamiq.com/) for digital recreation. This process always helps to iron out the things you dont think of before commiting to the code. Exporing the wireframes was easy using Balsamiq, and you can find them all here:
+
+[Wireframes Folder](https://github.com/lornebb/NullAnIon/tree/master/static/wireframes)
+
 [Back to Top](##Contents)
 
 ### Website Layout
@@ -175,6 +179,18 @@ lots of forms and form flows, so styling these was important to not have the sit
 [Back to Top](##Contents)
 
 ### Account Creation Flowchart
+
+Account creation is different to anything I hav done before as users don't need an account unless they are purchasing. So the account creation has to be executed during the checkout process. I drew a user flow to help easily explain this. This was hand made with [Goodnotes](https://www.goodnotes.com/).
+
+![User-Flow-Account-Creation](static/wireframes/user-flow-account-creation.jpg)
+
+[Back to Top](##Contents)
+
+### Returning Customer Account Flowchart
+
+Returning customers that want to check up on an order, or share notes / feedback on a revision will need to use a log in / forgotpassword portal, that also has some defensive measures built in to only allow users to log in, and not create a new account. Also, a forgot password link will be available. This was hand made with [Goodnotes](https://www.goodnotes.com/).
+
+![Returning-Customers-User-Flow](static/wireframes/user-flow-returning-customer.jpg)
 
 [Back to Top](##Contents)
 
