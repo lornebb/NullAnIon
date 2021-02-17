@@ -166,6 +166,8 @@ lots of forms and form flows, so styling these was important to not have the sit
 
 ## Wireframes
 
+![LandingPage](static/wireframes/desktop-landing-page.png)
+
 [Back to Top](##Contents)
 
 ### Website Layout
