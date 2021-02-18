@@ -75,10 +75,10 @@ The Nullanion project's purpose is to offer multiple music services to customers
 
 #### First-time user
 
-1. As a first-time user, I want to quickly and easily nagivate around the site to understand what this company does / can do for me.
+1. As a first-time user, I want to quickly and easily navigate around the site to understand what this company does / can do for me.
 2. As a first-time user, I want to hear examples of work.
 3. As a first-time user, I want to select a service and follow an easy to use form to customise my order.
-4. As a first-time user, I want to see clear chanegs to quote price, and transparant pricing so as to not feel slighted on price.
+4. As a first-time user, I want to see clear changes to quote price, and transparent pricing so as to not feel slighted on price.
 5. As a first-time user, I want to make sure I create an account before I pay to ensure a relation between order and my account.
 6. As a first-time user, I want to make sure that after I pay, I get a confirmation of payment.
 7. As a first-time user, I want to make sure that after I have paid, my files can be uploaded securely.
@@ -96,15 +96,15 @@ The Nullanion project's purpose is to offer multiple music services to customers
 #### Browsing customer
 
 1. As a browsing customer, I want to be able to look around the site without making an account.
-2. As a browsing customer, I want to be able to check out the services freely and see how much things would cost withotu commiting to a price.
+2. As a browsing customer, I want to be able to check out the services freely and see how much things would cost without committing to a price.
 
 #### Engineer (Super User)
 
-1. As an engineer, I want to be able to recieve an order in an understandable format.
+1. As an engineer, I want to be able to receive an order in an understandable format.
 2. As an engineer, I want to be able to access the user files to work on as soon as the order opens.
 3. As an engineer, I want to see a clear deadline for an order.
 4. As an engineer, I want to see reference text and links from the customer.
-5. As an engineer, I want to know what format the cusomter is expecting their order to come back in.
+5. As an engineer, I want to know what format the customer is expecting their order to come back in.
 6. As an engineer, I want to be able to communicate directly with the customer.
 7. As an engineer, I want to be able to upload versions to the customer.
 8. as an engineer, I want to be able to mark an order as completed/fulfilled.
