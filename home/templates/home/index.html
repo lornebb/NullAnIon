@@ -1,75 +1,55 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block content %}
-<!-- Navbar -->
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="#">
-      <!-- <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"> -->
-      nullanion
-    </a>
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-end">
-      <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Services
-          </a>
-  
-          <div class="navbar-dropdown">
-            <a class="navbar-item">
-              Mix
-            </a>
-            <a class="navbar-item">
-              Master
-            </a>
-            <a class="navbar-item">
-              Production
-            </a>
-            
-            <a class="navbar-item">
-              Soundtrack
-            </a>
-            <a class="navbar-item">
-              Sound Design
-            </a>
-          </div>
-          <div class="navbar-item">
-              <a class="navbar-item">
-                  Library
-              </a>
-          </div>
-          <div class="navbar-item">
-              <a class="navbar-item">
-                  Account
-              </a>
-          </div>
-          <div class="navbar-item">
-              <a class="navbar-item">
-                  BASKET
-              </a>
-          </div>
-      </div>
-  </div>
-</nav>
-<!-- Main body -->
-<div class="columns">
-  <!-- Info sidebar -->
-  <div class="column is-one-quarter">
-    <div class="content">
-      <h4>About NULLANiON</h4>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat nihil fuga in sed at assumenda ipsum pariatur, alias quas id, ea quidem perferendis aliquam incidunt sapiente debitis libero? Consectetur, quo!
-      </p>
+{% block page_header %}
+  <div class="columns">
+    <div class="column">
+
     </div>
   </div>
-  <div class="column">Auto</div>
-</div>
+{% endblock %}
+
+{% block content %}
+
+<section class="container is-fluid">
+  <div class="columns">
+    <div class="column is-one-quarter">
+      <div class="box">
+          <h6 class="title is-6 has-text-centered">NULLANiON</h6>
+          <p class="has-text-justified">Nullanion offers music services for those that need quality, delivered on time.</p>
+          <!-- <p class="has-text-justified">Nullanion offers music services for those that need quality, delivered on time.</p> -->
+      </div>
+      <div class="box">
+          <h6 class="title is-6 has-text-centered">Library</h6>
+          <p class="has-text-justified">Hear references from the NULLANiON library. You will find mixes, masters, soundtracks and more.</p>
+          <a class="button is-fullwidth">Library</a>
+      </div>
+      <div class="box">
+        <h6 class="title is-6 has-text-centered">Mix and Master</h6>
+        <p class="has-text-justified">Mix and Master is the most popular service, you can get your song, EP or Album sounding professional and radio ready.</p>
+        <div class="field is-grouped">
+          <p class="control">
+            <button class="button">
+              Mix
+            </button>
+          </p>
+          <p class="control">
+            <button class="button">
+              Master
+            </button>
+          </p>
+        </div>
+      </div>
+      <div class="box">
+        <h6 class="title is-6 has-text-centered">Other Services</h6>
+        <p class="has-text-justified">The rest of the services etc etc etc etc etc etc etc etc etc </p>
+        <a class="button is-fullwidth">Other Services</a>
+      </div>
+    </div>
+    <div class="column">
+      <!-- <img src="media/my-blob-1.jpg" alt="hero logo image"> -->
+    </div>
+  </div>
+</section>
   
 {% endblock %}

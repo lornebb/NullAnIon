@@ -14,7 +14,9 @@
 
     {% block corecss %}
     <!-- bulma css -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+      <!-- homemade css -->
+      <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% endblock %}
 
     {% block extra_css %}
@@ -30,7 +32,7 @@
   </head>
   <body>
     <header>
-        <!-- nav -->
+      {% include 'includes/main-nav.html' %}
     </header>
 
     {% if messages %}
@@ -40,11 +42,24 @@
     {% block page_header %}
     {% endblock %}
 
+    <main class="Site-content">
     {% block content %}
     {% endblock %}
+    </main>
 
     {% block postloadjs %}
     {% endblock %}
+
+    <footer class="footer">
+      <div class="content has-text-centered">
+        <p>
+          <strong>NULLANiON</strong> by <a href="#">NULLANiON</a>.
+        </p>
+        <p>
+          For educational purposes only.
+        </p>
+      </div>
+    </footer>
 
   </body>
 </html>

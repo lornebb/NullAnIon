@@ -1,0 +1,23 @@
+.Site-content {
+  flex: 1;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background: url("/media/my-blob-1.jpg") no-repeat center center fixed;
+  background-size: cover;
+  /* height: 100vh; */
+  /* height: calc(100vh - 100px); */
+  /* color: #f0f8ff; */
+  /* font-family: */
+}
+
+#floating-sidebar {
+  background-color: rgba(204, 204, 204, 0.4);
+}
