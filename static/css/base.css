@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;1,200&display=swap');
+
 .site-content {
   flex: 1;
 }
@@ -10,12 +12,12 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
-  background: url("/media/my-blob-1.jpg") no-repeat center center fixed;
+  background: url("/media/nullanion_background.png") no-repeat center center fixed;
   background-size: cover;
   /* height: 100vh; */
   /* height: calc(100vh - 100px); */
   /* color: #f0f8ff; */
-  /* font-family: */
+  font-family: 'Raleway', sans-serif;
 }
 
 #floating-sidebar {
