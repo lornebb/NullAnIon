@@ -136,7 +136,7 @@ Proving some experience and a legitiate web site to sell these services is the n
 
 ## Design Choices
 
-lots of forms and form flows, so styling these was important to not have the site appear to dreaery. littered with icons and big button.
+lots of forms and form flows, so styling these was important to not have the site appear too dreaery. littered with bespoke artwork emoting the flow of audio production and big buttons and floating info boxes to let the user know where they are.
 
 [Back to Top](##Contents)
 
@@ -149,6 +149,9 @@ lots of forms and form flows, so styling these was important to not have the sit
 [Back to Top](##Contents)
 
 ### Colours
+
+Yellow: #c6ab15
+Orange: #dc6517
 
 [Back to Top](##Contents)
 
