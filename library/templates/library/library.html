@@ -2,7 +2,11 @@
 {% load static %}
 
 {% block page_header %}
+<div class="columns">
+    <div class="column">
 
+    </div>
+  </div>
 {% endblock %}
 
 {% block content %}
@@ -10,37 +14,10 @@
 <section class="container is-fluid">
   <div class="columns">
     <div class="column is-one-quarter">
-      <div class="box">
-          <h6 class="title is-6 has-text-centered">NULLANiON</h6>
-          <p class="has-text-justified">Nullanion offers music services for those that need quality, delivered on time.</p>
-          <!-- <p class="has-text-justified">Nullanion offers music services for those that need quality, delivered on time.</p> -->
-      </div>
-      <div class="box">
-          <h6 class="title is-6 has-text-centered">Library</h6>
-          <p class="has-text-justified">Hear references from the NULLANiON library. You will find mixes, masters, soundtracks and more.</p>
-          <a class="button is-fullwidth">Library</a>
-      </div>
-      <div class="box">
-        <h6 class="title is-6 has-text-centered">Mix and Master</h6>
-        <p class="has-text-justified">Mix and Master is the most popular service, you can get your song, EP or Album sounding professional and radio ready.</p>
-        <div class="field is-grouped">
-          <p class="control">
-            <button class="button">
-              Mix
-            </button>
-          </p>
-          <p class="control">
-            <button class="button">
-              Master
-            </button>
-          </p>
-        </div>
-      </div>
-      <div class="box">
-        <h6 class="title is-6 has-text-centered">Other Services</h6>
-        <p class="has-text-justified">The rest of the services etc etc etc etc etc etc etc etc etc </p>
-        <a class="button is-fullwidth">Other Services</a>
-      </div>
+        {% include 'includes/info-main.html' %}
+        {% include 'includes/info-library.html' %}
+        {% include 'includes/info-mix-master.html' %}
+        {% include 'includes/info-other-services.html' %}
     </div>
     <div class="column">
      LIBRARY GOES HERE
