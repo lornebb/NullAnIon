@@ -23,36 +23,92 @@
       <div class="column">            
         <u>LIBRARY</u>
         
-        {% for songs in song %}
+          {% for songs in song %}
 
-        <div class="card">
-          <div class="card-image">
-            <figure class="image">
-              <img src="{{ songs.image_url }}" alt="{{ songs.song_name }} artwork image">
-            </figure>
+          <div class="tile is-ancestor">
+            <div class="tile is-vertical is-8">
+              <div class="tile">
+                <div class="tile is-parent">
+                  <article class="tile is-child">
+                    <figure class="image is-square">
+                      <a href="{{ songs.audio_link }}">
+                        <img src="{{ songs.image_url }}" alt="{{ songs.song_name }} artwork image">
+                      </a>
+                    </figure>
+                  </article>
+                </div>
+                <div class="tile is-parent is-vertical">
+                  <article class="tile is-child notification">
+                    <p class="title">{{ songs.song_name }}</p>
+                    <p class="subtitle">By: {{ songs.artist_name }}</p>
+                    <div class="content">
+                      Album: {{ songs.album_name }}
+                      <br>
+                      Year: {{ songs.year }}
+                    </div>
+                  </article>
+                  <article class="tile is-child notification">
+                    <p class="title">{{ songs.category }}</p>
+                    <p class="subtitle">also: {{ songs.category_secondary }}</p>
+                  </article>
+                </div>
+                
+              </div>
+              <div class="tile is-parent">
+                <!-- <article class="tile is-child notification is-danger">
+                  <p class="title">description</p>
+                  <p class="subtitle">Aligned with the right tile</p>
+                  <div class="content">
+                  </div>
+                </article> -->
+              </div>
+            </div>
+            <div class="tile is-parent">
+              <article class="tile is-child notification">
+                <div class="content">
+                  <p class="title">Description</p>
+                  <p class="subtitle"></p>
+                  <div class="content">
+                    <!-- Content -->
+                    {{ songs.description}}
+                  </div>
+                </div>
+              </article>
+            </div>
           </div>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left">
-                <figure class="image is-48x48">
-                  <a href="{{ songs.audio_link }}"><img src="{{ MEDIA_URL }}noun_play_2184153.svg" alt="Play icon"></a>
+
+
+
+          <!-- <div class="column is-4">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-square">
+                  <img src="{{ songs.image_url }}" alt="{{ songs.song_name }} artwork image">
                 </figure>
               </div>
-              <div class="media-content">
-                <p class="title is-4">{{ songs.artist_name}}</p>
-                <p class="subtitle is-6">{{ songs.song_name }}</p>
+              <div class="card-content">
+                <div class="media">
+                  <div class="media-left">
+                    <figure class="image is-48x48">
+                      <a href="{{ songs.audio_link }}"><img src="" alt="Play icon"></a>
+                    </figure>
+                  </div>
+                  <div class="media-content">
+                    <p class="title is-4">{{ songs.artist_name}}</p>
+                    <p class="subtitle is-6">{{ songs.song_name }}</p>
+                  </div>
+                </div>
+            
+                <div class="content">
+                  {{ songs.description }}
+                  <br>
+                  <time datetime="2016-1-1">{{ songs.year }}</time>
+                </div>
               </div>
             </div>
-        
-            <div class="content">
-              {{ songs.description }}
-              <br>
-              <time datetime="2016-1-1">{{ songs.year }}</time>
-            </div>
-          </div>
+          </div> -->
+          {% endfor %}
         </div>
-        
-        {% endfor %}
       </div>
     </div>
   </section>

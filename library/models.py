@@ -18,6 +18,7 @@ class Category(models.Model):
 
 class Song(models.Model):
     category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
+    category_secondary = models.CharField(max_length=254, null=True, blank=True)
     song_name = models.CharField(max_length=254)
     album_name = models.CharField(max_length=254, null=True, blank=True)
     artist_name = models.CharField(max_length=254, null=True, blank=True)
