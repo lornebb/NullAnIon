@@ -11,7 +11,25 @@
 
 {% block content %}
 
-  LIBRARY GOES HERE
-  {{ song }}
+<main class="site-content">
+  <section class="container is-fluid">
+    <div class="columns">
+      <div class="column is-one-quarter">
+        {% include 'includes/info-main.html' %}
+        {% include 'includes/info-library.html' %}
+        {% include 'includes/info-mix-master.html' %}
+        {% include 'includes/info-other-services.html' %}
+      </div>
+      <div class="column">            
+        LIBRARY GOES HERE
+        {% for songs in song %}
+
+          {{ song }}
+        
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</main>
   
 {% endblock %}
