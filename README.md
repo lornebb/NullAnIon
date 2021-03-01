@@ -279,7 +279,6 @@ If this section grows too long, you may want to split it off into a separate fil
 
 ## Credits
 
-Play icon by [Eagle Eye from the Noun Project](https://thenounproject.com/search/?q=play&i=2184153)
 
 [Back to Top](##Contents)
 
