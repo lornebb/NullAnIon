@@ -1,1 +1,1 @@
-web: gunicorn nullanion.wgsi:application
+web: gunicorn nullanion.wsgi:application
