@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'home',
     'library',
     'storages',
+    'services',
 ]
 
 MIDDLEWARE = [
