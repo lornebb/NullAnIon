@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
+{% crispy example_form example_form.helper %}
 
 {% block page_header %}
 <div class="columns">
@@ -16,17 +18,20 @@
     <div class="columns">
       <div class="column is-one-quarter">
         {% include 'includes/info-main.html' %}
-        {% include 'includes/info-library.html' %}
         {% include 'includes/info-mix-master.html' %}
-        {% include 'includes/info-other-services.html' %}
       </div>
       <div class="column">            
-        <u>LIBRARY</u>
+        <u>Services: Order a Mix</u>
 
-    <form action="/your-name/" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit">
+    <form action="#" method="post" class="uniForm">
+
+
+      {{ example_form|crispy }}
+
+
+        
+
+        <!-- <input type="submit" value="Submit"> -->
     </form>
 
 HELLO I AM THE SERVICES PAGE
