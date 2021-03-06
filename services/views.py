@@ -1,7 +1,7 @@
 # from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from .forms import MixOrderForm
+from .forms import MixOrderForm, MasterOrderForm, ProductionOrderForm
 
 # def mix_form(request):
 #     """ A view to return the mix service from services """
@@ -27,5 +27,14 @@ def example_form(request):
     """a view to render example form"""
 
     mix_order_form = MixOrderForm()
+    master_order_form = MasterOrderForm()
+    production_order_form = ProductionOrderForm()
 
-    return render(request, 'services/mix.html', {'mix_order_form' : mix_order_form})
+    context = {
+        'mix_order_form' : mix_order_form,
+        'master_order_form' : master_order_form,
+        'production_order_form': production_order_form,
+    }
+
+    return render(request, 'services/mix.html', context)
+                        

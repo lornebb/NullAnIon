@@ -23,17 +23,27 @@
       <div class="column">            
         <u>Services: Order a Mix</u>
 
-    <form action="#" method="post" class="uniForm">
+        <!-- MIX ORDER FORM -->
+        <form action="#" method="post" class="uniForm">
+          {{ mix_order_form|crispy }}
+        </form>
+        <hr>
 
+        <!-- MASTER ORDER FORM  -->
+        <form action="#" method="post" class="uniForm"></form>
+          {{ master_order_form|crispy }}
+        </form>
+        <hr>
 
-      {{ mix_order_form|crispy }}
+        <!-- PRODUCTION ORDER FORM  -->
+        <form action="#" method="post" class="uniForm"></form>
+          {{ production_order_form|crispy }}
+        </form>
 
+      </div>
+    </div>
+  </section>
+</main>
 
-        
-
-        <!-- <input type="submit" value="Submit"> -->
-    </form>
-
-HELLO I AM THE SERVICES PAGE
 
 {% endblock %}

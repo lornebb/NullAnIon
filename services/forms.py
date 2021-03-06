@@ -20,24 +20,8 @@ STEMS_CHOICE = [('6 grouped', '6 grouped'),
                 ('40 individual stems', '40 individual stems'),
                 ('40+ individual stems', '40+ individual stems')]
 
-MASTER_STEMS_CHOICE = [('1 stereo pre-mix', '1 stereo pre-mix'),
-                        ('5 grouped stems', '5 grouped stems')]
-
-REVISIONS = [('upto 3 revisions', ' upto 3 revisions'),
+REVISIONS = [('upto 3 revisions', 'upto 3 revisions'),
             ('upto 6 revisions', 'upto 6 revisions')]
-
-MIX_EXTRAS = [('Auto-Tune Lead Vocal', 'Auto-Tune Lead Vocal'),
-            ('Auto-Tune Backing Vocals', 'Auto-Tune Backing Vocals'),
-            ('Drum Replacement', 'Drum Replacement'),
-            ('Instrumental Version', 'Instruemntal Version'),
-            ('Show Ready Version', 'Show Ready Version'),
-            ('A Capella Version', 'A Capella Version'),
-            ('Group Mixed Stem Return', 'Group Mix Stem Return'),
-            ('Individual Mixed Stem Return', 'Individual Mixed Stem Return')]
-
-MASTER_EXTRAS = [('Instrumental Version', 'Instrumental Version (only for grouped stems)'),
-                ('Show ready version', 'Show Ready Version (only for grouped stems)'),
-                ('A Capella Version', 'A Capella Version (only for grouped stems)')]
 
 
 class MixOrderForm(forms.Form):
@@ -49,8 +33,16 @@ class MixOrderForm(forms.Form):
         self.helper.form_class = 'blueForms'
         self.helper.form_method = 'post'
         self.helper.form_action = 'submit_survey'
-
         self.helper.add_input(Submit('submit', 'Submit'))
+    
+    MIX_EXTRAS = [('Auto-Tune Lead Vocal', 'Auto-Tune Lead Vocal'),
+            ('Auto-Tune Backing Vocals', 'Auto-Tune Backing Vocals'),
+            ('Drum Replacement', 'Drum Replacement'),
+            ('Instrumental Version', 'Instruemntal Version'),
+            ('Show Ready Version', 'Show Ready Version'),
+            ('A Capella Version', 'A Capella Version'),
+            ('Group Mixed Stem Return', 'Group Mix Stem Return'),
+            ('Individual Mixed Stem Return', 'Individual Mixed Stem Return')]
 
     type = forms.TypedChoiceField(
         label='Type of mix:',
@@ -109,9 +101,13 @@ class MasterOrderForm(forms.Form):
         self.helper.form_action = 'submit_survey'
 
         self.helper.add_input(Submit('submit', 'Submit'))
-
-    REVISIONS = [('upto 3 revisions', ' upto 3 revisions'),
-                ('upto 6 revisions', 'upto 6 revisions')]
+    
+    MASTER_EXTRAS = [('Instrumental Version', 'Instrumental Version (only for grouped stems)'),
+                ('Show ready version', 'Show Ready Version (only for grouped stems)'),
+                ('A Capella Version', 'A Capella Version (only for grouped stems)')]
+    
+    MASTER_STEMS_CHOICE = [('1 stereo pre-mix', '1 stereo pre-mix'),
+                        ('5 grouped stems', '5 grouped stems')]
     
     type = forms.TypedChoiceField(
         label='Type of mix:',
@@ -157,3 +153,47 @@ class MasterOrderForm(forms.Form):
         required=False,
         widget=forms.CheckboxSelectMultiple,
         choices=MASTER_EXTRAS)
+
+
+class ProductionOrderForm(forms.Form):
+    """ renders a form for user to order a production """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'id-production-order-form'
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'submit_survey'
+        self.helper.add_input(Submit('submit', 'Submit'))
+    
+    PRODUCTION_TYPE = [('Guitar', 'Guitar'),
+                        ('Bass', 'Bass'),
+                        ('Synths', 'Synths'),
+                        ('Keys', 'Keys'),
+                        ('Drums', 'Drums')]
+    
+    type = forms.TypedChoiceField(
+        label='Type of mix:',
+        choices=PRODUCTION_TYPE,
+        widget=forms.RadioSelect,
+        coerce = lambda x: bool(int(x)),
+        initial = '1',
+        required = True,
+    )
+    
+    deliver_by = forms.DateField(
+        label='Type of production needed:',
+        widget=forms.DateInput,
+        required=True,
+    )
+    
+    reference_links = forms.CharField(
+        label='...insert link here',
+        max_length='1024',
+        required=False,
+    )
+
+    notes = forms.CharField(
+        label='explain a bit about what you need.',
+        max_length='1024'
+    )
