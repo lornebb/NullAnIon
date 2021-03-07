@@ -51,7 +51,10 @@ INSTALLED_APPS = [
     'library',
     'storages',
     'services',
-    'crispy_forms'
+    'profiles',
+
+    # other
+    'crispy_forms',
 ]
 
 CRISPY_TEMPLATE_PACK = 'uni_form'
