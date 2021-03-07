@@ -4,6 +4,8 @@ from django.shortcuts import render
 from .forms_mix import MixOrderForm 
 from .forms_master import MasterOrderForm 
 from .forms_production import ProductionOrderForm
+from .forms_soundtrack import SoundtrackOrderForm
+from .forms_sounddesign import SounddesignOrderForm
 
 # def mix_form(request):
 #     """ A view to return the mix service from services """
@@ -31,12 +33,15 @@ def example_form(request):
     mix_order_form = MixOrderForm()
     master_order_form = MasterOrderForm()
     production_order_form = ProductionOrderForm()
+    soundtrack_order_form = SoundtrackOrderForm()
+    sounddesign_order_form = SounddesignOrderForm()
 
     context = {
         'mix_order_form' : mix_order_form,
         'master_order_form' : master_order_form,
         'production_order_form': production_order_form,
+        'soundtrack_order_form': soundtrack_order_form,
+        'sounddesign_order_form': sounddesign_order_form,
     }
 
     return render(request, 'services/mix.html', context)
-                        
