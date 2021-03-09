@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+  <div class="columns">
+    <div class="column">
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+<main class="site-content">
+    <section class="container is-fluid">
+        <div class="columns">
+            <div class="column is-one-quarter">
+                {% include 'includes/info-main.html' %}
+                {% include 'includes/info-library.html' %}
+                {% include 'includes/info-mix-master.html' %}
+                {% include 'includes/info-other-services.html' %}
+            </div>
+            <div class="columnns">
+                <div class="column">
+                    <form action="{% url 'checkout' %}" method="POST">
+                        {% csrf_token %}
+                        <fieldset>
+                            <legend>About you</legend>
+                            {{ order_form.full_name | as_crispy_field }}
+                            {{ order_form.email | as_crispy_field }}
+                            {{ order_form.phone_number | as_crispy_field }}
+                        </fieldset>
+                        <fieldset>
+                            <legend>Details</legend>
+                            {{ order_form.product_ordered | as_crispy_field }}
+                            {{ order_form.date }}
+                        </fieldset>
+                    </form>
+                    <fieldset>
+                        {% if user.is_authenticated %}
+                            <label>Save this delivery information to my profile</label>
+                            <input type="checkbox" name="save-info">
+                        {% else %}
+                            <label>
+                                <a href="{% url 'account_signup' %}">Create Account</a>
+                                or
+                                <a href="{% url 'account_login' %}">login</a>
+                                to save this information
+                            </label>
+                        {% endif %}
+                    </fieldset>
+                    <fieldset>
+                        <legend>Payment</legend>
+                        <!-- Stripe card element will go here -->
+                        <div>
+                            Card element
+                        </div>
+                        <!-- used to display errors -->
+                        <div>
+                            Card errors
+                        </div>
+                    </fieldset>
+
+                    <!-- Stripe -->
+                    <div class="field is-grouped">
+                        <a class="button is-primary" href="">
+                            Adjust order
+                        </a>
+                        <button class="button is-primary" href="">
+                            Complete Order
+                        </button>
+                        <p>
+                            <span>
+                                Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
