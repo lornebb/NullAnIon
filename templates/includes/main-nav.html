@@ -15,36 +15,53 @@
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-end">
       <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Services
+        <a class="navbar-link">
+          Services
+        </a>
+        <div class="navbar-dropdown">
+          <a href="{% url 'services' %}" class="navbar-item">
+            Mix
           </a>
-          <div class="navbar-dropdown">
-            <a href="{% url 'services' %}" class="navbar-item">
-              Mix
-            </a>
-            <a class="navbar-item">
-              Master
-            </a>
-            <a class="navbar-item">
-              Production
-            </a>
-            
-            <a class="navbar-item">
-              Soundtrack
-            </a>
-            <a class="navbar-item">
-              Sound Design
-            </a>
-          </div>
-        <div class="navbar-item">
-            <a href="{% url 'library' %}" class="navbar-item">
-                Library
-            </a>
+          <a class="navbar-item">
+            Master
+          </a>
+          <a class="navbar-item">
+            Production
+          </a>
+          
+          <a class="navbar-item">
+            Soundtrack
+          </a>
+          <a class="navbar-item">
+            Sound Design
+          </a>
         </div>
-        <div class="navbar-item">
-            <a href="{% url 'profile' %}" class="navbar-item">
-                Account
-            </a>
+      </div>
+      <a href="{% url 'library' %}" class="navbar-item">
+        Library
+      </a>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Account
+        </a>
+        <div class="navbar-dropdown">
+          {% if request.user.is_authenticated %}
+          {% if request.user.is_superuser %}
+          <a href="" class="navbar-item">SU Management</a>
+          {% endif %}
+          <a href="{% url 'profile' %}" class="navbar-item">My Profile</a>
+          <a href="{% url 'account_logout' %}" class="navbar-item">Logout</a>
+          {% else %}
+          <a href="{% url 'account_signup' %}" class="navbar-item">Create Account</a>
+          <a href="{% url 'account_login' %}" class="navbar-item">Sign In</a>
+          {% endif %}
+      </div>
+
+
+
+
+
+            
         </div>
         <div class="navbar-item">
             <a class="navbar-item">
