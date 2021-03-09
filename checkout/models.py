@@ -8,11 +8,18 @@ from django.db.models import Sum
 
 
 class Order(models.Model):
+
+    MIX = 'MIX'
+    MASTER = 'MASTER'
+    PRODUCT_CHOICES = [(MIX, 'Mix'),
+                    (MASTER, 'Master'),]
+
     order_number = models.CharField(max_length=32, null=False, editable=False)
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     date = models.DateTimeField(auto_now_add=True)
+    product_ordered = models.CharField(max_length=6, choices=PRODUCT_CHOICES, blank=False, null=False, default=MIX)
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
 
@@ -53,8 +60,14 @@ class Order(models.Model):
 
 class OrderLineItem(models.Model):
     """ for mix and master only """
+
+    MIX = 'MIX'
+    MASTER = 'MASTER'
+    PRODUCT_CHOICES = [(MIX, 'Mix'),
+                    (MASTER, 'Master'),]
+
     order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
-    product = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE)
+    product_ordered = models.CharField(max_length=6, choices=PRODUCT_CHOICES, blank=False, null=False, default=MIX)
     due_date = models.DateTimeField(auto_now_add=False)
     references = models.CharField(max_length=1028, null=True, blank=True)
     stems = models.DecimalField(max_digits=2, decimal_places=0, null=False, blank=False)
