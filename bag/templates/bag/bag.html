@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+  <div class="columns">
+    <div class="column">
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+<main class="site-content">
+  <section class="container is-fluid">
+    <div class="columns">
+      <div class="column is-one-quarter">
+        {% include 'includes/info-main.html' %}
+      </div>
+      <div class="column">
+        <p class="title">
+            This is the bag page.
+        </p>
+
+        {% if bag_items %}
+            <p class="subtitle">hello you have an order in your bag</p>
+        {% else %}
+        <p class="subtitle">you don't have an order in your bag. </p>
+        <p>
+            You can order from <a href="{% url 'services' %}">Services</a>
+        </p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

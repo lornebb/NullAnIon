@@ -46,21 +46,32 @@
         </a>
         <div class="navbar-dropdown">
           {% if request.user.is_authenticated %}
-          {% if request.user.is_superuser %}
-          <a href="" class="navbar-item">SU Management</a>
-          {% endif %}
-          <a href="{% url 'profile' %}" class="navbar-item">My Profile</a>
-          <a href="{% url 'account_logout' %}" class="navbar-item">Logout</a>
+            {% if request.user.is_superuser %}
+              <a href="" class="navbar-item">SU Management</a>
+            {% endif %}
+            <a href="{% url 'profile' %}" class="navbar-item">My Profile</a>
+            <a href="{% url 'account_logout' %}" class="navbar-item">Logout</a>
           {% else %}
-          <a href="{% url 'account_signup' %}" class="navbar-item">Create Account</a>
-          <a href="{% url 'account_login' %}" class="navbar-item">Sign In</a>
+            <a href="{% url 'account_signup' %}" class="navbar-item">Create Account</a>
+            <a href="{% url 'account_login' %}" class="navbar-item">Sign In</a>
           {% endif %}
         </div>      
       </div>
+
       <div class="navbar-item">
-          <a class="navbar-item" href="{% url 'checkout' %}">
-              BASKET
-          </a>
+        <a class="navbar-item" href="{% url 'view_bag' %}">
+            BAG
+        </a>
+        <div class="navbar-item">
+            <a class="navbar-item" href="{% url 'checkout' %}">
+                BASKET - 
+                {% if grand_total %}
+                  {{ grand_total|floatformat:2 }}
+                {% else %}
+                  0.00
+                {% endif %}
+            </a>
+        </div>
       </div>
     </div>
   </div>
