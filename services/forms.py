@@ -24,7 +24,7 @@ class ProductionForm(ModelForm):
     class Meta:
         model = Production
         fields = '__all__'
-    
+
 form = ProductionForm()
 
 

@@ -7,18 +7,19 @@ def view_bag(request):
 
 
 # add form details to this function (replace item_id)
-def add_to_bag(request, item_id):
+def add_to_bag(request):
     """ add filled out order form to the bag """
 
-    quantity = int(request.POST.get('quantity'))
-    redirect_url = request.POST.get('redirect_url')
+    # quantity = int(request.POST.get('quantity'))
+    # redirect_url = request.POST.get('redirect_url')
     bag = request.session.get('bag', {})
 
-    if item_id in list(bag.keys()):
-        bag[item_id] = quantity
-    else:
-        bag[item_id] = quantity
+    # if order_type in list(bag.keys()):
+    #     bag[order_type] = quantity
+    # else:
+    #     bag[order_type] = quantity
 
     request.session['bag'] = bag
+    template = 'services/services.html'
     print(request.session['bag'])
-    return redirect(redirect_url)
+    return render(request, template)

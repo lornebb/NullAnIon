@@ -23,9 +23,11 @@ def mix_form(request):
         mix_form = MixForm()
         form_title = "Mix"
         template = 'services/services.html'
+        order_type = 'mix_order_form'
         context = {
             'mix_form' : mix_form,
             'form_title' : form_title,
+            'order_type' : order_type,
         }
 
     # messages.success(request, 'Successfully added product!')
@@ -75,10 +77,12 @@ def production_form(request):
     else:
         production_form = ProductionForm()
         form_title = "Production"
+        # order_type = 'order_type'
         template = 'services/services.html'
         context = {
             'production_form' : production_form,
             'form_title' : form_title,
+            # 'order_type' : order_type,
         }
 
     return render(request, template, context)

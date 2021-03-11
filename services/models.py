@@ -102,7 +102,7 @@ class Production(models.Model):
         ('track_production', 'Track Production')
     ]
 
-    order_type = models.CharField(max_length=15, null=False, blank=False, default="Production", editable=False)
+    order_type = models.CharField(max_length=15, null=False, blank=False, default="Production")
     deliver_by = models.DateField(blank=False, null=False)
     reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=False, null=False)
     reference_link = models.URLField(blank=False, null=False)
