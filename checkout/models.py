@@ -6,7 +6,6 @@ from django.db.models import Sum
 # from services import order? 
 
 
-
 class Order(models.Model):
 
     MIX = 'MIX'

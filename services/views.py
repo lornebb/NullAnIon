@@ -1,11 +1,8 @@
 # from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from .forms_mix import MixOrderForm 
-from .forms_master import MasterOrderForm 
-from .forms_production import ProductionOrderForm
-from .forms_soundtrack import SoundtrackOrderForm
-from .forms_sounddesign import SounddesignOrderForm
+from .forms import MixForm
+# MasterForm, ProductionForm
 
 # def mix_form(request):
 #     """ A view to return the mix service from services """
@@ -27,21 +24,20 @@ from .forms_sounddesign import SounddesignOrderForm
 
 #     return render(request, 'services/mix.html', {'example_form': example_form})
 
-def example_form(request):
-    """a view to render example form"""
+def mix_form(request):
+    """a view to render the mixform form"""
 
-    mix_order_form = MixOrderForm()
-    master_order_form = MasterOrderForm()
-    production_order_form = ProductionOrderForm()
-    soundtrack_order_form = SoundtrackOrderForm()
-    sounddesign_order_form = SounddesignOrderForm()
-
+    mix_form = MixForm()
+    template = 'services/services.html'
     context = {
-        'mix_order_form' : mix_order_form,
-        'master_order_form' : master_order_form,
-        'production_order_form': production_order_form,
-        'soundtrack_order_form': soundtrack_order_form,
-        'sounddesign_order_form': sounddesign_order_form,
+        'mix_form' : mix_form,
     }
 
-    return render(request, 'services/mix.html', context)
+    return render(request, template, context)
+
+
+# master_form = MasterForm()
+# production_form = ProductionForm()
+
+# 'master_form' : master_form,
+# 'production_form': production_form,

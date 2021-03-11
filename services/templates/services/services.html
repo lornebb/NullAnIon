@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% crispy example_form example_form.helper %}
+{% crispy mix_form mix_form.helper %}
 
 {% block page_header %}
 <div class="columns">
@@ -21,36 +21,37 @@
         {% include 'includes/info-mix-master.html' %}
       </div>
       <div class="column">            
-        <u>Services: Order a Mix</u>
-
         <!-- MIX ORDER FORM -->
+        <u><strong>Order a Mix</strong></u>
         <form action="#" method="post" class="uniForm">
-          {{ mix_order_form|crispy }}
+          {{ mix_form|crispy }}
         </form>
         <hr>
 
         <!-- MASTER ORDER FORM  -->
+        <u><strong>Order a Master</strong></u>
         <form action="#" method="post" class="uniForm"></form>
-          {{ master_order_form|crispy }}
+        {{ master_form|crispy }}
         </form>
         <hr>
 
         <!-- PRODUCTION ORDER FORM  -->
+        <u><strong>Order a Production</strong></u>
         <form action="#" method="post" class="uniForm"></form>
-          {{ production_order_form|crispy }}
+        {{ production_form|crispy }}
         </form>
         <hr>
 
         <!-- SOUNDTRACK ORDER FORM  -->
-        <form action="#" method="post" class="uniForm"></form>
-          {{ soundtrack_order_form|crispy }}
+        <!-- <form action="#" method="post" class="uniForm"></form>
+          
         </form>
-        <hr>
+        <hr> -->
 
         <!-- SOUNDDESIGN ORDER FORM  -->
-        <form action="#" method="post" class="uniForm"></form>
-          {{ sounddesign_order_form|crispy }}
-        </form>
+        <!-- <form action="#" method="post" class="uniForm"></form>
+          
+        </form> -->
 
       </div>
     </div>
