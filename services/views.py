@@ -1,8 +1,7 @@
 # from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from .forms import MixForm
-# MasterForm, ProductionForm
+from .forms import MixForm, MasterForm, ProductionForm
 
 # def mix_form(request):
 #     """ A view to return the mix service from services """
@@ -24,6 +23,7 @@ from .forms import MixForm
 
 #     return render(request, 'services/mix.html', {'example_form': example_form})
 
+
 def mix_form(request):
     """a view to render the mixform form"""
 
@@ -36,8 +36,25 @@ def mix_form(request):
     return render(request, template, context)
 
 
-# master_form = MasterForm()
-# production_form = ProductionForm()
+def master_form(request):
+    """a view to render the masterform form"""
 
-# 'master_form' : master_form,
-# 'production_form': production_form,
+    master_form = MasterForm()
+    template = 'services/services.html'
+    context = {
+        'master_form' : master_form,
+    }
+
+    return render(request, template, context)
+
+
+def production_form(request):
+    """a view to render the productionform form"""
+
+    production_form = ProductionForm()
+    template = 'services/services.html'
+    context = {
+        'production_form' : production_form,
+    }
+
+    return render(request, template, context)

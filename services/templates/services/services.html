@@ -20,39 +20,40 @@
         {% include 'includes/info-main.html' %}
         {% include 'includes/info-mix-master.html' %}
       </div>
-      <div class="column">            
-        <!-- MIX ORDER FORM -->
-        <u><strong>Order a Mix</strong></u>
-        <form action="#" method="post" class="uniForm">
-          {{ mix_form|crispy }}
-        </form>
-        <hr>
+      <div class="column">
+        {% if mix_form %}       
+          <!-- MIX ORDER FORM -->
+          <u><strong>Order a Mix</strong></u>
+          <form action="#" method="post" class="uniForm">
+            {{ mix_form|crispy }}
+          </form>
+          <hr>
+        {% elif master_form %}
+          <!-- MASTER ORDER FORM  -->
+          <u><strong>Order a Master</strong></u>
+          <form action="#" method="post" class="uniForm"></form>
+          {{ master_form|crispy }}
+          </form>
+          <hr>
+        {% elif production_form %}
+          <!-- PRODUCTION ORDER FORM  -->
+          <u><strong>Order a Production</strong></u>
+          <form action="#" method="post" class="uniForm"></form>
+          {{ production_form|crispy }}
+          </form>
+          <hr>
 
-        <!-- MASTER ORDER FORM  -->
-        <u><strong>Order a Master</strong></u>
-        <form action="#" method="post" class="uniForm"></form>
-        {{ master_form|crispy }}
-        </form>
-        <hr>
+          <!-- SOUNDTRACK ORDER FORM  -->
+          <!-- <form action="#" method="post" class="uniForm"></form>
+            
+          </form>
+          <hr> -->
 
-        <!-- PRODUCTION ORDER FORM  -->
-        <u><strong>Order a Production</strong></u>
-        <form action="#" method="post" class="uniForm"></form>
-        {{ production_form|crispy }}
-        </form>
-        <hr>
-
-        <!-- SOUNDTRACK ORDER FORM  -->
-        <!-- <form action="#" method="post" class="uniForm"></form>
-          
-        </form>
-        <hr> -->
-
-        <!-- SOUNDDESIGN ORDER FORM  -->
-        <!-- <form action="#" method="post" class="uniForm"></form>
-          
-        </form> -->
-
+          <!-- SOUNDDESIGN ORDER FORM  -->
+          <!-- <form action="#" method="post" class="uniForm"></form>
+            
+          </form> -->
+        {% endif %}
       </div>
     </div>
   </section>
