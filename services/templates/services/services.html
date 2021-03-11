@@ -29,43 +29,32 @@
       <!-- LEFT info panel -->
       <div class="column is-one-quarter">
         {% include 'includes/info-main.html' %}
-        {% include 'includes/info-mix-master.html' %}
+        {% if mix_form or master_form %}
+          {% include 'includes/info-mix-master.html' %}
+        {% elif production_form %}
+          {% include 'includes/info-production.html' %}
+        {% endif %}
       </div>
       <!-- RIGHT content column -->
       <div class="column">
+        <!-- MIX ORDER FORM -->
+        <u><strong>Order a {{ form_title }}</strong></u>
+        <form action="{% url 'add_to_bag' %}" method="POST" class="uniForm">
+          {% csrf_token %}
         {% if mix_form %}       
-          <!-- MIX ORDER FORM -->
-          <u><strong>Order a Mix</strong></u>
-          <form action="#" method="post" class="uniForm">
-            {{ mix_form|crispy }}
-          </form>
-          <hr>
+          {{ mix_form|crispy }}
         {% elif master_form %}
-          <!-- MASTER ORDER FORM  -->
-          <u><strong>Order a Master</strong></u>
-          <form action="#" method="post" class="uniForm"></form>
           {{ master_form|crispy }}
-          </form>
-          <hr>
         {% elif production_form %}
-          <!-- PRODUCTION ORDER FORM  -->
-          <u><strong>Order a Production</strong></u>
-          <form action="#" method="post" class="uniForm"></form>
           {{ production_form|crispy }}
-          </form>
-          <hr>
-
-          <!-- SOUNDTRACK ORDER FORM  -->
-          <!-- <form action="#" method="post" class="uniForm"></form>
-            
-          </form>
-          <hr> -->
-
-          <!-- SOUNDDESIGN ORDER FORM  -->
-          <!-- <form action="#" method="post" class="uniForm"></form>
-            
-          </form> -->
         {% endif %}
+          <div class="control">
+            <input class="button is-primary" type="submit" value="Submit">
+          </div>
+          <!-- redirects user back to same page once added to bag... redirect in bag/views.py-->
+          <input type="hidden" name="redirect_url" value="{{ request.path }}">
+        </form>
+        <hr>        
       </div>
     </div>
   </section>
