@@ -1,6 +1,7 @@
 from django.db import models
 # from typing_extensions import Required
 
+# global scope variables for choices
 general = 'general'
 energy = 'energy'
 tone = 'tone'
@@ -21,6 +22,8 @@ package_type = [(single, 'single (< 5mins)'),
 
 class Mix(models.Model):
     """ model for MIX service database """
+
+    # local choices veriables
 
     SIX = '6'
     FOURTY_STEMS = '40'
@@ -44,13 +47,14 @@ class Mix(models.Model):
                 ('Group Mixed Stem Return', 'Group Mix Stem Return'),
                 ('Individual Mixed Stem Return', 'Individual Mixed Stem Return')]
 
+    order_type = models.CharField(max_length=15, null=False, blank=False, default="Mix", editable=False)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0, editable=False)
     deliver_by = models.DateField(blank=False, null=False)
     reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=False, null=False)
     reference_link = models.URLField(blank=False, null=False)
-    package_type = models.CharField(max_length=1026, choices=package_type, blank=False, null=False)
-    stem_choices = models.CharField(max_length=1026, choices=STEM_CHOICES, blank=False, null=False)
-    revisions = models.CharField(max_length=1026, choices=REVISIONS, blank=False, null=False)
+    package_type = models.CharField(max_length=1026, choices=package_type, blank=False, null=False, default=[0])
+    stem_choices = models.CharField(max_length=1026, choices=STEM_CHOICES, blank=False, null=False, default=[0])
+    revisions = models.CharField(max_length=1026, choices=REVISIONS, blank=False, null=False, default=[0])
     mix_extras = models.CharField(max_length=1026, choices=MIX_EXTRAS, blank=False, null=False)
 
 
@@ -75,6 +79,7 @@ class Master(models.Model):
                 ('Show Ready Version', 'Show Ready Version'),
                 ('A Capella Version', 'A Capella Version'),]
 
+    order_type = models.CharField(max_length=15, null=False, blank=False, default="Master", editable=False)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0, editable=False)
     deliver_by = models.DateField(blank=False, null=False)
     reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=False, null=False)
@@ -97,6 +102,7 @@ class Production(models.Model):
         ('track_production', 'Track Production')
     ]
 
+    order_type = models.CharField(max_length=15, null=False, blank=False, default="Production", editable=False)
     deliver_by = models.DateField(blank=False, null=False)
     reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=False, null=False)
     reference_link = models.URLField(blank=False, null=False)
