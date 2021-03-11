@@ -3,6 +3,16 @@
 {% load crispy_forms_tags %}
 {% crispy mix_form mix_form.helper %}
 
+{% block extra_title %}
+  {% if mix_form %}
+    - Mix Order
+  {% elif master_form %}
+    - Master Order
+  {% elif production_form %}
+    - Production Order
+  {% endif %}
+{% endblock %}
+
 {% block page_header %}
 <div class="columns">
     <div class="column">
@@ -16,10 +26,12 @@
 <main class="site-content">
   <section class="container is-fluid">
     <div class="columns">
+      <!-- LEFT info panel -->
       <div class="column is-one-quarter">
         {% include 'includes/info-main.html' %}
         {% include 'includes/info-mix-master.html' %}
       </div>
+      <!-- RIGHT content column -->
       <div class="column">
         {% if mix_form %}       
           <!-- MIX ORDER FORM -->
