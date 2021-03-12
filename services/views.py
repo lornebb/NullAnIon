@@ -23,7 +23,7 @@ def mix_form(request):
         mix_form = MixForm()
         form_title = "Mix"
         template = 'services/services.html'
-        order_type = 'mix_order_form'
+        order_type = 'Mix Order'
         context = {
             'mix_form' : mix_form,
             'form_title' : form_title,
@@ -51,10 +51,12 @@ def master_form(request):
     else:
         master_form = MasterForm()
         form_title = "Master"
+        order_type = "Master order"
         template = 'services/services.html'
         context = {
             'master_form' : master_form,
             'form_title' : form_title,
+            'order_type' : order_type
         }
 
     return render(request, template, context)
