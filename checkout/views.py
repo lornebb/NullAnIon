@@ -23,7 +23,7 @@ def checkout_order(request):
         product_obj = Mix(request.POST)
         product = product_obj
         url = 'checkout/checkout.html'
-        messages.success(request, f"Successfully added a '{product_obj.order_type}' order to the basket.")
+        messages.sucess(request, f"Successfully added a '{product_obj.order_type}' order to the basket.")
 
         context = {
             'product' : product,
