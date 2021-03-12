@@ -22,7 +22,7 @@
             </div>
             <div class="columnns">
                 <div class="column">
-                    <form action="{% url 'checkout' %}" method="POST">
+                    <form action="" method="POST">
                         {% csrf_token %}
                         <fieldset>
                             <legend><u>About you</u></legend>
@@ -75,6 +75,21 @@
                             Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong>
                         </span>
                     </p>
+                </div>
+                <div class="columns">
+                    <div class="title">
+                        {{ product.order_type }}
+                    </div>
+                    {{ product.id.deliver_by }}
+                    <div class="column">
+                        {% for items in product.id %}
+                        <div class="div">
+                            <p class="subtitle">
+                                {{ items }}
+                            </p>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>

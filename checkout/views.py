@@ -11,7 +11,7 @@ def checkout(request):
     # order_form = OrderForm()
     template = 'checkout/checkout.html'
     context = {
-        # 'order_form': order_form,
+        
     }
 
     return render(request, template, context)
@@ -20,13 +20,15 @@ def checkout_order(request):
     """ view to get completed order forms to checkout for payment """
 
     if request.method == 'POST':
-        product = Mix(request.POST)
+        product_obj = Mix(request.POST)
+        product = product_obj
         url = 'checkout/checkout.html'
-        messages.success(request, f"Successfully added a '{product.order_type}' order to the basket.")
-        print(f"CHECKOUT ORDER MADE {product.order_type} *************")
+        messages.success(request, f"Successfully added a '{product_obj.order_type}' order to the basket.")
+
         context = {
-            'product=id' : product.id,
+            'product' : product,
         }
+
         return render(request, url, context)
     else: 
         messages.error(request, "You have not filled an order form from services")
