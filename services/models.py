@@ -107,3 +107,6 @@ class Production(models.Model):
     reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=False, null=False)
     reference_link = models.URLField(blank=False, null=False)
     production_type = models.CharField(max_length=1026, choices=PRODUCTION_TYPE, blank=False, null=False)
+
+    def __str__(self):
+        return self.order_type

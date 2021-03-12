@@ -46,12 +46,15 @@
           <!-- MIX FORM -->
           {% if mix_form %}       
             {{ mix_form|crispy }}
+
           <!-- MASTER FORM -->
           {% elif master_form %}
             {{ master_form|crispy }}
+
           <!-- PRODUCTION FORM -->
           {% elif production_form %}
             {{ production_form|crispy }}
+
           {% endif %}
 
           <div class="control">

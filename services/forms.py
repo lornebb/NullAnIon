@@ -1,32 +1,43 @@
-from django.forms import ModelForm
+from django import forms
 from services.models import Mix, Master, Production
 # from crispy_forms.helper import FormHelper
 # from crispy_forms.layout import Submit
 
 
-class MixForm(ModelForm):
+class MixForm(forms.ModelForm):
     class Meta:
         model = Mix
         fields = '__all__'
-    
-form = MixForm()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['order_type'].widget.attrs['disabled'] = True
+        self.fields['order_type'].widget.attrs['required'] = True
 
 
-class MasterForm(ModelForm):
+class MasterForm(forms.ModelForm):
     class Meta:
         model = Master
         fields = '__all__'
-    
-form = MasterForm()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['order_type'].widget.attrs['disabled'] = True
+        self.fields['order_type'].widget.attrs['required'] = True
 
 
-class ProductionForm(ModelForm):
+class ProductionForm(forms.ModelForm):
     class Meta:
         model = Production
         fields = '__all__'
 
-form = ProductionForm()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
+        self.fields['order_type'].widget.attrs['disabled'] = True
+        self.fields['order_type'].widget.attrs['required'] = True
 
 
 # class MixOrderForm(forms.Form):

@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block page_header %}
   <div class="columns">
@@ -24,20 +25,23 @@
                     <form action="{% url 'checkout' %}" method="POST">
                         {% csrf_token %}
                         <fieldset>
-                            <legend>About you</legend>
-                            {{ order_form.full_name | as_crispy_field }}
-                            {{ order_form.email | as_crispy_field }}
-                            {{ order_form.phone_number | as_crispy_field }}
+                            <legend><u>About you</u></legend>
+                            About you form should be here.
+                            {{ order_form|crispy }}
+                            {{ order_form.email | crispy }}
+                            {{ order_form.phone_number | crispy }}
                         </fieldset>
                         <fieldset>
-                            <legend>Details</legend>
-                            {{ order_form.product_ordered | as_crispy_field }}
+                            <legend><u>Details</u></legend>
+                            About you form should be here.
+                            {{ order_form.product_ordered | crispy }}
                             {{ order_form.date }}
                         </fieldset>
                     </form>
+                    <hr>
                     <fieldset>
                         {% if user.is_authenticated %}
-                            <label>Save this delivery information to my profile</label>
+                            <label>Save this information to my profile</label>
                             <input type="checkbox" name="save-info">
                         {% else %}
                             <label>
@@ -68,12 +72,12 @@
                         <button class="button is-primary" href="">
                             Complete Order
                         </button>
-                        <p>
-                            <span>
-                                Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong>
-                            </span>
-                        </p>
                     </div>
+                    <p>
+                        <span>
+                            Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong>
+                        </span>
+                    </p>
                 </div>
             </div>
         </div>
