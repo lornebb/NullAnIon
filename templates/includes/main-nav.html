@@ -59,12 +59,9 @@
       </div>
 
       <div class="navbar-item">
-        <a class="navbar-item" href="{% url 'view_bag' %}">
-            BAG
-        </a>
         <div class="navbar-item">
             <a class="navbar-item" href="{% url 'checkout' %}">
-                BASKET - 
+                CHECKOUT - 
                 {% if grand_total %}
                   {{ grand_total|floatformat:2 }}
                 {% else %}

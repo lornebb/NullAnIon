@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'services',
     'profiles',
     'checkout',
-    'bag',
 
     # other
     'crispy_forms',
@@ -87,7 +86,6 @@ TEMPLATES = [
                 'django.template.context_processors.request', # required by all auth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'bag.contexts.bag_contents',
                 'django.template.context_processors.media',
             ],
             'builtins': [

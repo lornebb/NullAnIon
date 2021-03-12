@@ -40,28 +40,32 @@
       <!-- RIGHT content column -->
       <div class="column">
         <u><strong>Order a {{ form_title }}</strong></u>
-        <form action="{% url 'add_to_bag' %}" method="POST" class="uniForm">
-          {% csrf_token %}
-          
-          <!-- MIX FORM -->
-          {% if mix_form %}       
-            {{ mix_form|crispy }}
+        {% csrf_token %}
+        
+        <!-- MIX FORM -->
+        {% if mix_form %}       
+        <form action="{% url 'services-mix' %}" method="POST" class="uniForm">
+                {{ mix_form|crispy }}
 
-          <!-- MASTER FORM -->
-          {% elif master_form %}
-            {{ master_form|crispy }}
+        <!-- MASTER FORM -->
+        {% elif master_form %}
 
-          <!-- PRODUCTION FORM -->
-          {% elif production_form %}
-            {{ production_form|crispy }}
+            <form action="{% url 'services-master' %}" method="POST" class="uniForm"></form>
+                {{ master_form|crispy }}
 
-          {% endif %}
+        <!-- PRODUCTION FORM -->
+        {% elif production_form %}
 
-          <div class="control">
-            <input class="button is-primary" type="submit" value="Submit">
-          </div>
-          <!-- redirects user back to same page once added to bag... redirect in bag/views.py-->
-          <!-- <input type="hidden" name="redirect_url" value="{{ request.path }}"> -->
+            <form action="{% url 'services-production' %}" method="POST" class="uniForm"></form>
+                {{ production_form|crispy }}
+
+        {% endif %}
+
+            <div class="control">
+                <input class="button is-primary" type="submit" value="Submit">
+            </div>
+            <!-- redirects user back to same page once added to bag... redirect in bag/views.py-->
+            <!-- <input type="hidden" name="redirect_url" value="{{ request.path }}"> -->
         </form>
         <hr>        
       </div>
