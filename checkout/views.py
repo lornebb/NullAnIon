@@ -21,8 +21,14 @@ def checkout_order(request):
 
     if request.method == 'POST':
         product = Mix(request.POST)
-        redirect_url = 'checkout/checkout.html'
+        url = 'checkout/checkout.html'
         messages.success(request, f"Successfully added a '{product.order_type}' order to the basket.")
         print(f"CHECKOUT ORDER MADE {product.order_type} *************")
+        context = {
+            'product=id' : product.id,
+        }
+        return render(request, url, context)
+    else: 
+        messages.error(request, "You have not filled an order form from services")
+        return redirect('home')
 
-    return redirect('checkout', product=id)
