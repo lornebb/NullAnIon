@@ -14,10 +14,7 @@ def mix_form(request):
             redirect_url = 'checkout/checkout.html'
             messages.success(request, f"Successfully added a '{product.order_type}' order to the basket.")
             print(f"CHECKOUT ORDER MADE {product.order_type} *******************************************************************************************")
-            return redirect('checkout', product=id)
-
-
-
+            return redirect('checkout_order', product=id)
 
         # # create a form instance and populate it with data from the request:
         # mix_form = MixForm(request.POST)

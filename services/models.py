@@ -48,7 +48,7 @@ class Mix(models.Model):
                 ('Individual Mixed Stem Return', 'Individual Mixed Stem Return')]
 
     order_type = models.CharField(max_length=15, null=False, blank=False, default="Mix")
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0, editable=False)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, default=22.22)
     deliver_by = models.DateField(blank=False, null=False)
     reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=False, null=False)
     reference_link = models.URLField(blank=True, null=False)

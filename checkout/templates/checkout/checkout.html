@@ -28,15 +28,34 @@
                 <div class="column">
                     <form action="" method="POST">
                         {% csrf_token %}
+                            <p class="title">
+                                Order Type:
+                            </p>
+                            <p class="subtitle">
+                                {{ product.order_type }}
+                            </p>
+                            <p class="title">
+                                Deliver By:
+                            </p>
+                            <p class="subtitle">
+                                {{ product.id.deliver_by }}
+                            </p>
+                            <p class="title">
+                                Total price
+                            </p>
+                            <p class="subtitle">
+                                {{ product.id.total_price }}
+                            </p>
+
                         <fieldset>
                             <legend><u>About you</u></legend>
                             About you form should be here.
                             name & email & phone_number
                         </fieldset>
                         <fieldset>
-                            <legend><u>Details</u></legend>
-                            About you form should be here.
-                            product_ordered & date
+                            <legend><u>Order Details</u></legend>
+                            {{ product }}
+                            
                         </fieldset>
                     </form>
                     <hr>
@@ -79,21 +98,6 @@
                             Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong>
                         </span>
                     </p>
-                </div>
-                <div class="columns">
-                    <div class="title">
-                        {{ product.order_type }}
-                    </div>
-                    {{ product.id.deliver_by }}
-                    <div class="column">
-                        {% for items in product.id %}
-                        <div class="div">
-                            <p class="subtitle">
-                                {{ items }}
-                            </p>
-                        </div>
-                        {% endfor %}
-                    </div>
                 </div>
             </div>
         </div>

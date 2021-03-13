@@ -15,6 +15,9 @@ class MixForm(forms.ModelForm):
         self.fields['order_type'].widget.attrs['disabled'] = True
         self.fields['order_type'].widget.attrs['required'] = True
         self.fields['reference_link'].widget.attrs['required'] = False
+        # self.fields['total_price'].widget.attrs['default'] = "22.33"
+        # self.fields['total_price'].widget.attrs['disabled'] = True
+        self.fields['total_price'].widget.attrs['required'] = True
 
 
 class MasterForm(forms.ModelForm):
