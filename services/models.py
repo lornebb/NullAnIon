@@ -89,7 +89,7 @@ class Master(models.Model):
     revisions = models.CharField(max_length=1026, choices=REVISIONS, blank=False, null=False, default=3)
     reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=True, null=False)
     reference_link = models.URLField(blank=True, null=False)
-    mix_extras = models.CharField(max_length=1026, choices=MASTER_EXTRAS, blank=True, null=False)
+    mix_extras = models.CharField(max_length=1026, choices=MASTER_EXTRAS, blank=True, null=False, default='Instrumental Version')
     total_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
 
     def __str__(self):

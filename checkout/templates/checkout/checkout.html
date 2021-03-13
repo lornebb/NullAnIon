@@ -46,6 +46,16 @@
                             <p class="subtitle">
                                 {{ product.id.total_price }}
                             </p>
+                            <p class="title">
+                                Mix Extras
+                            </p>
+                            <p class="subtitle">
+                                {% if product.id.mix_extras %}
+                                    {% for extras in product.id.mix_extras %}
+                                        {{ product.id.mix_extras }}
+                                    {% endfor %}
+                                {% endif %}
+                            </p>
 
                         <fieldset>
                             <legend><u>About you</u></legend>

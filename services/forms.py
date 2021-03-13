@@ -1,6 +1,8 @@
 import datetime
 from django.forms import ModelForm, Textarea, RadioSelect, DateField
 from django.forms.fields import CharField
+from django.forms.models import ModelMultipleChoiceField
+from django.forms.widgets import CheckboxSelectMultiple, NullBooleanSelect, SelectMultiple
 # from typing_extensions import Required
 from services.models import Mix, Master, Production
 from crispy_forms.helper import FormHelper
@@ -20,6 +22,7 @@ class MixForm(ModelForm):
             'package_type': RadioSelect(),
             'stem_choices': RadioSelect(),
             'revisions': RadioSelect(),
+            'mix_extras': CheckboxSelectMultiple(),
             # 'deliver_by': DateField(),
         }
 
@@ -57,6 +60,7 @@ class MasterForm(ModelForm):
             'package_type': RadioSelect(),
             'stem_choices': RadioSelect(),
             'revisions': RadioSelect(),
+            'mix_extras': CheckboxSelectMultiple(),
         }
 
 
@@ -73,5 +77,6 @@ class ProductionForm(ModelForm):
                 'notes',
         )
         widgets = {
+            'production_type': CheckboxSelectMultiple(),
             'notes': Textarea(attrs={'cols': 1, 'rows': 1})
         }

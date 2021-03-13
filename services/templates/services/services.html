@@ -40,22 +40,26 @@
       <!-- RIGHT content column -->
       <div class="column">
         <u><strong>Order a {{ form_title }}</strong></u>
-        <form action="{% url 'checkout_order' %}" method="POST" class="uniForm">
+        
+        {% if mix_form %}       
+        <form action="{% url 'checkout_order_mix' %}" method="POST" class="uniForm">
           {% csrf_token %}
-
-          {% if mix_form %}       
             <!-- MIX FORM -->
             {{ mix_form|crispy }}
 
-          {% elif master_form %}
-            <!-- MASTER FORM -->
-            {{ master_form|crispy }}
+        {% elif master_form %}
+        <form action="{% url 'checkout_order_master' %}" method="POST" class="uniForm">
+          {% csrf_token %}
+          <!-- MASTER FORM -->
+          {{ master_form|crispy }}
 
-          {% elif production_form %}
-            <!-- PRODUCTION FORM -->
-            {{ production_form|crispy }}
-       
-          {% endif %}
+        {% elif production_form %}
+        <form action="{% url 'checkout_order_production' %}" method="POST" class="uniForm">
+          {% csrf_token %}
+          <!-- PRODUCTION FORM -->
+          {{ production_form|crispy }}
+      
+        {% endif %}
 
           <div class="control">
             <input class="button is-primary" type="submit" value="Submit">
