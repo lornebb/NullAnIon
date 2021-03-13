@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% crispy mix_form mix_form.helper %}
+<!-- {% crispy mix_form mix_form.helper %} -->
 
 {% block extra_title %}
   {% if mix_form %}
@@ -43,22 +43,22 @@
         <form action="{% url 'checkout_order' %}" method="POST" class="uniForm">
           {% csrf_token %}
 
-          <!-- MIX FORM -->
           {% if mix_form %}       
+            <!-- MIX FORM -->
             {{ mix_form|crispy }}
 
-          <!-- MASTER FORM -->
           {% elif master_form %}
+            <!-- MASTER FORM -->
             {{ master_form|crispy }}
 
-          <!-- PRODUCTION FORM -->
           {% elif production_form %}
+            <!-- PRODUCTION FORM -->
             {{ production_form|crispy }}
        
           {% endif %}
 
           <div class="control">
-              <input class="button is-primary" type="submit" value="Submit">
+            <input class="button is-primary" type="submit" value="Submit">
           </div>
           <!-- redirects user back to same page once added to bag... redirect in bag/views.py-->
           <!-- <input type="hidden" name="redirect_url" value="{{ request.path }}"> -->

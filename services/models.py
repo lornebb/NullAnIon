@@ -48,14 +48,14 @@ class Mix(models.Model):
                 ('Individual Mixed Stem Return', 'Individual Mixed Stem Return')]
 
     order_type = models.CharField(max_length=15, null=False, blank=False, default="Mix")
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, default=22.22)
+    package_type = models.CharField(max_length=1026, choices=package_type, blank=False, null=False, default=single)
     deliver_by = models.DateField(blank=False, null=False)
-    reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=False, null=False)
+    stem_choices = models.CharField(max_length=1026, choices=STEM_CHOICES, blank=False, null=False, default=6)
+    revisions = models.CharField(max_length=1026, choices=REVISIONS, blank=False, null=False, default=3)
+    reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=True, null=False)
     reference_link = models.URLField(blank=True, null=False)
-    package_type = models.CharField(max_length=1026, choices=package_type, blank=False, null=False, default=[0])
-    stem_choices = models.CharField(max_length=1026, choices=STEM_CHOICES, blank=False, null=False, default=[0])
-    revisions = models.CharField(max_length=1026, choices=REVISIONS, blank=False, null=False, default=[0])
     mix_extras = models.CharField(max_length=1026, choices=MIX_EXTRAS, blank=False, null=False)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, default=22.22)
 
     def __str__(self):
         return self.order_type
@@ -83,14 +83,14 @@ class Master(models.Model):
                 ('A Capella Version', 'A Capella Version'),]
 
     order_type = models.CharField(max_length=15, null=False, blank=False, default="Master")
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0, editable=False)
+    package_type = models.CharField(max_length=1026, choices=package_type, blank=False, null=False, default=single)
     deliver_by = models.DateField(blank=False, null=False)
-    reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=False, null=False)
+    stem_choices = models.CharField(max_length=1026, choices=STEM_CHOICES, blank=False, null=False, default=[GROUP_STEMS])
+    revisions = models.CharField(max_length=1026, choices=REVISIONS, blank=False, null=False, default=3)
+    reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=True, null=False)
     reference_link = models.URLField(blank=True, null=False)
-    package_type = models.CharField(max_length=1026, choices=package_type, blank=False, null=False)
-    stem_choices = models.CharField(max_length=1026, choices=STEM_CHOICES, blank=False, null=False)
-    revisions = models.CharField(max_length=1026, choices=REVISIONS, blank=False, null=False)
-    mix_extras = models.CharField(max_length=1026, choices=MASTER_EXTRAS, blank=False, null=False)
+    mix_extras = models.CharField(max_length=1026, choices=MASTER_EXTRAS, blank=True, null=False)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
 
     def __str__(self):
         return self.order_type
@@ -109,10 +109,11 @@ class Production(models.Model):
     ]
 
     order_type = models.CharField(max_length=15, null=False, blank=False, default="Production")
-    deliver_by = models.DateField(blank=False, null=False)
+    production_type = models.CharField(max_length=1026, choices=PRODUCTION_TYPE, blank=False, null=False)
     reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=False, null=False)
     reference_link = models.URLField(blank=True, null=False)
-    production_type = models.CharField(max_length=1026, choices=PRODUCTION_TYPE, blank=False, null=False)
+    deliver_by = models.DateField(blank=False, null=False)
+    notes = models.CharField(max_length=320)
 
     def __str__(self):
         return self.order_type
