@@ -26,7 +26,7 @@
             </div>
             <div class="columnns">
                 <div class="column">
-                    <form action="" method="POST">
+                    <form action="{% url 'checkout_blank' %}" method="POST">
                         {% csrf_token %}
                             <p class="title">
                                 Order Type:
@@ -56,23 +56,32 @@
                                     {% endfor %}
                                 {% endif %}
                             </p>
-
-                        <fieldset>
-                            <legend><u>About you</u></legend>
-                            About you form should be here.
-                            name & email & phone_number
-                        </fieldset>
-                        <fieldset>
-                            <legend><u>Order Details</u></legend>
-                            {{ product }}
-                            
-                        </fieldset>
                         <hr>
                         <fieldset>
                             {% if user.is_authenticated %}
-                                <label>Save this information to my profile</label>
-                                <input type="checkbox" name="save-info">
+                                <p class="subtitle">
+                                    Username:
+                                </p>
+                                <p class="subtitle">
+                                    <strong>
+                                        {{ profile.user }}
+                                    </strong>
+                                </p>
+                                <p class="subtitle">
+                                    Email:
+                                </p>
+                                <p class="subtitle">
+                                    <strong>
+                                        {{ profile.email }}
+                                    </strong>
+                                </p>
+                                <!-- <label>Save this new information to my profile</label>
+                                <input type="checkbox" name="save-info"> -->
                             {% else %}
+                                <fieldset>
+                                    <legend><u>About you</u></legend>
+                                    {{ order_form_form|crispy }}
+                                </fieldset>
                                 <label>
                                     <a href="{% url 'account_signup' %}">Create Account</a>
                                     or
