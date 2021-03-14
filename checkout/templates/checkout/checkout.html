@@ -41,13 +41,13 @@
                                 {{ product.id.deliver_by }}
                             </p>
                             <p class="title">
-                                Total price
+                                Total price:
                             </p>
                             <p class="subtitle">
                                 {{ product.id.total_price }}
                             </p>
                             <p class="title">
-                                Mix Extras
+                                Mix Extras:
                             </p>
                             <p class="subtitle">
                                 {% if product.id.mix_extras %}
@@ -61,16 +61,12 @@
                             {% if user.is_authenticated %}
                                 <p class="subtitle">
                                     Username:
-                                </p>
-                                <p class="subtitle">
                                     <strong>
                                         {{ profile.user }}
                                     </strong>
                                 </p>
                                 <p class="subtitle">
                                     Email:
-                                </p>
-                                <p class="subtitle">
                                     <strong>
                                         {{ profile.email }}
                                     </strong>
@@ -91,7 +87,7 @@
                             {% endif %}
                         </fieldset>
                         <fieldset>
-                            <legend>Payment</legend>
+                            <legend>Payment:</legend>
                             <!-- Stripe card element will go here -->
                             <div>
                                 <div class="" id="card-element"></div>
