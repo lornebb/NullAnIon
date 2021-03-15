@@ -49,6 +49,9 @@ def checkout_order_mix(request):
 
         return render(request, template, context)
     else:
+        context = {
+            
+        }
         messages.error(request, "You have not filled an order form from services")
         return render(request, template, context)
 
