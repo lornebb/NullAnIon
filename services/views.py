@@ -5,17 +5,17 @@ from django.contrib import messages
 from .forms import MixForm, MasterForm, ProductionForm
 
 
-def mix_form(request):
+def order_form(request):
     """a view to render the mixform form"""
 
     if request.method == 'POST':
         product = MixForm(request.POST)
         master_form = MasterForm(request.POST)
-        if mix_form.is_valid():
-            template = 'checkout/checkout.html'
-            messages.success(request, f"Successfully added a '{product.order_type}' order to the basket.")
-            print(f"CHECKOUT ORDER MADE {product.order_type} *******************************************************************************************")
-            return redirect('checkout_order', product=id)
+        # if mix_form.is_valid():
+        template = 'checkout/checkout.html'
+        messages.success(request, f"Successfully added a '{product.order_type}' order to the basket.")
+        print(f"CHECKOUT ORDER MADE {product.order_type} *******************************************************************************************")
+        return redirect('checkout_order', product=id)
 
         # # create a form instance and populate it with data from the request:
         # mix_form = MixForm(request.POST)
@@ -29,31 +29,56 @@ def mix_form(request):
     
     # if a GET (or any other method) we'll create a blank form
     else:
+        template = 'services/services.html'
         # print(request.get("myquery"))
         if request.GET.get("type") == "mix":
-            print("*******************")
-        mix_form = MixForm()
-        form_title = "Mix"
-        # post_title = "services-mix"
-        template = 'services/services.html'
-        order_type = 'Mix Order'
-        # master form
-        master_form = MasterForm()
-        master_form_title = "Master"
-        master_order_type = "Master order"
-        print(request.GET.get("type"))
-        context = {
+            print(f"*******************{type}****** MIX?")
+            print(request.GET.get("type"))
+            mix_form = MixForm()
+            form_title = "Mix"
+            mix_order_type = 'Mix Order'
+
+            context = {
             'mix_form' : mix_form,
             'form_title' : form_title,
-            'order_type' : order_type,
-            'master_form' : master_form,
-            'master_form_title' : master_form_title,
-            'master_order_type': master_order_type,
-            # 'post_title' : post_title,
-        }
+            'mix_order_type' : mix_order_type,
+            }
 
-    # messages.success(request, 'Successfully added product!')
-    return render(request, template, context)
+            return render(request, template, context)
+
+        if request.GET.get("type") == "master":
+            print(f"*******************{type}**** MASTER?")
+            print(request.GET.get("type"))
+            master_form = MasterForm()
+            form_title = "Master"
+            master_order_type = "Master Order"
+            
+            context = {
+            'master_form' : master_form,
+            'form_title' : form_title,
+            'master_order_type': master_order_type,
+            }
+
+            return render(request, template, context)
+        
+        if request.GET.get("type") == "production":
+            print(f"*******************{type}******* Production?")
+            print(request.GET.get("type"))
+            production_form = ProductionForm()
+            form_title = "Production"
+            production_order_type = "Production Order"
+
+            context = {
+            'production_form': production_form,
+            'form_title': form_title,
+            'production_order_type': production_order_type,
+            }
+
+            return render(request, template, context)
+        
+     
+
+    
 
 
 # def master_form(request):
@@ -79,34 +104,6 @@ def mix_form(request):
     #         'master_form' : master_form,
     #         'form_title' : form_title,
     #         'order_type' : order_type
-    #     }
-
-    # return render(request, template, context)
-
-
-# def production_form(request):
-    # """a view to render the productionform form"""
-
-    # if request.method == 'POST':
-    #     # create a form instance and populate it with data from the request:
-    #     Production_form = ProductionForm(request.POST)
-    #     # check whether it's valid:
-    #     if Production_form.is_valid():
-    #         # process the data in form.cleaned_data as required
-    #         # ...
-    #         # redirect to a new URL:
-    #         return HttpResponseRedirect('#')
-    
-    # # if a GET (or any other method) we'll create a blank form
-    # else:
-    #     production_form = ProductionForm()
-    #     form_title = "Production"
-    #     order_type = 'Production order'
-    #     template = 'services/services.html'
-    #     context = {
-    #         'production_form' : production_form,
-    #         'form_title' : form_title,
-    #         'order_type' : order_type,
     #     }
 
     # return render(request, template, context)

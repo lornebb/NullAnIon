@@ -18,12 +18,14 @@ import stripe
 
 #     return render(request, template, context)
 
-def checkout_order_mix(request):
+def checkout_order(request):
+    print("WE MADE IT *************************")
     """ view to get completed order forms to checkout for payment """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
     
     template = 'checkout/checkout.html'
+
 
     if request.method == 'POST':
         product_obj = Mix(request.POST)
