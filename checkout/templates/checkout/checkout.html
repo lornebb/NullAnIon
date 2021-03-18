@@ -28,57 +28,55 @@
                 <div class="column">
                     <form action="" method="POST">
                         {% csrf_token %}
-                            <p class="title">
+                            <p class="subtitle">
                                 Order Type:
                             </p>
-                            <p class="subtitle">
-                                {{ product.order_type }}
-                            </p>
                             <p class="title">
+                                {{ order.package_type }}
+                            </p>
+                            <p class="subtitle">
                                 Deliver By:
                             </p>
-                            <p class="subtitle">
-                                {{ product.id.deliver_by }}
-                            </p>
                             <p class="title">
-                                Total price
+                                {{ order.deliver_by }}
                             </p>
                             <p class="subtitle">
-                                {{ product.id.total_price }}
-                            </p>
-                            <p class="title">
                                 Mix Extras
                             </p>
-                            <p class="subtitle">
-                                {% if product.id.mix_extras %}
-                                    {% for extras in product.id.mix_extras %}
-                                        {{ product.id.mix_extras }}
+                            <p class="title">
+                                {% if order.mix_extras %}
+                                    {% for extras in order.mix_extras %}
+                                        {{ order.mix_extras }}
                                     {% endfor %}
                                 {% endif %}
                             </p>
-
+                            <p class="subtitle">
+                                Total price:
+                            </p>
+                            <p class="title">
+                                {{ order.total_price }}
+                            </p>
                         <fieldset>
                             <legend><u>About you</u></legend>
-                            About you form should be here.
-                            name & email & phone_number
+                            {{ user }}
                         </fieldset>
                         <fieldset>
                             <legend><u>Order Details</u></legend>
-                            {{ product }}
+                            {{ order }}
                             
                         </fieldset>
                     </form>
                     <hr>
                     <fieldset>
                         {% if user.is_authenticated %}
-                            <label>Save this information to my profile</label>
-                            <input type="checkbox" name="save-info">
+                            <label>You are logged in as {{ user }}</label>
+                            <!-- <input type="checkbox" name="save-info"> -->
                         {% else %}
                             <label>
                                 <a href="{% url 'account_signup' %}">Create Account</a>
                                 or
                                 <a href="{% url 'account_login' %}">login</a>
-                                to save this information
+                                to confirm this order
                             </label>
                         {% endif %}
                     </fieldset>

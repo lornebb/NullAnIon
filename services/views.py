@@ -22,13 +22,17 @@ def order_form(request):
             total_price=total_price,
         )
 
+        context = {
+            'order': order,
+        }
+
         messages.success(request, f"Successfully added a '{order.id}' order to the basket.")
 
         # product = MixForm(request.POST)
         # master_form = MasterForm(request.POST)
         # if mix_form.is_valid():
         template = 'checkout/checkout.html'
-        return redirect('checkout')
+        return render(request, template, context)
         # product=id)
 
         # # create a form instance and populate it with data from the request:
