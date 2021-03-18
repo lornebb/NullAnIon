@@ -3,19 +3,33 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from .forms import MixForm, MasterForm, ProductionForm
+from .models import Mix, Master, Production
 
 
 def order_form(request):
-    """a view to render the mixform form"""
+    """a view to render the mixform / masterform or productionform"""
 
     if request.method == 'POST':
-        product = MixForm(request.POST)
-        master_form = MasterForm(request.POST)
+        package_type = request.POST['package_type']
+        deliver_by = request.POST['deliver_by']
+        stem_choices = request.POST['stem_choices']
+        total_price = request.POST['total_price']
+
+        order = Mix.objects.create(
+            package_type=package_type,
+            deliver_by=deliver_by,
+            stem_choices=stem_choices,
+            total_price=total_price,
+        )
+
+        messages.success(request, f"Successfully added a '{order.id}' order to the basket.")
+
+        # product = MixForm(request.POST)
+        # master_form = MasterForm(request.POST)
         # if mix_form.is_valid():
         template = 'checkout/checkout.html'
-        messages.success(request, f"Successfully added a '{product.order_type}' order to the basket.")
-        print(f"CHECKOUT ORDER MADE {product.order_type} *******************************************************************************************")
-        return redirect('checkout_order', product=id)
+        return redirect('checkout')
+        # product=id)
 
         # # create a form instance and populate it with data from the request:
         # mix_form = MixForm(request.POST)

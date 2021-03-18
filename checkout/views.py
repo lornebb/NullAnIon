@@ -18,7 +18,7 @@ import stripe
 
 #     return render(request, template, context)
 
-def checkout_order(request):
+def checkout(request):
     print("WE MADE IT *************************")
     """ view to get completed order forms to checkout for payment """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
@@ -54,7 +54,7 @@ def checkout_order(request):
         context = {
             
         }
-        messages.error(request, "You have not filled an order form from services")
+        # messages.error(request, "You have not filled an order form from services")
         return render(request, template, context)
 
 
