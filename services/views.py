@@ -19,6 +19,7 @@ def order_form(request):
         reference_link_type = request.POST['reference_link_type']
         reference_link = request.POST['reference_link']
         # mix_extras = request.POST['mix_extras']
+        contact = request.POST['contact']
         total_price = request.POST['total_price']
 
         order = Mix.objects.create(
@@ -30,6 +31,7 @@ def order_form(request):
             reference_link_type=reference_link_type,
             reference_link=reference_link,
             # mix_extras=mix_extras,
+            contact=contact,
             total_price=total_price,
         )
 

@@ -25,7 +25,7 @@
                 {% include 'includes/info-other-services.html' %}
             </div>
             <div class="columnns">
-                <div class="column is-offset-one-quarter">
+                <div class="column">
                     <div class="title is-3">Your Order</div>
                     <form action="{% url 'checkout' %}" method="POST">
                         {% csrf_token %}
@@ -37,30 +37,38 @@
                             <p class="title">{{ order.stem_choices }}</p>
                             <p class="subtitle">Revisions:</p>
                             <p class="title">{{ order.revisions }}</p>
-                            <p class="subtitle">Reference Type:</p>
-                            <p class="title">{{ order.reference_link_type }}</p>
-                            <p class="subtitle">Reference Link:</p>
-                            <p class="title">{{ order.reference_link }}</p>
+
+                            {% if references in order.reference_link %}
+                                <p class="subtitle">Reference Type:</p>
+                                <p class="title">{{ order.reference_link_type }}</p>
+                                <p class="subtitle">Reference Link:</p>
+                                <p class="title">{{ order.reference_link }}</p>
+                            {% else %}
+                                <p>You have not added any references for this mix.</p>
+                            {% endif %}
+
                             {% if order.mix_extras %}
                                 <p class="subtitle">Mix Extras</p>
                                 {% for extras in order.mix_extras %}
                                     <p class="title">{{ order.mix_extras }}</p>
                                 {% endfor %}
                                 {% else %}
-                                    <p> You have not added any mix extras </p>
-                                {% endif %}
+                                    <p class="subtitle"> You have not added any mix extras </p>
+                            {% endif %}
+
+                            <p class="subtitle">Contact email:</p>
+                            <p class="title">{{ order.contact }}</p>
                             <p class="subtitle">Total price:</p>
-                            <p class="title">{{ order.total_price }}</p>
+                            <p class="title">$ {{ order.total_price }}</p>
                         <fieldset>
                             {% if user.is_authenticated %}
                                 <legend><u>About you</u></legend>
                                 <label>You are logged in as {{ user }}</label>
-                                {{ user }}
-                                <legend><u>Order Details</u></legend>
-                                {{ order }}
-                                <label>entert contact email:</label>
-                                <p>this is important to ensure communication after your order!</p>
-                                <input type="text" name="email">
+                                <p>{{ user }}</p>
+                                <p>{{ user.email }}</p>
+                                <label><u>Please double check contact email for this mix:</u></label>
+                                <p><strong>this is important to ensure communication after your order!</strong></p>
+                                <input type="text" name="email" placeholder="{{ user.email }}">
                             {% else %}
                                 <label>
                                     <a href="{% url 'account_signup' %}">Create Account</a>
