@@ -10,7 +10,7 @@ class MixForm(ModelForm):
                 'deliver_by', 'stem_choices',
                 'revisions', 'reference_link_type',
                 'reference_link', 'mix_extras',
-                'contact', 'total_price',)
+                'contact', 'order_total',)
         
         widgets = {
             'package_type': RadioSelect(),
@@ -28,7 +28,7 @@ class MasterForm(ModelForm):
                     'deliver_by', 'stem_choices',
                     'revisions', 'reference_link_type',
                     'reference_link', 'mix_extras', 
-                    'contact', 'total_price',)
+                    'contact', 'order_total',)
         
         widgets = {
             'package_type': RadioSelect(),

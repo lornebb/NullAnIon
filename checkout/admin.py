@@ -10,19 +10,19 @@ class OrderLineItemAdminInline(admin.TabularInline):
 class OrderAdmin(admin.ModelAdmin):
     inlines = (OrderLineItemAdminInline,)
 
-    readonly_fields = ('date', 'order_total',
+    readonly_fields = ('order_total',
                     'grand_total', 'order_number')
     
     fields = ('order_number', 'order_id', 'product_ordered',
-                'date', 'full_name', 'email',
+                'full_name', 'email',
                 'phone_number', 'order_total',
                 'grand_total')
     
     list_display = ('order_number', 'product_ordered',
-                    'date', 'full_name',
-                    'email', 'phone_number', 'order_total',
+                    'full_name', 'email',
+                    'phone_number', 'order_total',
                     'grand_total')
     
-    ordering = ('-date',)
+    # ordering = ('-date',)
 
 admin.site.register(Order, OrderAdmin)

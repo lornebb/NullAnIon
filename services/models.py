@@ -58,7 +58,7 @@ class Mix(models.Model):
     reference_link = models.URLField(blank=True, null=False)
     mix_extras = models.CharField(max_length=1026, choices=MIX_EXTRAS, blank=False, null=False, default='')
     contact = models.EmailField(blank=False, null=False, default='')
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, default=22.22)
+    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, default=22.22)
 
     def __str__(self):
         return self.contact
@@ -94,7 +94,7 @@ class Master(models.Model):
     reference_link = models.URLField(blank=True, null=False)
     mix_extras = models.CharField(max_length=1026, choices=MASTER_EXTRAS, blank=True, null=False, default='')
     contact = models.EmailField(blank=False, null=False, default='')
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
 
     def __str__(self):
         return self.contact

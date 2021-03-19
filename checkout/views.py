@@ -13,13 +13,45 @@ def checkout(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
-        
+
+        if request.POST['reference_link'] != "":
+            reference_link_type = request.POST['reference_link_type']
+            reference_link = request.POST['reference_link']
+        else:
+            reference_link_type = None
+            reference_link = None
+
+        if request.POST['mix_extras'] != "":
+            mix_extras = request.POST['mix_extras']
+        else:
+            mix_extras = None
+
+        form_data = {
+            'order_id': request.POST['order_id'],
+            'full_name': request.POST['full_name'],
+            'email': request.POST['email'],
+            'phone_number': request.POST['phone_number'],
+            'package_type': request.POST['package_type'],
+            'deliver_by': request.POST['deliver_by'],
+            'stem_choices': request.POST['stem_choices'],
+            'revisions': request.POST['revisions'],
+            'reference_link_type': reference_link_type,
+            'reference_link': reference_link,
+            'mix_extras': mix_extras,
+            'contact': request.POST['contact'],
+            'order_total': request.POST['order_total'],
+        }
+
+        print("form_data ************************************************************************************************************************************************")
+        print(form_data)
         print("************************************************************************************************************************************************")
-        print(request.POST)
-        print("************************************************************************************************************************************************")
 
+        order_form = OrderForm(form_data)
 
-
+        if order_form.is_valid():
+            print("************************ ITS VALID ****** LETS DO THIS SHIT. ******************")
+        else:
+            print("************************ ITS NOT VALID ************************")
 
 
 
@@ -68,7 +100,7 @@ def checkout(request):
     #     #     request.POST, initial={'order_type': 'Mix'},)
     #     product = product_obj
     #     messages.success(request, f"Successfully added a '{product_obj.order_type}' order to the basket.")
-    #     total = product.total_price
+    #     total = product.order_total
     #     stripe_total = round(total * 100)
     #     stripe.api_key = stripe_secret_key
     #     intent = stripe.PaymentIntent.create(

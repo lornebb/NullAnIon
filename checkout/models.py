@@ -14,12 +14,18 @@ class Order(models.Model):
                     (MASTER, 'Master'),]
 
     order_number = models.CharField(max_length=32, null=False, editable=False)
-    order_id = models.IntegerField(null=False)
+    order_id = models.IntegerField(null=False, blank=False)
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
-    date = models.DateTimeField(auto_now_add=True)
-    product_ordered = models.CharField(max_length=6, choices=PRODUCT_CHOICES, blank=False, null=False, default=MIX)
+    deliver_by = models.DateTimeField(auto_now_add=True)
+    stem_choices = models.CharField(max_length=1026, blank=False, null=False, default=6)
+    revisions = models.CharField(max_length=1026, blank=False, null=False, default=3)
+    reference_link_type = models.CharField(max_length=1026, blank=True, null=False)
+    reference_link = models.URLField(blank=True, null=False)
+    mix_extras = models.CharField(max_length=1026)
+    contact = models.EmailField(blank=False, null=False, default='')
+    product_ordered = models.CharField(max_length=6, blank=False, null=False)
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
 

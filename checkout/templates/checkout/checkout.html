@@ -34,45 +34,46 @@
 
                             <label for="package_type" class="subtitle">Package Type:</label>
                             <input name="package_type" class="title" value="{{ order.package_type }}" readonly>
-
+                            <br>
                             <label for="deliver_by" class="subtitle">Deliver By:</label>
                             <input name="deliver_by" class="title" value="{{ order.deliver_by }}" readonly>
-
+                            <br>
                             <label for="stem_choices" class="subtitle">You are sending </label>
                             <input name="stem_choices" class="title" value="{{ order.stem_choices }} Stems" readonly>
-
+                            <br>
                             <label for="revisions" class="subtitle">Revisions:</label>
-                            <input name="revisions" class="title" vlaue="{{ order.revisions }} revisions" readonly>
-
-                            {% if references in order.reference_link %}
+                            <input name="revisions" class="title" value="{{ order.revisions }} Revisions" readonly>
+                            <br>
+                            {% if order.reference_link %}
                                 <label for="reference_link_type" class="subtitle">Reference Type:</label>
                                 <input name="reference_link_type" class="title" value="{{ order.reference_link_type }}" readonly>
-
+                                <br>
                                 <label for="reference_link" class="subtitle">Reference Link:</label>
                                 <input name="reference_link" class="title" value="{{ order.reference_link }}" readonly>
                             {% else %}
                                 <p class="subtitle">You have not added any references for this mix.</p>
                             {% endif %}
-
+                            <br>
                             {% if order.mix_extras %}
                                 <label for="mix_extras" class="subtitle">Mix Extras</label>
                                 {% for extras in order.mix_extras %}
                                     <input name="mix_extras" class="title" value="{{ order.mix_extras }}" readonly>
                                 {% endfor %}
                                 {% else %}
-                                    <input name="mix_extras" class="title" value="No Mix Extras" readonly>
-                                    <span>You have not requested any mix extras</span>
+                                <div><strong>You have not requested any mix extras</strong></div>
+                                    <input name="mix_extras" class="subtitle" value="No Mix Extras" readonly>
                             {% endif %}
-
-                            <label for="contact" class="subtitle">File trasnfer contact email:</label>
+                            <br>
+                            <label for="contact" class="subtitle">File transfer contact email:</label>
                             <input name="contact" class="title" value="{{ order.contact }}" readonly>
-
+                            <br>
                             <h1>ORDER ID NUMBER </h1>
                             <label for="order_id">Order ID</label>
                             <input name="order_id" value="{{ order.id }}" readonly>
-
-                            <label for="total_price" class="subtitle">Total price:</label>
-                            <input name="total_price" class="title" value="$ {{ order.total_price }}" readonly>
+                            <br>
+                            <label for="order_total" class="subtitle">Total price:</label>
+                            <input name="order_total" class="subitle" value="$ {{ order.order_total }}" readonly>
+                            <br>
                         </fieldset>
                         <fieldset>
                             {% if user.is_authenticated %}

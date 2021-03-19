@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='master',
-            name='total_price',
+            name='order_total',
             field=models.DecimalField(decimal_places=2, default=0, max_digits=10),
         ),
         migrations.AlterField(

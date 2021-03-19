@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='Master',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('total_price', models.DecimalField(decimal_places=2, default=0, editable=False, max_digits=10)),
+                ('order_total', models.DecimalField(decimal_places=2, default=0, editable=False, max_digits=10)),
                 ('deliver_by', models.DateField()),
                 ('reference_link_type', models.CharField(choices=[('general', 'general'), ('energy', 'energy'), ('tone', 'tone'), ('instrument', 'instrument')], max_length=1026)),
                 ('reference_link', models.URLField()),
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
             name='Mix',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('total_price', models.DecimalField(decimal_places=2, default=0, editable=False, max_digits=10)),
+                ('order_total', models.DecimalField(decimal_places=2, default=0, editable=False, max_digits=10)),
                 ('deliver_by', models.DateField()),
                 ('reference_link_type', models.CharField(choices=[('general', 'general'), ('energy', 'energy'), ('tone', 'tone'), ('instrument', 'instrument')], max_length=1026)),
                 ('reference_link', models.URLField()),
