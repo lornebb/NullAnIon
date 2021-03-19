@@ -1,18 +1,22 @@
 from django.shortcuts import render
 from django.contrib import messages
-from services.forms import Mix, Master, Production
+# from services.forms import Mix, Master, Production
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 from .forms import OrderForm 
 import stripe
 
-
+@login_required
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-
-    # if request.method == 'POST':
+    if request.method == 'POST':
+        
+        print("************************************************************************************************************************************************")
+        print(request.POST)
+        print("************************************************************************************************************************************************")
 
 
 

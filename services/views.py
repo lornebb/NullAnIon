@@ -4,6 +4,7 @@ from django.contrib import messages
 
 from .forms import MixForm, MasterForm, ProductionForm
 from .models import Mix, Master, Production
+from checkout.forms import OrderForm
 
 
 
@@ -35,8 +36,11 @@ def order_form(request):
             total_price=total_price,
         )
 
+        order_form = OrderForm
+
         context = {
             'order': order,
+            'order_form': order_form,
         }
 
         messages.success(request, f"Successfully added your \

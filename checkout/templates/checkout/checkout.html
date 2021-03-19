@@ -29,46 +29,63 @@
                     <div class="title is-3">Your Order</div>
                     <form action="{% url 'checkout' %}" method="POST">
                         {% csrf_token %}
-                            <p class="subtitle">Package Type:</p>
-                            <p class="title">{{ order.package_type }}</p>
-                            <p class="subtitle">Deliver By:</p>
-                            <p class="title">{{ order.deliver_by }}</p>
-                            <p class="subtitle">Stem Choice:</p>
-                            <p class="title">{{ order.stem_choices }}</p>
-                            <p class="subtitle">Revisions:</p>
-                            <p class="title">{{ order.revisions }}</p>
+                        <fieldset>
+                            <Legend>Your Order</Legend>
+
+                            <label for="package_type" class="subtitle">Package Type:</label>
+                            <input name="package_type" class="title" value="{{ order.package_type }}" readonly>
+
+                            <label for="deliver_by" class="subtitle">Deliver By:</label>
+                            <input name="deliver_by" class="title" value="{{ order.deliver_by }}" readonly>
+
+                            <label for="stem_choices" class="subtitle">You are sending </label>
+                            <input name="stem_choices" class="title" value="{{ order.stem_choices }} Stems" readonly>
+
+                            <label for="revisions" class="subtitle">Revisions:</label>
+                            <input name="revisions" class="title" vlaue="{{ order.revisions }} revisions" readonly>
 
                             {% if references in order.reference_link %}
-                                <p class="subtitle">Reference Type:</p>
-                                <p class="title">{{ order.reference_link_type }}</p>
-                                <p class="subtitle">Reference Link:</p>
-                                <p class="title">{{ order.reference_link }}</p>
+                                <label for="reference_link_type" class="subtitle">Reference Type:</label>
+                                <input name="reference_link_type" class="title" value="{{ order.reference_link_type }}" readonly>
+
+                                <label for="reference_link" class="subtitle">Reference Link:</label>
+                                <input name="reference_link" class="title" value="{{ order.reference_link }}" readonly>
                             {% else %}
-                                <p>You have not added any references for this mix.</p>
+                                <p class="subtitle">You have not added any references for this mix.</p>
                             {% endif %}
 
                             {% if order.mix_extras %}
-                                <p class="subtitle">Mix Extras</p>
+                                <label for="mix_extras" class="subtitle">Mix Extras</label>
                                 {% for extras in order.mix_extras %}
-                                    <p class="title">{{ order.mix_extras }}</p>
+                                    <input name="mix_extras" class="title" value="{{ order.mix_extras }}" readonly>
                                 {% endfor %}
                                 {% else %}
-                                    <p class="subtitle"> You have not added any mix extras </p>
+                                    <input name="mix_extras" class="title" value="No Mix Extras" readonly>
+                                    <span>You have not requested any mix extras</span>
                             {% endif %}
 
-                            <p class="subtitle">Contact email:</p>
-                            <p class="title">{{ order.contact }}</p>
-                            <p class="subtitle">Total price:</p>
-                            <p class="title">$ {{ order.total_price }}</p>
+                            <label for="contact" class="subtitle">File trasnfer contact email:</label>
+                            <input name="contact" class="title" value="{{ order.contact }}" readonly>
+
+                            <h1>ORDER ID NUMBER </h1>
+                            <label for="order_id">Order ID</label>
+                            <input name="order_id" value="{{ order.id }}" readonly>
+
+                            <label for="total_price" class="subtitle">Total price:</label>
+                            <input name="total_price" class="title" value="$ {{ order.total_price }}" readonly>
+                        </fieldset>
                         <fieldset>
                             {% if user.is_authenticated %}
                                 <legend><u>About you</u></legend>
                                 <label>You are logged in as {{ user }}</label>
-                                <p>{{ user }}</p>
-                                <p>{{ user.email }}</p>
-                                <label><u>Please double check contact email for this mix:</u></label>
-                                <p><strong>this is important to ensure communication after your order!</strong></p>
-                                <input type="text" name="email" placeholder="{{ user.email }}">
+                                <p>Username on profile: {{ user }}</p>
+                                <p>Email on profile: {{ user.email }}</p>
+                                <p class="subtitle"><strong>Payment Form</strong></p>
+
+                                {{ order_form.full_name |as_crispy_field }}
+                                {{ order_form.email |as_crispy_field }}
+                                {{ order_form.phone_number |as_crispy_field }}
+
                             {% else %}
                                 <label>
                                     <a href="{% url 'account_signup' %}">Create Account</a>
@@ -78,8 +95,9 @@
                                 </label>
                             {% endif %}
                         </fieldset>
+                        <br>
                         <fieldset>
-                            <legend>Payment</legend>
+                            <legend class="title">Payment</legend>
                             <!-- Stripe card element will go here -->
                             <div>
                                 <div class="" id="card-element"></div>
@@ -94,7 +112,7 @@
                             <a class="button is-primary" href="">
                                 Adjust order
                             </a>
-                            <button class="button is-primary" href="">
+                            <button class="button is-primary" type="submit" href="">
                                 Complete Order
                             </button>
                         </div>
