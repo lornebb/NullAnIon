@@ -11,6 +11,7 @@ def order_form(request):
     """a view to render the mixform / masterform or productionform"""
 
     if request.method == 'POST':
+        # This is only for MIX at the moment.
         package_type = request.POST['package_type']
         deliver_by = request.POST['deliver_by']
         stem_choices = request.POST['stem_choices']
