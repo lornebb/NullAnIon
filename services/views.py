@@ -36,25 +36,15 @@ def order_form(request):
             'order': order,
         }
 
-        messages.success(request, f"Successfully added your {order.order_type} order to the basket.")
+        messages.success(request, f"Successfully added your \
+                            {order.order_type} order to the basket.")
 
         template = 'checkout/checkout.html'
         return render(request, template, context)
-
-        # # create a form instance and populate it with data from the request:
-        # mix_form = MixForm(request.POST)
-        # # check whether it's valid:
-        # if mix_form.is_valid():
-        #     print("Mix Form is valid and this inner function was called *******************************")
-        #     # process the data in form.cleaned_data as required
-        #     # ...
-        #     # redirect to a new URL:
-        #     return HttpResponseRedirect('#')
     
     # if a GET (or any other method) we'll create a blank form
     else:
         template = 'services/services.html'
-        # print(request.get("myquery"))
         if request.GET.get("type") == "mix":
             mix_form = MixForm()
             form_title = "Mix"
@@ -93,35 +83,3 @@ def order_form(request):
             }
 
             return render(request, template, context)
-        
-     
-
-    
-
-
-# def master_form(request):
-    # """a view to render the masterform form"""
-
-    # if request.method == 'POST':
-    #     # create a form instance and populate it with data from the request:
-    #     master_form = MasterForm(request.POST)
-    #     # check whether it's valid:
-    #     if master_form.is_valid():
-    #         # process the data in form.cleaned_data as required
-    #         # ...
-    #         # redirect to a new URL:
-    #         return HttpResponseRedirect('#')
-    
-    # # if a GET (or any other method) we'll create a blank form
-    # else:
-    #     master_form = MasterForm()
-    #     form_title = "Master"
-    #     order_type = "Master order"
-    #     template = 'services/services.html'
-    #     context = {
-    #         'master_form' : master_form,
-    #         'form_title' : form_title,
-    #         'order_type' : order_type
-    #     }
-
-    # return render(request, template, context)
