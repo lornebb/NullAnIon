@@ -6,6 +6,7 @@ from .forms import MixForm, MasterForm, ProductionForm
 from .models import Mix, Master, Production
 
 
+
 def order_form(request):
     """a view to render the mixform / masterform or productionform"""
 
@@ -13,12 +14,21 @@ def order_form(request):
         package_type = request.POST['package_type']
         deliver_by = request.POST['deliver_by']
         stem_choices = request.POST['stem_choices']
+        revisions = request.POST['revisions']
+        reference_link_type = request.POST['reference_link_type']
+        reference_link = request.POST['reference_link']
+        # mix_extras = request.POST['mix_extras']
         total_price = request.POST['total_price']
 
         order = Mix.objects.create(
+            order_type = "Mix",
             package_type=package_type,
             deliver_by=deliver_by,
             stem_choices=stem_choices,
+            revisions=revisions,
+            reference_link_type=reference_link_type,
+            reference_link=reference_link,
+            # mix_extras=mix_extras,
             total_price=total_price,
         )
 
@@ -26,14 +36,10 @@ def order_form(request):
             'order': order,
         }
 
-        messages.success(request, f"Successfully added a '{order.id}' order to the basket.")
+        messages.success(request, f"Successfully added your {order.order_type} order to the basket.")
 
-        # product = MixForm(request.POST)
-        # master_form = MasterForm(request.POST)
-        # if mix_form.is_valid():
         template = 'checkout/checkout.html'
         return render(request, template, context)
-        # product=id)
 
         # # create a form instance and populate it with data from the request:
         # mix_form = MixForm(request.POST)
@@ -50,8 +56,6 @@ def order_form(request):
         template = 'services/services.html'
         # print(request.get("myquery"))
         if request.GET.get("type") == "mix":
-            print(f"*******************{type}****** MIX?")
-            print(request.GET.get("type"))
             mix_form = MixForm()
             form_title = "Mix"
             mix_order_type = 'Mix Order'
@@ -65,8 +69,6 @@ def order_form(request):
             return render(request, template, context)
 
         if request.GET.get("type") == "master":
-            print(f"*******************{type}**** MASTER?")
-            print(request.GET.get("type"))
             master_form = MasterForm()
             form_title = "Master"
             master_order_type = "Master Order"
@@ -80,8 +82,6 @@ def order_form(request):
             return render(request, template, context)
         
         if request.GET.get("type") == "production":
-            print(f"*******************{type}******* Production?")
-            print(request.GET.get("type"))
             production_form = ProductionForm()
             form_title = "Production"
             production_order_type = "Production Order"

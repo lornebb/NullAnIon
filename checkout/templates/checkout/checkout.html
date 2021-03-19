@@ -25,87 +25,77 @@
                 {% include 'includes/info-other-services.html' %}
             </div>
             <div class="columnns">
-                <div class="column">
-                    <form action="" method="POST">
+                <div class="column is-offset-one-quarter">
+                    <div class="title is-3">Your Order</div>
+                    <form action="{% url 'checkout' %}" method="POST">
                         {% csrf_token %}
-                            <p class="subtitle">
-                                Order Type:
-                            </p>
-                            <p class="title">
-                                {{ order.package_type }}
-                            </p>
-                            <p class="subtitle">
-                                Deliver By:
-                            </p>
-                            <p class="title">
-                                {{ order.deliver_by }}
-                            </p>
-                            <p class="subtitle">
-                                Mix Extras
-                            </p>
-                            <p class="title">
-                                {% if order.mix_extras %}
-                                    {% for extras in order.mix_extras %}
-                                        {{ order.mix_extras }}
-                                    {% endfor %}
+                            <p class="subtitle">Package Type:</p>
+                            <p class="title">{{ order.package_type }}</p>
+                            <p class="subtitle">Deliver By:</p>
+                            <p class="title">{{ order.deliver_by }}</p>
+                            <p class="subtitle">Stem Choice:</p>
+                            <p class="title">{{ order.stem_choices }}</p>
+                            <p class="subtitle">Revisions:</p>
+                            <p class="title">{{ order.revisions }}</p>
+                            <p class="subtitle">Reference Type:</p>
+                            <p class="title">{{ order.reference_link_type }}</p>
+                            <p class="subtitle">Reference Link:</p>
+                            <p class="title">{{ order.reference_link }}</p>
+                            {% if order.mix_extras %}
+                                <p class="subtitle">Mix Extras</p>
+                                {% for extras in order.mix_extras %}
+                                    <p class="title">{{ order.mix_extras }}</p>
+                                {% endfor %}
+                                {% else %}
+                                    <p> You have not added any mix extras </p>
                                 {% endif %}
-                            </p>
-                            <p class="subtitle">
-                                Total price:
-                            </p>
-                            <p class="title">
-                                {{ order.total_price }}
-                            </p>
+                            <p class="subtitle">Total price:</p>
+                            <p class="title">{{ order.total_price }}</p>
                         <fieldset>
-                            <legend><u>About you</u></legend>
-                            {{ user }}
+                            {% if user.is_authenticated %}
+                                <legend><u>About you</u></legend>
+                                <label>You are logged in as {{ user }}</label>
+                                {{ user }}
+                                <legend><u>Order Details</u></legend>
+                                {{ order }}
+                                <label>entert contact email:</label>
+                                <p>this is important to ensure communication after your order!</p>
+                                <input type="text" name="email">
+                            {% else %}
+                                <label>
+                                    <a href="{% url 'account_signup' %}">Create Account</a>
+                                    or
+                                    <a href="{% url 'account_login' %}">Login</a>
+                                    to confirm this order
+                                </label>
+                            {% endif %}
                         </fieldset>
                         <fieldset>
-                            <legend><u>Order Details</u></legend>
-                            {{ order }}
-                            
+                            <legend>Payment</legend>
+                            <!-- Stripe card element will go here -->
+                            <div>
+                                <div class="" id="card-element"></div>
+                            </div>
+                            <!-- used to display errors -->
+                            <div>
+                                <div class="" id="card-errors" role="alert"></div>
+                            </div>
                         </fieldset>
+                        <!-- Stripe -->
+                        <div class="field is-grouped">
+                            <a class="button is-primary" href="">
+                                Adjust order
+                            </a>
+                            <button class="button is-primary" href="">
+                                Complete Order
+                            </button>
+                        </div>
+                        <p>
+                            <span>
+                                Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong>
+                            </span>
+                        </p>
                     </form>
-                    <hr>
-                    <fieldset>
-                        {% if user.is_authenticated %}
-                            <label>You are logged in as {{ user }}</label>
-                            <!-- <input type="checkbox" name="save-info"> -->
-                        {% else %}
-                            <label>
-                                <a href="{% url 'account_signup' %}">Create Account</a>
-                                or
-                                <a href="{% url 'account_login' %}">login</a>
-                                to confirm this order
-                            </label>
-                        {% endif %}
-                    </fieldset>
-                    <fieldset>
-                        <legend>Payment</legend>
-                        <!-- Stripe card element will go here -->
-                        <div>
-                            <div class="" id="card-element"></div>
-                        </div>
-                        <!-- used to display errors -->
-                        <div>
-                            <div class="" id="card-errors" role="alert"></div>
-                        </div>
-                    </fieldset>
-
-                    <!-- Stripe -->
-                    <div class="field is-grouped">
-                        <a class="button is-primary" href="">
-                            Adjust order
-                        </a>
-                        <button class="button is-primary" href="">
-                            Complete Order
-                        </button>
-                    </div>
-                    <p>
-                        <span>
-                            Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong>
-                        </span>
-                    </p>
                 </div>
             </div>
         </div>
