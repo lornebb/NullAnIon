@@ -13,13 +13,28 @@ def order_form(request):
 
     if request.method == 'POST':
         # This is only for MIX at the moment.
+
+        if request.POST['reference_link'] != "":
+            reference_link_type = request.POST['reference_link_type']
+            reference_link = request.POST['reference_link']
+        else:
+            reference_link_type = None
+            reference_link = None
+
+        if request.POST.getlist('mix_extras') != "":
+            mix_extras = request.POST.getlist('mix_extras')
+            for extra in mix_extras:
+                print(extra)
+        else:
+            mix_extras = None
+
         package_type = request.POST['package_type']
         deliver_by = request.POST['deliver_by']
         stem_choices = request.POST['stem_choices']
         revisions = request.POST['revisions']
-        reference_link_type = request.POST['reference_link_type']
-        reference_link = request.POST['reference_link']
-        mix_extras = request.POST['mix_extras']
+        reference_link_type = reference_link_type
+        reference_link = reference_link
+        mix_extras = mix_extras
         contact = request.POST['contact']
         order_total = request.POST['order_total']
 
@@ -49,7 +64,6 @@ def order_form(request):
         template = 'checkout/checkout.html'
         return render(request, template, context)
     
-    # if a GET (or any other method) we'll create a blank form
     else:
         template = 'services/services.html'
         if request.GET.get("type") == "mix":

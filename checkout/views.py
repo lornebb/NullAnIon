@@ -21,8 +21,8 @@ def checkout(request):
             reference_link_type = None
             reference_link = None
 
-        if request.POST['mix_extras'] != "":
-            mix_extras = request.POST['mix_extras']
+        if request.POST.getlist('mix_extras') != "":
+            mix_extras = request.POST.getlist('mix_extras')
         else:
             mix_extras = None
 
