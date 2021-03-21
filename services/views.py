@@ -8,6 +8,7 @@ from checkout.forms import OrderForm
 
 
 
+
 def order_form(request):
     """a view to render the mixform / masterform or productionform"""
 
@@ -62,6 +63,7 @@ def order_form(request):
                             {order.order_type} order to the basket.")
 
         template = 'checkout/checkout.html'
+        # template = checkout
         return render(request, template, context)
     
     else:

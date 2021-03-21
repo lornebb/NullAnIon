@@ -4,15 +4,16 @@ from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
-from .forms import OrderForm 
+from .models import Order
 import stripe
 
-@login_required
+# @login_required
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
+        # This is only for MIX at the moment.
 
         if request.POST['reference_link'] != "":
             reference_link_type = request.POST['reference_link_type']
@@ -23,14 +24,12 @@ def checkout(request):
 
         if request.POST.getlist('mix_extras') != "":
             mix_extras = request.POST.getlist('mix_extras')
+            for extra in mix_extras:
+                print(extra)
         else:
             mix_extras = None
 
         form_data = {
-            'order_id': request.POST['order_id'],
-            'full_name': request.POST['full_name'],
-            'email': request.POST['email'],
-            'phone_number': request.POST['phone_number'],
             'package_type': request.POST['package_type'],
             'deliver_by': request.POST['deliver_by'],
             'stem_choices': request.POST['stem_choices'],
@@ -46,16 +45,39 @@ def checkout(request):
         print(form_data)
         print("************************************************************************************************************************************************")
 
-        order_form = OrderForm(form_data)
+        order = Order.objects.create(form_data)
 
-        if order_form.is_valid():
-            print("************************ ITS VALID ****** LETS DO THIS SHIT. ******************")
-        else:
-            print("************************ ITS NOT VALID ************************")
+        print("form_data ************************************************************************************************************************************************")
+        print(order)
+        print("************************************************************************************************************************************************")
+        
+        context = {
+            'order': order,
+            'stripe_public_key': stripe_public_key,
+            'stripe_secret_key': stripe_secret_key,
+        }
+
+        messages.success(request, f"Successfully added your \
+                        {order.order_type} order to the basket.")
+
+        template = 'checkout/checkout.html'
+        return render(request, template, context)
+
+    else:
+
+        template = 'checkout/checkout.html'
+        return render(request, template)
 
 
 
-
+# def checkout_complete(request):
+    
+#     customer_details = (
+#     'order_id': request.POST['order_id'],
+#     'full_name': request.POST['full_name'],
+#     'email': request.POST['email'],
+#     'phone_number': request.POST['phone_number'],
+#     )
 
 
 
