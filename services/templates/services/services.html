@@ -41,7 +41,7 @@
       <div class="column">
         <!-- IF ELSE FOR TITLE like below -->
         <u><strong>Order a {{ form_title }}</strong></u>
-        <form action="{% url 'services' %}" method="POST" class="uniForm">
+        <form action="{% url 'checkout' %}" method="POST" class="uniForm">
           {% csrf_token %}
         
         {% if mix_form %}   
