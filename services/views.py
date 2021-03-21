@@ -3,98 +3,104 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
 from .forms import MixForm, MasterForm, ProductionForm
+from .models import Mix, Master, Production
+from checkout.forms import OrderForm
 
 
-def mix_form(request):
-    """a view to render the mixform form"""
+
+def order_form(request):
+    """a view to render the mixform / masterform or productionform"""
 
     if request.method == 'POST':
-        product = MixForm(request.POST)
-        if mix_form.is_valid():
-            template = 'checkout/checkout.html'
-            messages.success(request, f"Successfully added a '{product.order_type}' order to the basket.")
-            print(f"CHECKOUT ORDER MADE {product.order_type} *******************************************************************************************")
-            return redirect('checkout_order', product=id)
+        # This is only for MIX at the moment.
 
-        # # create a form instance and populate it with data from the request:
-        # mix_form = MixForm(request.POST)
-        # # check whether it's valid:
-        # if mix_form.is_valid():
-        #     print("Mix Form is valid and this inner function was called *******************************")
-        #     # process the data in form.cleaned_data as required
-        #     # ...
-        #     # redirect to a new URL:
-        #     return HttpResponseRedirect('#')
-    
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        mix_form = MixForm()
-        form_title = "Mix"
-        # post_title = "services-mix"
-        template = 'services/services.html'
-        order_type = 'Mix Order'
+        if request.POST['reference_link'] != "":
+            reference_link_type = request.POST['reference_link_type']
+            reference_link = request.POST['reference_link']
+        else:
+            reference_link_type = None
+            reference_link = None
+
+        if request.POST.getlist('mix_extras') != "":
+            mix_extras = request.POST.getlist('mix_extras')
+            for extra in mix_extras:
+                print(extra)
+        else:
+            mix_extras = None
+
+        package_type = request.POST['package_type']
+        deliver_by = request.POST['deliver_by']
+        stem_choices = request.POST['stem_choices']
+        revisions = request.POST['revisions']
+        reference_link_type = reference_link_type
+        reference_link = reference_link
+        mix_extras = mix_extras
+        contact = request.POST['contact']
+        order_total = request.POST['order_total']
+
+        order = Mix.objects.create(
+            order_type = "Mix",
+            package_type=package_type,
+            deliver_by=deliver_by,
+            stem_choices=stem_choices,
+            revisions=revisions,
+            reference_link_type=reference_link_type,
+            reference_link=reference_link,
+            mix_extras=mix_extras,
+            contact=contact,
+            order_total=order_total,
+        )
+
+        order_form = OrderForm
+
         context = {
+            'order': order,
+            'order_form': order_form,
+        }
+
+        messages.success(request, f"Successfully added your \
+                            {order.order_type} order to the basket.")
+
+        template = 'checkout/checkout.html'
+        return render(request, template, context)
+    
+    else:
+        template = 'services/services.html'
+        if request.GET.get("type") == "mix":
+            mix_form = MixForm()
+            form_title = "Mix"
+            mix_order_type = 'Mix Order'
+
+            context = {
             'mix_form' : mix_form,
             'form_title' : form_title,
-            'order_type' : order_type,
-            # 'post_title' : post_title,
-        }
+            'mix_order_type' : mix_order_type,
+            }
 
-    # messages.success(request, 'Successfully added product!')
-    return render(request, template, context)
+            return render(request, template, context)
 
-
-def master_form(request):
-    """a view to render the masterform form"""
-
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        master_form = MasterForm(request.POST)
-        # check whether it's valid:
-        if master_form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('#')
-    
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        master_form = MasterForm()
-        form_title = "Master"
-        order_type = "Master order"
-        template = 'services/services.html'
-        context = {
+        if request.GET.get("type") == "master":
+            master_form = MasterForm()
+            form_title = "Master"
+            master_order_type = "Master Order"
+            
+            context = {
             'master_form' : master_form,
             'form_title' : form_title,
-            'order_type' : order_type
-        }
+            'master_order_type': master_order_type,
+            }
 
-    return render(request, template, context)
+            return render(request, template, context)
+        
+        if request.GET.get("type") == "production":
+            production_form = ProductionForm()
+            form_title = "Production"
+            production_order_type = "Production Order"
 
+            context = {
+            'production_form': production_form,
+            'form_title': form_title,
+            'production_order_type': production_order_type,
+            }
 
-def production_form(request):
-    """a view to render the productionform form"""
-
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        Production_form = ProductionForm(request.POST)
-        # check whether it's valid:
-        if Production_form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('#')
-    
-    # if a GET (or any other method) we'll create a blank form
-    else:
-        production_form = ProductionForm()
-        form_title = "Production"
-        order_type = 'Production order'
-        template = 'services/services.html'
-        context = {
-            'production_form' : production_form,
-            'form_title' : form_title,
-            'order_type' : order_type,
-        }
-
-    return render(request, template, context)
+            return render(request, template, context)

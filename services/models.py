@@ -1,5 +1,4 @@
 from django.db import models
-# from typing_extensions import Required
 
 # global scope variables for choices
 general = 'general'
@@ -22,6 +21,9 @@ package_type = [(single, 'single (< 5mins)'),
 
 class Mix(models.Model):
     """ model for MIX service database """
+
+    class Meta:
+        verbose_name_plural = 'Mixes'
 
     # local choices veriables
 
@@ -52,13 +54,14 @@ class Mix(models.Model):
     deliver_by = models.DateField(blank=False, null=False)
     stem_choices = models.CharField(max_length=1026, choices=STEM_CHOICES, blank=False, null=False, default=6)
     revisions = models.CharField(max_length=1026, choices=REVISIONS, blank=False, null=False, default=3)
-    reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=True, null=False)
-    reference_link = models.URLField(blank=True, null=False)
-    mix_extras = models.CharField(max_length=1026, choices=MIX_EXTRAS, blank=False, null=False)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, default=22.22)
+    reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=True, null=True, default=general)
+    reference_link = models.URLField(blank=True, null=True)
+    mix_extras = models.CharField(max_length=1026, choices=MIX_EXTRAS, blank=False, null=False, default='')
+    contact = models.EmailField(blank=False, null=False, default='')
+    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, default=22.23)
 
     def __str__(self):
-        return self.order_type
+        return self.contact
 
 
 class Master(models.Model):
@@ -87,13 +90,14 @@ class Master(models.Model):
     deliver_by = models.DateField(blank=False, null=False)
     stem_choices = models.CharField(max_length=1026, choices=STEM_CHOICES, blank=False, null=False, default=[GROUP_STEMS])
     revisions = models.CharField(max_length=1026, choices=REVISIONS, blank=False, null=False, default=3)
-    reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=True, null=False)
+    reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=True, null=False, default=general)
     reference_link = models.URLField(blank=True, null=False)
-    mix_extras = models.CharField(max_length=1026, choices=MASTER_EXTRAS, blank=True, null=False, default='Instrumental Version')
-    total_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+    mix_extras = models.CharField(max_length=1026, choices=MASTER_EXTRAS, blank=True, null=False, default='')
+    contact = models.EmailField(blank=False, null=False, default='')
+    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
 
     def __str__(self):
-        return self.order_type
+        return self.contact
 
 
 class Production(models.Model):
@@ -110,10 +114,11 @@ class Production(models.Model):
 
     order_type = models.CharField(max_length=15, null=False, blank=False, default="Production")
     production_type = models.CharField(max_length=1026, choices=PRODUCTION_TYPE, blank=False, null=False)
-    reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=False, null=False)
+    reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=False, null=False, default=general)
     reference_link = models.URLField(blank=True, null=False)
     deliver_by = models.DateField(blank=False, null=False)
+    contact = models.EmailField(blank=False, null=False, default='')
     notes = models.CharField(max_length=320)
 
     def __str__(self):
-        return self.order_type
+        return self.contact

@@ -26,68 +26,79 @@
             </div>
             <div class="columnns">
                 <div class="column">
-                    <form action="{% url 'checkout_blank' %}" method="POST">
+                    <div class="title is-3">Your Order</div>
+                    <form action="{% url 'checkout' %}" method="POST">
                         {% csrf_token %}
-                            <p class="title">
-                                Order Type:
-                            </p>
-                            <p class="subtitle">
-                                {{ product.order_type }}
-                            </p>
-                            <p class="title">
-                                Deliver By:
-                            </p>
-                            <p class="subtitle">
-                                {{ product.id.deliver_by }}
-                            </p>
-                            <p class="title">
-                                Total price:
-                            </p>
-                            <p class="subtitle">
-                                {{ product.id.total_price }}
-                            </p>
-                            <p class="title">
-                                Mix Extras:
-                            </p>
-                            <p class="subtitle">
-                                {% if product.id.mix_extras %}
-                                    {% for extras in product.id.mix_extras %}
-                                        {{ product.id.mix_extras }}
-                                    {% endfor %}
-                                {% endif %}
-                            </p>
-                        <hr>
+                        <fieldset>
+                            <Legend>Your Order</Legend>
+
+                            <label for="package_type" class="subtitle">Package Type:</label>
+                            <input name="package_type" class="title" value="{{ order.package_type }}" readonly>
+                            <br>
+                            <label for="deliver_by" class="subtitle">Deliver By:</label>
+                            <input name="deliver_by" class="title" value="{{ order.deliver_by }}" readonly>
+                            <br>
+                            <label for="stem_choices" class="subtitle">You are sending </label>
+                            <input name="stem_choices" class="title" value="{{ order.stem_choices }} Stems" readonly>
+                            <br>
+                            <label for="revisions" class="subtitle">Revisions:</label>
+                            <input name="revisions" class="title" value="{{ order.revisions }} Revisions" readonly>
+                            <br>
+                            {% if order.reference_link %}
+                                <label for="reference_link_type" class="subtitle">Reference Type:</label>
+                                <input name="reference_link_type" class="title" value="{{ order.reference_link_type }}" readonly>
+                                <br>
+                                <label for="reference_link" class="subtitle">Reference Link:</label>
+                                <input name="reference_link" class="title" value="{{ order.reference_link }}" readonly>
+                            {% else %}
+                                <p class="subtitle">You have not added any references for this mix.</p>
+                            {% endif %}
+                            <br>
+                            {% if order.mix_extras %}
+                                <label for="mix_extras" class="subtitle">Mix Extras</label>
+                                {% for extras in order.mix_extras %}
+                                    <input name="mix_extras" class="title" value="{{ order.mix_extras }}" readonly>
+                                {% endfor %}
+                                {% else %}
+                                <div><strong>You have not requested any mix extras</strong></div>
+                                    <input name="mix_extras" class="subtitle" value="No Mix Extras" readonly>
+                            {% endif %}
+                            <br>
+                            <label for="contact" class="subtitle">File transfer contact email:</label>
+                            <input name="contact" class="title" value="{{ order.contact }}" readonly>
+                            <br>
+                            <h1>ORDER ID NUMBER </h1>
+                            <label for="order_id">Order ID</label>
+                            <input name="order_id" value="{{ order.id }}" readonly>
+                            <br>
+                            <label for="order_total" class="subtitle">Total price:</label>
+                            <input name="order_total" class="subitle" value="$ {{ order.order_total }}" readonly>
+                            <br>
+                        </fieldset>
                         <fieldset>
                             {% if user.is_authenticated %}
-                                <p class="subtitle">
-                                    Username:
-                                    <strong>
-                                        {{ profile.user }}
-                                    </strong>
-                                </p>
-                                <p class="subtitle">
-                                    Email:
-                                    <strong>
-                                        {{ profile.email }}
-                                    </strong>
-                                </p>
-                                <!-- <label>Save this new information to my profile</label>
-                                <input type="checkbox" name="save-info"> -->
+                                <legend><u>About you</u></legend>
+                                <label>You are logged in as {{ user }}</label>
+                                <p>Username on profile: {{ user }}</p>
+                                <p>Email on profile: {{ user.email }}</p>
+                                <p class="subtitle"><strong>Payment Form</strong></p>
+
+                                {{ order_form.full_name |as_crispy_field }}
+                                {{ order_form.email |as_crispy_field }}
+                                {{ order_form.phone_number |as_crispy_field }}
+
                             {% else %}
-                                <fieldset>
-                                    <legend><u>About you</u></legend>
-                                    {{ order_form_form|crispy }}
-                                </fieldset>
                                 <label>
                                     <a href="{% url 'account_signup' %}">Create Account</a>
                                     or
-                                    <a href="{% url 'account_login' %}">login</a>
-                                    to save this information
+                                    <a href="{% url 'account_login' %}">Login</a>
+                                    to confirm this order
                                 </label>
                             {% endif %}
                         </fieldset>
+                        <br>
                         <fieldset>
-                            <legend>Payment:</legend>
+                            <legend class="title">Payment</legend>
                             <!-- Stripe card element will go here -->
                             <div>
                                 <div class="" id="card-element"></div>
@@ -97,13 +108,12 @@
                                 <div class="" id="card-errors" role="alert"></div>
                             </div>
                         </fieldset>
-
                         <!-- Stripe -->
                         <div class="field is-grouped">
                             <a class="button is-primary" href="">
                                 Adjust order
                             </a>
-                            <button class="button is-primary" href="">
+                            <button class="button is-primary" type="submit" href="">
                                 Complete Order
                             </button>
                         </div>

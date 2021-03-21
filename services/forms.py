@@ -1,12 +1,6 @@
-import datetime
-from django.forms import ModelForm, Textarea, RadioSelect, DateField
-from django.forms.fields import CharField
-from django.forms.models import ModelMultipleChoiceField
-from django.forms.widgets import CheckboxSelectMultiple, NullBooleanSelect, SelectMultiple
-# from typing_extensions import Required
+from django.forms import ModelForm, Textarea, RadioSelect
+from django.forms.widgets import CheckboxSelectMultiple
 from services.models import Mix, Master, Production
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 
 
 class MixForm(ModelForm):
@@ -15,8 +9,8 @@ class MixForm(ModelForm):
         fields = ('package_type', 
                 'deliver_by', 'stem_choices',
                 'revisions', 'reference_link_type',
-                'reference_link', 'mix_extras', 
-                'total_price',)
+                'reference_link', 'mix_extras',
+                'contact', 'order_total',)
         
         widgets = {
             'package_type': RadioSelect(),
@@ -26,26 +20,6 @@ class MixForm(ModelForm):
             # 'deliver_by': DateField(),
         }
 
-    # def __init__(self, *args, **kwargs):
-    #     super(MixForm, self).__init__(*args, **kwargs)
-    #     self.helper = FormHelper(self)
-    #     self.helper.layout.append(Submit('save', 'save'))
-
-    #     self.helper.form_id = 'id-MixOrderform'
-    #     # self.helper.form_class = 'HELPER ACTIVATE' css class
-    #     self.helper.form_method = 'post'
-    #     self.helper.form_action = 'checkout_order'
-
-    #     self.helper.add_input(Submit('submit', 'Submit'))
-
-    #     self.fields['order_type'].widget.attrs['disabled'] = True
-    #     self.fields['order_type'].widget.attrs['required'] = True
-    #     self.fields['reference_link'].widget.attrs['required'] = False
-    #     # self.fields['total_price'].widget.attrs['default'] = "22.33"
-    #     # self.fields['total_price'].widget.attrs['disabled'] = True
-    #     self.fields['total_price'].widget.attrs['required'] = True
-    #     # self.fields['package_type'].widget.forms.RadioSelect
-
 
 class MasterForm(ModelForm):
     class Meta:
@@ -54,7 +28,7 @@ class MasterForm(ModelForm):
                     'deliver_by', 'stem_choices',
                     'revisions', 'reference_link_type',
                     'reference_link', 'mix_extras', 
-                    'total_price',)
+                    'contact', 'order_total',)
         
         widgets = {
             'package_type': RadioSelect(),
@@ -62,7 +36,6 @@ class MasterForm(ModelForm):
             'revisions': RadioSelect(),
             'mix_extras': CheckboxSelectMultiple(),
         }
-
 
 
 class ProductionForm(ModelForm):
@@ -74,6 +47,7 @@ class ProductionForm(ModelForm):
                 'reference_link_type',
                 'reference_link',
                 'deliver_by',
+                'contact',
                 'notes',
         )
         widgets = {

@@ -3,8 +3,7 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <a href="{% url 'home' %}" class="navbar-item" href="#">
-        <img src="{% static 'images/null_an_ion_logotype.svg' %}" width="112" height="28">
-        
+        <img src="{% static 'images/nullanion-logo-simple-thick.svg' %}" width="120" height="40" style="object-fit: fill;">
       </a>
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
         <span aria-hidden="true"></span>
@@ -19,13 +18,13 @@
           Services
         </a>
         <div class="navbar-dropdown">
-          <a href="{% url 'services-mix' %}" class="navbar-item">
+          <a href="{% url 'services'%}?type=mix" class="navbar-item">
             Mix
           </a>
-          <a href="{% url 'services-master' %}" class="navbar-item">
+          <a href="{% url 'services'%}?type=master" class="navbar-item">
             Master
           </a>
-          <a href="{% url 'services-production' %}" class="navbar-item">
+          <a href="{% url 'services'%}?type=production" class="navbar-item">
             Production
           </a>
 <!--           
