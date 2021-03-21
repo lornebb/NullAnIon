@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-<!-- {% crispy mix_form mix_form.helper %} -->
+{% crispy mix_form mix_form.helper %}
+
+{% block extra_css %}
+  <!-- services css -->
+    <link rel="stylesheet" href="{% static 'services/css/services.css' %}">
+{% endblock %}
 
 {% block extra_title %}
   {% if mix_form %}
@@ -44,10 +49,29 @@
         <form action="{% url 'checkout' %}" method="POST" class="uniForm">
           {% csrf_token %}
         
-        {% if mix_form %}   
+        {% if mix_form %} 
+        <!-- MIX FORM -->
+       
+        {% for type in mix_form.package_type %}
+         
+          {% if type == id_package_type_0 %}
+            <img class="icon-img" src="{% static 'icons/05-single.svg' %}" alt="">
+            <label for="{{type.choice}}">{{type.choice}}</label>
+            <input type="radio" id="icon-img" name="{{type.choice}}" value="{{type.package_type}}"> <br>
+          {% elif type == ep  %}
+            <span>THIS IS AN EP</span>
+          {% elif type == album  %}
+            <span>THIS IS AN EP</span>
+          {% else %}
+            <span>This didnt work</span>
+          {% endif %}
+        </li>
+        {% endfor %}  
+        </ul>
 
-            <!-- MIX FORM -->
-            {{ mix_form|crispy }}
+            
+
+
 
         {% elif master_form %}
         

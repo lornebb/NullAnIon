@@ -1,6 +1,12 @@
-#icon-single {
+.icon-single {
     background: url(/static/icons/05-single.svg);
-    height: 20px;
-    width: 20px;
+    object-fit: contain;
+    height: 50px;
+    width: 50px;
     display: block;
 }
+/* 
+ul {
+    background-color: red;
+    display: inline !important;
+} */
