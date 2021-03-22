@@ -63,30 +63,30 @@ class Order(models.Model):
         return self.order_number
 
 
-class OrderLineItem(models.Model):
-    """ for mix and master only """
+# class OrderLineItem(models.Model):
+#     """ for mix and master only """
 
-    MIX = 'MIX'
-    MASTER = 'MASTER'
-    PRODUCT_CHOICES = [(MIX, 'Mix'),
-                    (MASTER, 'Master'),]
+#     MIX = 'MIX'
+#     MASTER = 'MASTER'
+#     PRODUCT_CHOICES = [(MIX, 'Mix'),
+#                     (MASTER, 'Master'),]
 
-    order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
-    product_ordered = models.CharField(max_length=6, choices=PRODUCT_CHOICES, blank=False, null=False, default=MIX)
-    due_date = models.DateTimeField(auto_now_add=False)
-    references = models.CharField(max_length=1028, null=True, blank=True)
-    stems = models.DecimalField(max_digits=2, decimal_places=0, null=False, blank=False)
-    revisions = models.DecimalField(max_digits=1, decimal_places=0, null=False, blank=False)
-    extras = models.CharField(max_length=2056, null=True, blank=True)
-    lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
+#     order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
+#     product_ordered = models.CharField(max_length=6, choices=PRODUCT_CHOICES, blank=False, null=False, default=MIX)
+#     due_date = models.DateTimeField(auto_now_add=False)
+#     references = models.CharField(max_length=1028, null=True, blank=True)
+#     stems = models.DecimalField(max_digits=2, decimal_places=0, null=False, blank=False)
+#     revisions = models.DecimalField(max_digits=1, decimal_places=0, null=False, blank=False)
+#     extras = models.CharField(max_length=2056, null=True, blank=True)
+#     lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
 
-    def save(self, *args, **kwargs):
-            """
-            Override the original save method to set the order number
-            if it hasn't already been set.
-            """
-            self.lineitem_total = self.product.price * self.quanity
-            super().save(*args, **kwargs)
+#     def save(self, *args, **kwargs):
+#             """
+#             Override the original save method to set the order number
+#             if it hasn't already been set.
+#             """
+#             self.lineitem_total = self.product.price * self.quanity
+#             super().save(*args, **kwargs)
 
-    def __str__(self):
-        return f'SKU {self.product.sku} on order {self.order.order_number}'
+#     def __str__(self):
+#         return f'SKU {self.product.sku} on order {self.order.order_number}'

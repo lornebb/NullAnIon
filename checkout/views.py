@@ -41,24 +41,27 @@ def checkout(request):
             'order_total': request.POST['order_total'],
         }
 
-        print("form_data ************************************************************************************************************************************************")
-        print(form_data)
-        print("************************************************************************************************************************************************")
+        order_form = Order(form_data)
+        if order_form.is_valid():
+            messages.success(request, f"Successfully added your \
+                        {order_form} order to the basket.")
+        else:
+            messages.error(request, (f'There was an error with your {order_form} form. '
+                                     'Please double check your information.'))
+        order = order_form.save()
 
-        order = Order.objects.create(form_data)
-
         print("form_data ************************************************************************************************************************************************")
-        print(order)
+        print(order_form)
         print("************************************************************************************************************************************************")
         
         context = {
-            'order': order,
+            'order': order_form,
             'stripe_public_key': stripe_public_key,
             'stripe_secret_key': stripe_secret_key,
         }
 
         messages.success(request, f"Successfully added your \
-                        {order.order_type} order to the basket.")
+                        {order} order to the basket.")
 
         template = 'checkout/checkout.html'
         return render(request, template, context)
