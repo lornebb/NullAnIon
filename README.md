@@ -1,8 +1,10 @@
 # Nullanion
 
+![Null Logo](static/images/nullanion-logo.svg)
+
 Nullanion offers music services for those that need quality, delivered on time.
 
-At Nullanion, one can order a mix or master of a song, EP or full length LP (Album). Other services include Ad. Production, Soundtrack and Sound Design. Follow the form for each service to customise your order down to bit-rate and next day delivery, then add it to your basket. After purchase, use your account to upload your stems and have direct one to one conversations with your engineer/producer regarding your order and delivery estimations.
+At Nullanion, one can order a mix or master of a song, EP or full length LP (Album). Other services include Ad. Production, Soundtrack and Sound Design. Follow the form for each service to customise your order down to revisions and next day delivery, then order. After purchase, upload your stems directly to your engineer or producer.
 
 ## Contents
 
@@ -44,7 +46,7 @@ At Nullanion, one can order a mix or master of a song, EP or full length LP (Alb
 
 ### Project Goals
 
-The Nullanion project's purpose is to offer multiple music services to customers that need high quality delivery on mix, master, additional production, soundtrack and sound design products. Customers will be able to create a bespoke order, pay their quote, communicate directly with their engingeer and upload / download high quality files. All in an easy to follow user journey and secure environment.
+The Nullanion project's purpose is to offer multiple music services to customers that need high quality delivery on mix, master or additional production products. Customers will be able to create a bespoke order, pay their quote, communicate with their engingeer and upload / download high quality files. All in an easy to follow user journey and secure environment.
 
 [Back to Top](##Contents)
 
@@ -65,7 +67,7 @@ The Nullanion project's purpose is to offer multiple music services to customers
 
 - Create a safe and secure e-commerce site, that can generate revenue.
 - Provide clear pricing and service descriptions.
-- Demonstrate industry experience to users via a showcase area.
+- Demonstrate industry experience to users via a showcase/library area.
 - Maintain account product history for optimising future experiences.
 - Use work generated from sales as examples on the site.
 
@@ -75,14 +77,14 @@ The Nullanion project's purpose is to offer multiple music services to customers
 
 #### First-time user
 
-1. As a first-time user, I want to quickly and easily navigate around the site to understand what this company does / can do for me.
+1. As a first-time user, I want to quickly and easily navigate around the site to understand what this company does / can do for me without needing to give any credentials.
 2. As a first-time user, I want to hear examples of work.
 3. As a first-time user, I want to select a service and follow an easy to use form to customise my order.
 4. As a first-time user, I want to see clear changes to quote price, and transparent pricing so as to not feel slighted on price.
 5. As a first-time user, I want to make sure I create an account before I pay to ensure a relation between order and my account.
 6. As a first-time user, I want to make sure that after I pay, I get a confirmation of payment.
 7. As a first-time user, I want to make sure that after I have paid, my files can be uploaded securely.
-8. As a first-time user, I want to have an easy communication process with the engineer working on my material.
+8. As a first-time user, I want to have an instant and easy communication process with the engineer working on my material.
 
 #### Returning Customer
 
@@ -136,22 +138,45 @@ Proving some experience and a legitiate web site to sell these services is the n
 
 ## Design Choices
 
-lots of forms and form flows, so styling these was important to not have the site appear too dreaery. littered with bespoke artwork emoting the flow of audio production and big buttons and floating info boxes to let the user know where they are.
+There are three main form flows to the site. Styling was important - custom icons were designed by [Mikey Rosenfeldt](https://vimeo.com/michaelrosenfeldt). The main aim here was to not allow the site to appear too drearey. With a clear, off white flow design of wave forms.
 
 [Back to Top](##Contents)
 
 ### Fonts
 
+#### Title logo
+
+![Nullanion title](static/images/nullanion-logo.svg)
+
+The font for the title was a bespoke creation by [Mikey Rosenfeldt](https://vimeo.com/michaelrosenfeldt) and the complimenting font of [Raleway](https://fonts.google.com/specimen/Raleway?preview.text_type=custom) was used for other text across the site.
+
 [Back to Top](##Contents)
 
 ### Icons
+
+More bespoke creations made for the forms were the icons.
+
+![single](static/icons/single.svg)
+![ep](static/icons/ep.svg)
+![album](static/icons/album.svg)
+
+![mix](static/icons/mix.svg)
+![master](static/icons/master.svg)
+![productin](static/icons/production.svg)
+
+![guitar](static/icons/guitar.svg)
+![bass](static/icons/bass.svg)
+![keys](static/icons/keys.svg)
+![synth](static/icons/synth.svg)
+![drums](static/icons/drums.svg)
 
 [Back to Top](##Contents)
 
 ### Colours
 
-Yellow: #c6ab15
-Orange: #dc6517
+The main colour pallete is between these two tones:
+![Orange](static/wireframes/orange.png)
+![Blue](static/wireframes/blue.png)
 
 [Back to Top](##Contents)
 
@@ -159,11 +184,12 @@ Orange: #dc6517
 
 [Back to Top](##Contents)
 
-### Images
+### Images & Backgrounds
 
-[Back to Top](##Contents)
+Images are mainly used as backgrounds to facilitate the flow of audio creation.
 
-### Backgrounds
+![background1](static/images/nullanion-background-01.jpg)
+![background2](static/images/nullanion-background-02.jpg)
 
 [Back to Top](##Contents)
 
@@ -205,12 +231,15 @@ Returning customers that want to check up on an order, or share notes / feedback
 
 ### Existing Features
 
-- Feature 1 - allows users X to achieve Y, by having them fill out Z
-- ...
+- Order a mix - allows users to create a bespoke order for a song / ep or album by following the form and submitting it to the checkout.
 
-For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
+- Order a master - allows users to create a bespoke order for a song / ep or album by following the form and submitting it to the checkout.
 
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
+- Order a Production - allows users to create a bespoke order for a song / ep or album by following the form and submitting it to checkout.
+
+- Create profile by signing up and creating an account.
+
+- Profile to see order progress and orders that have been purchased.
 
 [Back to Top](##Contents)
 
@@ -226,14 +255,39 @@ In addition, you may also use this section to discuss plans for additional featu
 
 ## Technologies Used
 
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
+### Languages
 
-- [JQuery](https://jquery.com)
-  - The project uses **JQuery** to simplify DOM manipulation.
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+
+- [JavaScript](https://www.w3schools.com/js/)
+
+- [Python](https://www.python.org/)
+
+- [JSON](https://www.json.org/json-en.html)
+
+### Libraries / Frameworks
+
+- [Django](https://www.djangoproject.com/)
+
+- [Bulmer](https://bulma.io/)
+
+- [jQuery](https://jquery.com/)
+
+- [SQLite](https://sqlite.org/index.html)
+
+- [Postgres](https://www.postgresql.org/)
+
+### Tools
+
+- [Git](https://git-scm.com/)
+
+- [Heroku](https://www.heroku.com/)
 
 [Back to Top](##Contents)
 
-## Planning + Testing
+## Planning
 
 Since a lot of the technologies I used in this project are brand new to me, planning in the intitial pahses were very important. Making sure that wireframes, user stories, user journies and expected outcome had their expectations managed, was my top priority.
 
@@ -241,27 +295,140 @@ I knew I wanted to make a website to provide a portal for musicans to purchase t
 
 A brand had to be created for the look and the intricicies of the service I wanted to provide had to be understood before any code was written.
 
+After that, the info panels on the left needed to be created to ensure users knew where they were and what was going on.
+
+## Testing
+
+### Library
+
+> As a first-time user, I want to quickly and easily navigate around the site to understand what this company does / can do for me without needing to give any credentials.
+
+-also-
+
+> As a first-time user, I want to hear examples of work.
+
+- **Plan**
+
+When a user visits the page, information is available to them to view and get an understanding of what is on offer, without having to share any personal details.
+
+- **Implementation**
+
+The landing page is clean and free of clutter, so when a user lands there, they are free to click around and discover what they need. the info panels on the left display what is on offer, and invite the user to visit the library page. Upon arival there, the user is presented with a list of songs that showcase the skills of Nullanion services, all without having to share any personal details.
+
+- **Test**
+
+1. Arrive to site:
+    1. Arrive on landing page, view info panels on left.
+    2. Click on 'Library'.
+    3. View on list of songs.
+
+2. It is also possible at this point to click through on songs to their spotify origins:
+    1. Click on the artwork of the song.
+    2. Ensure that the link follows to a spotify listing in a new tab.
+
+- **Verdict**
+
+The test works as planned and has therefore passed.
+
+[Back to Top](##contents)
+
+### Order a Mix, Master or Production
+
+> As a first-time user, I want to select a service and follow an easy to use form to customise my order.
+
+-also-
+
+> As a first-time user, I want to see clear changes to quote price, and transparent pricing so as to not feel slighted on price.
+
+- **Plan**
+
+When a user visits their desired order form page, following the form in a logic manner will be the most logical route to completing an order.
+
+- **Implementation**
+
+Each form is created with bespoke icons to simplify the experience and streamline the user to a complete order. Hopfully inviting them to explore more interesting ways to ask for the service.
+
+- **Test**
+
+1. Select a service from the services dropdown in the nav bar:
+    1. Arrive on desired form, ensure that layout is of suitable readablity with icons displayed for options for radio selectors.
+    2. Fill out forms.
+    3. Ensure that each required field is filled.
+        1. If required field is not filled in, ensure that form can not be submitted.
+        2. Ensure that the total price is displayed and can not be altered.
+    4. Submit form.
+    5. Sucessful submission will bring you to the checkout page.
+        1. Ensure that order details that you just filled out have been carried onto the checkout page.
+        2. Ensure that the price displayed on the form page, is reflected in the checkout total price order field.
+
+- **Verdict**
+
+The test works as planned and has therefore passed.
+
+[Back to Top](##contents)
+
+### Checkout and Paying
+
+> As a first-time user, I want to make sure I create an account before I pay to ensure a relation between order and my account.
+
+-also-
+
+> As a first-time user, I want to make sure that after I pay, I get a confirmation of payment.
+
+-also-
+
+> As a first-time user, I want to make sure that after I have paid, my files can be uploaded securely.
+
+-also-
+
+> As a first-time user, I want to have an instant and easy communication process with the engineer working on my material.
+
+- **Plan**
+
+This is the crucial part of the experience, a safe and secure checkout and feedback about what happens next. This needs to be secure, easy to use and instant. The form should only be able to tbe completed by users signed in and registered with a validated email address - this makes sure that the verification, upload, and confirmation correspondance goes to the correct person.
+
+- **Implimention**
+
+Using python and strip in the design and model forms ensureing form validation the form should not submit without the required fields and a log in required. The file upload link will give the user direct access to a secure upload folder for their files.
+
+- **Test**
+
+1. After completeing a mix / master form, follow through to checkout page.
+    1. At checkout page, try to complete order without entering any personal or financial details.
+    2. If that is unsucessful, sign in or register.
+        1. After sign in or register, ensure that you are redirected back to checkout page.
+    3. Back at checkout page, ensure that your order form data is still as you ordered it.
+    4. Ensure that a personal detail form is now present and that a card details field is visible.
+        1. Try to checkout without filling any details in.
+    5. Fill out yoru personal details.
+        1. Try to complete order without financial details entered.
+    6. Fill in your card details (4242 4242 4242 4242) and submit form.
+    7. Ensure that you are presented with a completed order page, a link to your dropbox to upload your files to, and an email address for contact, including instructions with how to upload your files.
+    8. Ensure that your inbox has an email with a greeting and the exact same details for file upload for files, from the same email address.
+
+- **Verdict**
+
+The test works as planned and has therefore passed.
+
+[Back to Top](##contents)
+
+### test name
+
+> blockquote of user story
+
+- **Plan**
+
+- **Implimention**
+
+- **Test**
+
+- **Verdict**
+
+The test works as planned and has therefore passed.
+
+[Back to Top](##contents)
 
 ----
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
-
-Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
-
-For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
-
-1. Contact form:
-    1. Go to the "Contact Us" page
-    2. Try to submit the empty form and verify that an error message about the required fields appears
-    3. Try to submit the form with an invalid email address and verify that a relevant error message appears
-    4. Try to submit the form with all inputs valid and verify that a success message appears.
-
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
-
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
-
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
-
-[Back to Top](##Contents)
 
 ## Bugs
 
@@ -272,8 +439,6 @@ If this section grows too long, you may want to split it off into a separate fil
 [Back to Top](##Contents)
 
 ## Deploying to Heroku
-
-
 
 [Back to Top](##Contents)
 
