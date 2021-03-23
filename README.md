@@ -413,22 +413,6 @@ The test works as planned and has therefore passed.
 
 [Back to Top](##contents)
 
-### test name
-
-> blockquote of user story
-
-- **Plan**
-
-- **Implimention**
-
-- **Test**
-
-- **Verdict**
-
-The test works as planned and has therefore passed.
-
-[Back to Top](##contents)
-
 ----
 
 ## Bugs
