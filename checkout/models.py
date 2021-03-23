@@ -1,9 +1,6 @@
 import uuid
 
 from django.db import models
-from django.db.models import Sum
-
-# from services import order? 
 
 
 class Order(models.Model):
@@ -17,14 +14,15 @@ class Order(models.Model):
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
+    order_type = models.CharField(max_length=20, default='')
+    package_type = models.CharField(max_length=50, default='')
     deliver_by = models.DateTimeField(auto_now_add=True)
     stem_choices = models.CharField(max_length=1026, blank=False, null=False, default=6)
     revisions = models.CharField(max_length=1026, blank=False, null=False, default=3)
     reference_link_type = models.CharField(max_length=1026, blank=True, null=False)
     reference_link = models.URLField(blank=True, null=False)
-    mix_extras = models.CharField(max_length=1026)
+    mix_extras = models.CharField(max_length=1026, default='none')
     contact = models.EmailField(blank=False, null=False, default='')
-    product_ordered = models.CharField(max_length=6, blank=False, null=False)
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
 
@@ -34,21 +32,6 @@ class Order(models.Model):
         generate a random, unique order number using UUID
         """
         return uuid.uuid4().hex.upper()
-
-    def update_total(self):
-        """
-        Update grand total each time a line item is added,
-        adding moms at the end to the grand total.
-        """
-        moms = 0.25
-
-        def percentage(percent, whole):
-            return (percent * whole) / 100.0
-
-        self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total_sum']
-        self.grandtotal = (percentage(moms, self.order_total)) + self.order_total
-        self.save()
-
 
     def save(self, *args, **kwargs):
         """

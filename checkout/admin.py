@@ -11,18 +11,41 @@ class OrderAdmin(admin.ModelAdmin):
     # inlines = (OrderLineItemAdminInline,)
 
     readonly_fields = ('order_total',
-                    'grand_total', 'order_number')
+                    'grand_total',
+                    'order_number',)
     
-    fields = ('order_number', 'order_id', 'product_ordered',
-                'full_name', 'email',
-                'phone_number', 'order_total',
+    # fields = ('order_number',
+    #             'full_name',
+    #             'email',
+    #             'phone_number',
+    #             'order_total',
+    #             'package_type',
+    #             'devlier_by',
+    #             'stem_choices',
+    #             'revisions',
+    #             'reference_link_type',
+    #             'reference_link',
+    #             'mix_extras',
+    #             'contact',
+    #             'order_total',
+    #             'grand_total')
+    
+    list_display = ('order_number',
+                'full_name',
+                'email',
+                'phone_number',
+                'order_total',
+                'package_type',
+                'deliver_by',
+                'stem_choices',
+                'revisions',
+                'reference_link_type',
+                'reference_link',
+                'mix_extras',
+                'contact',
+                'order_total',
                 'grand_total')
     
-    list_display = ('order_number', 'product_ordered',
-                    'full_name', 'email',
-                    'phone_number', 'order_total',
-                    'grand_total')
-    
-    # ordering = ('-date',)
+    # ordering = ('deliver_by',)
 
 admin.site.register(Order, OrderAdmin)

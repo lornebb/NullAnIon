@@ -29,30 +29,42 @@ def checkout(request):
         else:
             mix_extras = None
 
-        form_data = {
-            'package_type': request.POST['package_type'],
-            'deliver_by': request.POST['deliver_by'],
-            'stem_choices': request.POST['stem_choices'],
-            'revisions': request.POST['revisions'],
-            'reference_link_type': reference_link_type,
-            'reference_link': reference_link,
-            'mix_extras': mix_extras,
-            'contact': request.POST['contact'],
-            'order_total': request.POST['order_total'],
-        }
+        package_type = request.POST['package_type']
+        deliver_by = request.POST['deliver_by']
+        stem_choices = request.POST['stem_choices']
+        revisions = request.POST['revisions']
+        reference_link_type = reference_link_type
+        reference_link = reference_link
+        mix_extras = mix_extras
+        contact = request.POST['contact']
+        order_total = request.POST['order_total']
 
-        order_form = Order(form_data)
-        if order_form.is_valid():
-            messages.success(request, f"Successfully added your \
-                        {order_form} order to the basket.")
-        else:
-            messages.error(request, (f'There was an error with your {order_form} form. '
-                                     'Please double check your information.'))
+        order_form = Order.objects.create(
+            order_type = "Mix",
+            package_type=package_type,
+            deliver_by=deliver_by,
+            stem_choices=stem_choices,
+            revisions=revisions,
+            reference_link_type=reference_link_type,
+            reference_link=reference_link,
+            mix_extras=mix_extras,
+            contact=contact,
+            order_total=order_total,
+        )
+
+        # order_form = Order(form_data)
+        # if order_form.is_valid():
+        messages.success(request, f"Successfully added your \
+                    {Order} order to the basket.")
+        # else:
+        # messages.error(request, (f'There was an error with your {order_form} form. '
+        #                             'Please double check your information.'))
+        
         order = order_form.save()
 
         print("form_data ************************************************************************************************************************************************")
         print(order_form)
-        print("************************************************************************************************************************************************")
+        print("**********************************************************************************************************************************************************")
         
         context = {
             'order': order_form,
@@ -70,7 +82,6 @@ def checkout(request):
 
         template = 'checkout/checkout.html'
         return render(request, template)
-
 
 
 # def checkout_complete(request):
