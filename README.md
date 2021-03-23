@@ -423,9 +423,7 @@ The test works as planned and has therefore passed.
 
 Nullanion was developed on VS Code code, using Git and GitHub for version control. the runnable version is hosted on Heroku with static and media files stored in an AWS S3 Bucket.
 
-[Back to Top](##Contents)
-
-## Deploying to Heroku
+### Deploying to Heroku
 
 Firstly, create a Heroku account. Select start a new app and chose the location closest to you. Select and appropriate name and create. At this point you need to select POSTGRES from the resources tab, then move to the deploy tab. Connect your github account and select your repo for automatic deployment. For extra documentation on this you can read it [here](https://dashboard.heroku.com/).
 
@@ -475,7 +473,7 @@ At this point, you should update your new database with the local SQLite data wi
 python3 manage.py migrate (add the --plan flag first to make sure the right thing is happening)
 ```
 
-## Running locally
+### Running locally
 
 For a local deployment you will need an IDE (I used VS Code, as mentioned above), and also PIP, Python3 (3.+) and Git.
 
