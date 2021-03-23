@@ -38,9 +38,6 @@ At Nullanion, one can order a mix or master of a song, EP or full length LP (Alb
 10. [Deploying to Heroku](##Deploying-to-Heroku)
 11. [Deploy Locally](##Deploy-locally)
 12. [Credits](##Credits)
-    - [Content](###Content)
-    - [Media](###Media)
-    - [Acknowledgements](###Acknowledgements)
 
 ## UX
 
@@ -285,6 +282,10 @@ Returning customers that want to check up on an order, or share notes / feedback
 
 - [Heroku](https://www.heroku.com/)
 
+- [PIP](https://pip.pypa.io/en/stable/installing/)
+
+- [BOTO](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
+
 [Back to Top](##Contents)
 
 ## Planning
@@ -436,31 +437,137 @@ The test works as planned and has therefore passed.
 
 ## Deployment
 
+Nullanion was developed on VS Code code, using Git and GitHub for version control. the runnable version is hosted on Heroku with static and media files stored in an AWS S3 Bucket.
+
 [Back to Top](##Contents)
 
 ## Deploying to Heroku
+
+Firstly, create a Heroku account. Select start a new app and chose the location closest to you. Select and appropriate name and create. At this point you need to select POSTGRES from the resources tab, then move to the deploy tab. Connect your github account and select your repo for automatic deployment. For extra documentation on this you can read it [here](https://dashboard.heroku.com/).
+
+Set up your config variables in the settings tab by selecting 'reveal config vars'. For this project change it to:
+
+- SECRET_KEY
+- DATABASE_URL
+- EMAIL_HOST_PASSWORD
+- EMAIL_HOST_USER
+- STRIPE_PUBLIC_KEY
+- STRIPE_SECRET_KEY
+- STRIPE_WH_SECRET
+
+Notes on where these variables are found:
+
+- (Your stripe secret keys are found in your stripe account on your dashboard.)
+- (Email vars are found in your email provider.)
+- (Database key is found in your Heroku account once you have set up your Postgres database.)
+
+In order for these to all work together, a few setting will need to be configured in your Github repo and your requirements.txt file. First of all make sure to install DJ_database and psycopg2 with pip like this:
+
+```cli
+pip3 install dj_database_url
+```
+
+and
+
+```cli
+pip3 install pycopg2-binary
+```
+
+finally, to make sure heroku knows to install this in the environment (please do this every time there is a new installation):
+
+```cli
+pip3 freeze --local > requirements.txt
+```
+
+After this has been done, make sure to point your database settings in django to the new database like this:
+
+```cli
+‘default’: dj_database_url.parse(‘URL from Postgres – found in Heroku config var’)
+```
+
+At this point, you should update your new database with the local SQLite data with
+
+```cli
+python3 manage.py migrate (add the --plan flag first to make sure the right thing is happening)
+```
+
+## Running locally
+
+For a local deployment you will need an IDE (I used VS Code, as mentioned above), and also PIP, Python3 (3.+) and Git.
+
+Check your pip version with:
+
+```cli
+py -3 -m pip --version
+```
+
+check your python version with:
+
+```cli
+python -m .mvenv <path to your venv>
+```
+
+Download the repo above, take it as a .zip folder and extract the files into your chosen location and open in your IDE.
+
+You will need to create a lightweight virtual environment for python with:
+
+```cli
+python -m venv <name of env>
+```
+
+and every time you open the project, to change to this env, use:
+
+```cli
+source <name of env>/bin/activate
+```
+
+at this point, the same as above, you will need to set up your env.py file, add it to the git ignore list to ensure it never ends up in version control, the same as above, but without the database url so django defaults to the SQLite3 database that comes with django.
+
+- SECRET_KEY
+- EMAIL_HOST_PASSWORD
+- EMAIL_HOST_USER
+- STRIPE_PUBLIC_KEY
+- STRIPE_SECRET_KEY
+- STRIPE_WH_SECRET
+
+All the variables above can be found in the same places. EMAIL_HOST_... from your email provider, STRIPE_... from your stripe account, and SECRET_KEY from django.settings.py.
+
+Before starting the server, make sure to make migrations, check then, then migrate with this:
+
+```cli
+python3 manage.py makemigrations --dry-run
+# check that the output is desired, if so:
+
+python3 manage.py makemigrations
+#check that this was executed sucessfully, then:
+
+python3 manage.py migrate --plan
+#check that the plan is as desired, if so:
+
+python3 manage.py migrate
+#check that this was completed successfully.
+```
+
+Now the database has been migrated properly, you can run the server and run the project locally with the command:
+
+```cli
+python3 manage.py runserver
+```
+
+Click on the link / copy and paste the port that has been opened in the CLI to open a browser tab with the project running in it.
 
 [Back to Top](##Contents)
 
 ## Credits
 
+- All icon, background and logo designed by [Mikey Rosenfeldt](https://vimeo.com/michaelrosenfeldt), on commission.
 
-[Back to Top](##Contents)
+- My peers [Chris Palmer](https://github.com/cgpalmer) and [Fran DeBoo](https://github.com/fdeboo) for so much helpful knowledge and guidance.
 
-### Content
+- The ultimate thanks have to go to the excellent team at Tutor Support at Code Institute who helped me deep into the night with bugs and helping me figure out logic. Their help was invaluable to getting this project finished.
 
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
+- [Simen Daehlin](https://github.com/Eventyret) who always goes above and boyond to help nme get my head around the bigger picture.
 
-[Back to Top](##Contents)
-
-### Media
-
-- The photos used in this site were obtained from ...
-
-[Back to Top](##Contents)
-
-### Acknowledgements
-
-- I received inspiration for this project from X.
+- The sticky footer in bulma fix code was inspired by [Philip Walton](https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
 
 [Back to Top](##Contents)
