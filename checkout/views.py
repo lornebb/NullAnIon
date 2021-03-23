@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
 from .models import Order
+from .forms import OrderForm
 import stripe
 
 # @login_required
@@ -39,7 +40,7 @@ def checkout(request):
         contact = request.POST['contact']
         order_total = request.POST['order_total']
 
-        order_form = Order.objects.create(
+        order_form_services = Order.objects.create(
             order_type = "Mix",
             package_type=package_type,
             deliver_by=deliver_by,
@@ -55,25 +56,26 @@ def checkout(request):
         # order_form = Order(form_data)
         # if order_form.is_valid():
         messages.success(request, f"Successfully added your \
-                    {Order} order to the basket.")
+                    {order_form_services.id} order to the basket.")
         # else:
         # messages.error(request, (f'There was an error with your {order_form} form. '
         #                             'Please double check your information.'))
         
-        order = order_form.save()
+        
 
-        print("form_data ************************************************************************************************************************************************")
-        print(order_form)
+        print("order ************************************************************************************************************************************************")
+        print(order_form_services.id)
         print("**********************************************************************************************************************************************************")
         
         context = {
-            'order': order_form,
+            'order_form_to_fill': OrderForm,
+            'order_form_services': order_form_services,
             'stripe_public_key': stripe_public_key,
             'stripe_secret_key': stripe_secret_key,
         }
 
         messages.success(request, f"Successfully added your \
-                        {order} order to the basket.")
+                        {order_form_services.id} order to the basket.")
 
         template = 'checkout/checkout.html'
         return render(request, template, context)

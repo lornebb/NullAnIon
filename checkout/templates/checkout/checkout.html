@@ -83,9 +83,9 @@
                                 <p>Email on profile: {{ user.email }}</p>
                                 <p class="subtitle"><strong>Payment Form</strong></p>
 
-                                {{ order_form.full_name |as_crispy_field }}
-                                {{ order_form.email |as_crispy_field }}
-                                {{ order_form.phone_number |as_crispy_field }}
+                                {{ order_form_to_fill.full_name |as_crispy_field }}
+                                {{ order_form_to_fill.email |as_crispy_field }}
+                                {{ order_form_to_fill.phone_number |as_crispy_field }}
 
                             {% else %}
                                 <label>
