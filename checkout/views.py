@@ -28,8 +28,7 @@ def checkout(request):
 
         if request.POST.getlist('mix_extras') != "":
             mix_extras = request.POST.getlist('mix_extras')
-            for extra in mix_extras:
-                print(extra)
+
         else:
             mix_extras = None
 
@@ -83,47 +82,52 @@ def checkout_complete(request):
     """
     Handle successful checkouts
     """
-    stripe_public_key = settings.STRIPE_PUBLIC_KEY
-    stripe_secret_key = settings.STRIPE_SECRET_KEY
+    if request.method == 'POST':
+        stripe_public_key = settings.STRIPE_PUBLIC_KEY
+        stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    full_name = request.POST['full_name']
-    email = request.POST['email']
-    phone_number = request.POST['phone_number']
-    package_type = request.POST['package_type']
-    order_total = request.POST['order_total']
-    grand_total = order_total
+        full_name = request.POST['full_name']
+        email = request.POST['email']
+        phone_number = request.POST['phone_number']
+        package_type = request.POST['package_type']
+        order_total = request.POST['order_total']
+        grand_total = order_total
 
-    Order.objects.update(
-        full_name = full_name,
-        email = email,
-        phone_number = phone_number,
-        order_type = "Mix",
-        package_type=package_type,
-        order_total=order_total,
-        grand_total=grand_total,
-    )
-    
-    total = grand_total
-    stripe_total = round(float(total) * 100)
-    stripe.api_key = stripe_secret_key
-    intent = stripe.PaymentIntent.create(
-        amount=stripe_total,
-        currency=settings.STRIPE_CURRENCY,
-    )
-
-    if not stripe_public_key:
-        messages.warning(request, ('Stripe public key is missing. '
-                                   'Did you forget to set it in '
-                                   'your environment?'))
-
-    template = 'checkout/checkout_success.html'
-    context = {
-        'stripe_public_key': stripe_public_key,
-        'client_secret': intent.client_secret,
+        Order.objects.update(
+            full_name = full_name,
+            email = email,
+            phone_number = phone_number,
+            order_type = "Mix",
+            package_type=package_type,
+            order_total=order_total,
+            grand_total=grand_total,
+        )
         
-    }
+        total = grand_total
+        stripe_total = round(float(total) * 100)
+        stripe.api_key = stripe_secret_key
+        intent = stripe.PaymentIntent.create(
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+        )
 
-    return render(request, template, context)
+        if not stripe_public_key:
+            messages.warning(request, ('Stripe public key is missing. '
+                                    'Did you forget to set it in '
+                                    'your environment?'))
+
+        template = 'checkout/checkout_success.html'
+        context = {
+            'stripe_public_key': stripe_public_key,
+            'client_secret': intent.client_secret,
+        }
+
+        return render(request, template, context)
+    else:
+        context = {}
+        template = 'checkout/checkout_success.html'
+        return render(request, template, context)
+
 
 
 

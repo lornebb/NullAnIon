@@ -57,7 +57,7 @@
                             {% if order_form_services.mix_extras %}
                                 <label for="mix_extras" class="subtitle">Mix Extras</label>
                                 {% for extras in order_form_services.mix_extras %}
-                                    <input name="mix_extras" class="title" value="{{ order_form_services.mix_extras }}" readonly>
+                                    <input name="mix_extras" class="title" value="{{ extras }}" readonly>
                                 {% endfor %}
                                 {% else %}
                                 <div><strong>You have not requested any mix extras</strong></div>
