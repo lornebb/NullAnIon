@@ -1,3 +1,6 @@
+from django.shortcuts import (
+    render, redirect, reverse, get_object_or_404, 
+    HttpResponse)
 from django.shortcuts import render
 from django.contrib import messages
 # from services.forms import Mix, Master, Production
@@ -8,7 +11,7 @@ from .models import Order
 from .forms import OrderForm
 import stripe
 
-# @login_required
+
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -53,20 +56,9 @@ def checkout(request):
             order_total=order_total,
         )
 
-        # order_form = Order(form_data)
-        # if order_form.is_valid():
         messages.success(request, f"Successfully added your \
                     {order_form_services.id} order to the basket.")
-        # else:
-        # messages.error(request, (f'There was an error with your {order_form} form. '
-        #                             'Please double check your information.'))
-        
-        
 
-        print("order ************************************************************************************************************************************************")
-        print(order_form_services.id)
-        print("**********************************************************************************************************************************************************")
-        
         context = {
             'order_form_to_fill': OrderForm,
             'order_form_services': order_form_services,
@@ -86,15 +78,52 @@ def checkout(request):
         return render(request, template)
 
 
-# def checkout_complete(request):
-    
-#     customer_details = (
-#     'order_id': request.POST['order_id'],
-#     'full_name': request.POST['full_name'],
-#     'email': request.POST['email'],
-#     'phone_number': request.POST['phone_number'],
-#     )
+@login_required
+def checkout_complete(request):
+    """
+    Handle successful checkouts
+    """
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
 
+    full_name = request.POST['full_name']
+    email = request.POST['email']
+    phone_number = request.POST['phone_number']
+    package_type = request.POST['package_type']
+    order_total = request.POST['order_total']
+    grand_total = order_total
+
+    Order.objects.update(
+        full_name = full_name,
+        email = email,
+        phone_number = phone_number,
+        order_type = "Mix",
+        package_type=package_type,
+        order_total=order_total,
+        grand_total=grand_total,
+    )
+    
+    total = grand_total
+    stripe_total = round(float(total) * 100)
+    stripe.api_key = stripe_secret_key
+    intent = stripe.PaymentIntent.create(
+        amount=stripe_total,
+        currency=settings.STRIPE_CURRENCY,
+    )
+
+    if not stripe_public_key:
+        messages.warning(request, ('Stripe public key is missing. '
+                                   'Did you forget to set it in '
+                                   'your environment?'))
+
+    template = 'checkout/checkout_success.html'
+    context = {
+        'stripe_public_key': stripe_public_key,
+        'client_secret': intent.client_secret,
+        
+    }
+
+    return render(request, template, context)
 
 
 

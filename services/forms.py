@@ -1,3 +1,4 @@
+from django.db.models.fields import DecimalField
 from django.forms import ModelForm, Textarea, RadioSelect
 from django.forms.widgets import CheckboxSelectMultiple
 from services.models import Mix, Master, Production
@@ -17,6 +18,7 @@ class MixForm(ModelForm):
             'stem_choices': RadioSelect(),
             'revisions': RadioSelect(),
             'mix_extras': CheckboxSelectMultiple(),
+            # 'order_total': DecimalField()
             # 'deliver_by': DateField(),
         }
 
