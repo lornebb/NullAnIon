@@ -7,8 +7,14 @@ from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
+
 from .models import Order
 from .forms import OrderForm
+
+from profiles.models import UserProfile
+
+from .forms import OrderForm 
+
 import stripe
 
 
