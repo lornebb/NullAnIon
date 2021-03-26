@@ -28,7 +28,6 @@ def checkout(request):
 
         if request.POST.getlist('mix_extras') != "":
             mix_extras = request.POST.getlist('mix_extras')
-
         else:
             mix_extras = None
 
@@ -41,6 +40,7 @@ def checkout(request):
         mix_extras = mix_extras
         contact = request.POST['contact']
         order_total = request.POST['order_total']
+        grand_total = order_total
 
         order_form_services = Order.objects.create(
             order_type = "Mix",
@@ -58,11 +58,21 @@ def checkout(request):
         messages.success(request, f"Successfully added your \
                     {order_form_services.id} order to the basket.")
 
+        total = grand_total
+        stripe_total = round(float(total) * 100)
+        stripe.api_key = stripe_secret_key
+        intent = stripe.PaymentIntent.create(
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+        )
+
         context = {
             'order_form_to_fill': OrderForm,
             'order_form_services': order_form_services,
             'stripe_public_key': stripe_public_key,
             'stripe_secret_key': stripe_secret_key,
+            'stripe_public_key': stripe_public_key,
+            'client_secret': intent.client_secret,
         }
 
         messages.success(request, f"Successfully added your \
@@ -70,38 +80,44 @@ def checkout(request):
 
         template = 'checkout/checkout.html'
         return render(request, template, context)
-
     else:
-
         template = 'checkout/checkout.html'
+        messages.warning(request, f"something went wrong - checkout/views.py")
         return render(request, template)
 
 
 @login_required
-def checkout_complete(request):
+def checkout_complete(request, order_number):
     """
     Handle successful checkouts
     """
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
+    
     if request.method == 'POST':
-        stripe_public_key = settings.STRIPE_PUBLIC_KEY
-        stripe_secret_key = settings.STRIPE_SECRET_KEY
+        form_data = {
+            'full_name' : request.POST['full_name'],
+            'email': request.POST['email'],
+            'phone_number': request.POST['phone_number'],
+            'package_type': request.POST['package_type'],
+            'order_total': request.POST['order_total'],
+            'order_number': request.POST['order_id'],
+            'grand_total': request.POST['order_total'],
+        }
+        
+        order_form = Order(form_data)
+        print("************************************************************************")
+        print(f"THIS IS THE ORDER FORM with form data: {form_data}")
+        print(f"THIS IS THE ORDER FORM with form data: {Order}")
+        print(f"THIS IS THE ORDER FORM: {order_form}")
+        print("************************************************************************")
 
-        full_name = request.POST['full_name']
-        email = request.POST['email']
-        phone_number = request.POST['phone_number']
-        package_type = request.POST['package_type']
-        order_total = request.POST['order_total']
-        grand_total = order_total
-
-        Order.objects.update(
-            full_name = full_name,
-            email = email,
-            phone_number = phone_number,
-            order_type = "Mix",
-            package_type=package_type,
-            order_total=order_total,
-            grand_total=grand_total,
-        )
+        if order_form.is_valid():
+            order = order_form.save(commit=False)
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.stripe_pid = pid
+            order.original_bag = json.dumps(bag)
+            order.save()
         
         total = grand_total
         stripe_total = round(float(total) * 100)
@@ -116,8 +132,13 @@ def checkout_complete(request):
                                     'Did you forget to set it in '
                                     'your environment?'))
 
+        order = get_object_or_404(Order, order_number)
+        messages.success(request, f'Order ordered! Order number {order_number} will be to {order.email} soon')
+
         template = 'checkout/checkout_success.html'
         context = {
+            'order': order,
+            'order_number': order_number,
             'stripe_public_key': stripe_public_key,
             'client_secret': intent.client_secret,
         }
