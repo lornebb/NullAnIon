@@ -1,4 +1,4 @@
-from django.shortcuts import (render, redirect, reverse)
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.shortcuts import render
 from django.contrib import messages
 from django.conf import settings
@@ -92,7 +92,7 @@ def checkout(request):
         template = 'checkout/checkout_complete.html'
 
         # return render(request, template, context)
-        return redirect(reverse('checkout_complete', args=[order_form_complete.order_number]))
+        return redirect(reverse('checkout_complete', args=[order_form_complete.order_number]), context)
     else:
         order_form_services = request.session['bag']
         print(f"order_form_services **************************************{order_form_services}")
@@ -124,7 +124,10 @@ def checkout_complete(request, order_number):
     """
     Handle successful checkouts
     """
-    
-    context = {}
+    order = Order.objects.get(order_number=order_number)
+    context = {
+        'order': order,
+    }
+    print(order)
     template = 'checkout/checkout_complete.html'
     return render(request, template, context)
