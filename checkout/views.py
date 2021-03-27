@@ -84,12 +84,25 @@ def checkout(request):
     else:
         order_form_services = request.session['bag']
         print(f"order_form_services **************************************{order_form_services}")
+        
+        order_total = order_form_services['order_total']
+        grand_total = order_total
+
+        total = grand_total
+        stripe_total = round(float(total) * 100)
+        stripe.api_key = stripe_secret_key
+        intent = stripe.PaymentIntent.create(
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+        )
+
         template = 'checkout/checkout.html'
         context = {
             'order_form_services': order_form_services,
             'order_form': OrderForm,
             'stripe_public_key': stripe_public_key,
             'stripe_secret_key': stripe_secret_key,
+            'client_secret': intent.client_secret,
         }
         # messages.warning(request, f"something went wrong - checkout/views.py")
         return render(request, template, context)

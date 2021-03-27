@@ -1,7 +1,3 @@
-// <<<<<<< alt-view-logic
-// var stripePublicKey = $("#id_stripe_public_key").text().slice(1, -1);
-// var clientSecret = $("#id_client_secret").text().slice(1, -1);
-
 var stripePublicKey = $('#id_stripe_public_key').text().slice(1, -1);
 var clientSecret = $('#id_client_secret').text().slice(1, -1);
 
@@ -48,7 +44,7 @@ card.addEventListener("change", function (event) {
 var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function (ev) {
-console.log(clientSecret)
+  console.log(clientSecret)
   ev.preventDefault();
   card.update({ 'disabled': true });
   $('#submit-button').attr('disabled', true);
