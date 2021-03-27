@@ -3,17 +3,13 @@ from django.shortcuts import (
     HttpResponse)
 from django.shortcuts import render
 from django.contrib import messages
-# from services.forms import Mix, Master, Production
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-
 
 from .models import Order
 from .forms import OrderForm
 
 from profiles.models import UserProfile
-
-from .forms import OrderForm 
 
 import stripe
 
@@ -61,8 +57,8 @@ def checkout(request):
             order_total=order_total,
         )
 
-        messages.success(request, f"Successfully added your \
-                    {order_form_services.id} order to the basket.")
+        # messages.success(request, f"Successfully added your \
+        #             {order_form_services.id} order to the basket.")
 
         total = grand_total
         stripe_total = round(float(total) * 100)
@@ -77,7 +73,6 @@ def checkout(request):
             'order_form_services': order_form_services,
             'stripe_public_key': stripe_public_key,
             'stripe_secret_key': stripe_secret_key,
-            'stripe_public_key': stripe_public_key,
             'client_secret': intent.client_secret,
         }
 
@@ -87,9 +82,17 @@ def checkout(request):
         template = 'checkout/checkout.html'
         return render(request, template, context)
     else:
+        order_form_services = request.session['bag']
+        print(f"order_form_services **************************************{order_form_services}")
         template = 'checkout/checkout.html'
-        messages.warning(request, f"something went wrong - checkout/views.py")
-        return render(request, template)
+        context = {
+            'order_form_services': order_form_services,
+            'order_form': OrderForm,
+            'stripe_public_key': stripe_public_key,
+            'stripe_secret_key': stripe_secret_key,
+        }
+        # messages.warning(request, f"something went wrong - checkout/views.py")
+        return render(request, template, context)
 
 
 @login_required

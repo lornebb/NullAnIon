@@ -27,7 +27,7 @@
             <div class="columnns">
                 <div class="column">
                     <div class="title is-3">Your Order</div>
-                    <form action="{% url 'checkout_complete' order_form_services.id %}" method="POST" id="payment-form">
+                    <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                         {% csrf_token %}
                         <fieldset>
                             <Legend>Your Order</Legend>
@@ -67,9 +67,9 @@
                             <label for="contact" class="subtitle">File transfer contact email:</label>
                             <input name="contact" class="title" value="{{ order_form_services.contact }}" readonly>
                             <br>
-                            <h1>ORDER ID NUMBER </h1>
+                            <!-- <h1>ORDER ID NUMBER </h1>
                             <label for="order_id">Order ID</label>
-                            <input name="order_id" value="{{ order_form_services }}" readonly>
+                            <input name="order_id" value="{{ order_form_services }}" readonly> -->
                             <br>
                             <label for="order_total" class="subtitle">Total price:</label>
                             <input name="order_total" class="subitle" value="{{ order_form_services.order_total }}" readonly>
@@ -83,9 +83,9 @@
                                 <p>Email on profile: {{ user.email }}</p>
                                 <p class="subtitle"><strong>Payment Form</strong></p>
 
-                                {{ order_form_to_fill.full_name |as_crispy_field }}
-                                {{ order_form_to_fill.email |as_crispy_field }}
-                                {{ order_form_to_fill.phone_number |as_crispy_field }}
+                                {{ order_form.full_name |as_crispy_field }}
+                                {{ order_form.email |as_crispy_field }}
+                                {{ order_form.phone_number |as_crispy_field }}
 
                             {% else %}
                                 <label>
