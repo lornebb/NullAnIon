@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.views.decorators.http import require_POST
 from django.shortcuts import render
 from django.contrib import messages
 from django.conf import settings
@@ -8,6 +9,26 @@ from .models import Order
 from .forms import OrderForm
 
 import stripe
+import json
+
+
+@require_POST
+def cache_checkout_data(request):
+    try:
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.modify(pid, metadata={
+            'bag': json.dumps(request.session.get('bag', {})),
+            'save_info': request.POST.get('save_info'),
+            'username': request.user,
+        })
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(request, ('Sorry, your payment cannot be '
+                                 'processed right now. Please try '
+                                 'again later.'))
+        return HttpResponse(content=e, status=400)
+
 
 
 def checkout(request):
@@ -43,6 +64,7 @@ def checkout(request):
         order_total = request.POST['order_total']
         grand_total = order_total
 
+
         order_form_complete = Order.objects.create(
             order_type = "Mix",
             full_name=full_name,
@@ -58,8 +80,11 @@ def checkout(request):
             contact=contact,
             order_total=order_total,
         )
-        # pid = request.POST.get('client_secret').split('_secret')[0]
-        # order_form_complete.stripe_pid = pid
+
+
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        order_form_complete.stripe_pid = pid
+        # order_form_complete.original_bag = json.dumps(bag)
 
         # messages.success(request, f"Successfully added your \
         #             {order_form_services.id} order to the basket.")
