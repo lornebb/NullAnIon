@@ -51,6 +51,10 @@ form.addEventListener('submit', function (ev) {
   stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: card,
+            billing_details: {
+              name: $.trim(form.full_name.value),
+              email: $.trim(form.email.value)
+            }
         }
     }).then(function(result) {
         if (result.error) {
