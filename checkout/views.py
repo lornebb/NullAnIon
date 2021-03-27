@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import (render, redirect, reverse)
 from django.shortcuts import render
 from django.contrib import messages
 from django.conf import settings
@@ -83,9 +83,16 @@ def checkout(request):
         }
 
         messages.success(request, f"Successfully completed order \
-                        {order_form_complete.id}.")
+                        {order_form_complete.id}. A confirmation \
+                        email will be sent to {order_form_complete.email}")
+        
+        if 'bag' in request.session:
+            del request.session['bag']
+        
+        template = 'checkout/checkout_complete.html'
 
-        return redirect(checkout_complete, context)
+        # return render(request, template, context)
+        return redirect(reverse('checkout_complete', args=[order_form_complete.order_number]))
     else:
         order_form_services = request.session['bag']
         print(f"order_form_services **************************************{order_form_services}")
@@ -119,5 +126,5 @@ def checkout_complete(request, order_number):
     """
     
     context = {}
-    template = 'checkout/checkout_success.html'
+    template = 'checkout/checkout_complete.html'
     return render(request, template, context)
