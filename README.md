@@ -546,6 +546,8 @@ Click on the link / copy and paste the port that has been opened in the CLI to o
 
 - My peers [Chris Palmer](https://github.com/cgpalmer) and [Fran DeBoo](https://github.com/fdeboo) for so much helpful knowledge and guidance.
 
+- My BFiC [Pauld](https://github.com/pauld0051) for his excellent google skills and helping me get past the line at the last minute!
+
 - The ultimate thanks have to go to the excellent team at Tutor Support at Code Institute who helped me deep into the night with bugs and helping me figure out logic. Their help was invaluable to getting this project finished.
 
 - [Simen Daehlin](https://github.com/Eventyret) who always goes above and boyond to help nme get my head around the bigger picture.
