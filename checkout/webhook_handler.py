@@ -32,7 +32,7 @@ class StripeWH_Handler:
         save_info = intent.metadata.save_info
 
         billing_details = intent.charges.data[0].billing_details
-        grand_total = round(intent.data.charges[0].amount / 100, 2)
+        grand_total = round(intent.charges.data[0].amount / 100, 2)
 
         order_exists = False
         attempt = 1
@@ -41,6 +41,7 @@ class StripeWH_Handler:
                 order = Order.objects.get(
                     full_name__iexact=billing_details.full_name,
                     email__iexact=billing_details.full_email,
+                    grand_total=grand_total,
                     original_bag=bag,
                     stripe_pid=pid,
                 )
@@ -59,6 +60,7 @@ class StripeWH_Handler:
                 order = Order.objects.create(
                     full_name=billing_details.full_name,
                     email=billing_details.full_email,
+                    grand_total=grand_total,
                     original_bag=bag,
                     stripe_pid=pid,
                 )
