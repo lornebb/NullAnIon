@@ -3,6 +3,7 @@ from .models import Song
 
 # Create your views here.
 
+
 def library(request):
     """ A view to return library page and songs from library """
 
@@ -13,4 +14,3 @@ def library(request):
     }
 
     return render(request, 'library/library.html', context)
-    
