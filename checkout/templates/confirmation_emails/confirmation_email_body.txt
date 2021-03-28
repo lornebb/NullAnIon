@@ -16,7 +16,7 @@ Mix Extras:
 
 Where we will send your {{order.package_type }} back to: {{ order.email }}
 
-Please UPLOAD your materials to this link:
+Please UPLOAD your materials to this link: https://www.dropbox.com/request/274urgH1uszcVdFsOspJ
 
 If possible, please upload them as a .zip or as a normal folder.
 Be sure to NAME the stems so they make sense for your engineer to work with them.
