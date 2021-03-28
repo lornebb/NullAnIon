@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import (render, redirect,
+                              reverse, HttpResponse)
 from django.views.decorators.http import require_POST
-from django.shortcuts import render
 from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -31,7 +31,6 @@ def cache_checkout_data(request):
                                  'processed right now. Please try '
                                  'again later.'))
         return HttpResponse(content=e, status=400)
-
 
 
 def checkout(request):
@@ -67,9 +66,8 @@ def checkout(request):
         order_total = request.POST['order_total']
         grand_total = order_total
 
-
         order_form_complete = Order.objects.create(
-            order_type = "Mix",
+            order_type="Mix",
             full_name=full_name,
             email=email,
             phone_number=phone_number,
@@ -83,7 +81,6 @@ def checkout(request):
             contact=contact,
             order_total=order_total,
         )
-
 
         pid = request.POST.get('client_secret').split('_secret')[0]
         order_form_complete.stripe_pid = pid
@@ -113,18 +110,19 @@ def checkout(request):
         messages.success(request, f"Successfully completed order \
                         {order_form_complete.id}. A confirmation \
                         email will be sent to {order_form_complete.email}")
-        
+
         if 'bag' in request.session:
             del request.session['bag']
-        
+
         template = 'checkout/checkout_complete.html'
 
         # return render(request, template, context)
-        return redirect(reverse('checkout_complete', args=[order_form_complete.order_number]), context)
+        return redirect(reverse('checkout_complete',
+                        args=[order_form_complete.order_number]),
+                        context
+                        )
     else:
         order_form_services = request.session['bag']
-        print(f"order_form_services **************************************{order_form_services}")
-        
         order_total = order_form_services['order_total']
         grand_total = order_total
 

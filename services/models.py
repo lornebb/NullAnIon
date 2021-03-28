@@ -10,9 +10,9 @@ ep = 'ep (< 35mins)'
 album = 'album / LP (> 35mins)'
 
 reference_link_type = [(general, 'general'),
-                        (energy, 'energy'),
-                        (tone, 'tone'),
-                        (instrument, 'instrument')]
+                    (energy, 'energy'),
+                    (tone, 'tone'),
+                    (instrument, 'instrument')]
 
 package_type = [(single, 'single (< 5mins)'),
                 (ep, 'ep (< 35mins)'),
@@ -38,27 +38,43 @@ class Mix(models.Model):
     THREE = '3'
 
     REVISIONS = [(THREE, '3'),
-                (SIX, '6')]
+                    (SIX, '6')]
 
     MIX_EXTRAS = [('Auto-Tune Lead Vocal', 'Auto-Tune Lead Vocal'),
-                ('Auto-Tune Backing Vocals', 'Auto-Tune Backing Vocals'),
-                ('Drum Replacement', 'Drum Replacement'),
-                ('Instrumental Version', 'Instruemntal Version'),
-                ('Show Ready Version', 'Show Ready Version'),
-                ('A Capella Version', 'A Capella Version'),
-                ('Group Mixed Stem Return', 'Group Mix Stem Return'),
-                ('Individual Mixed Stem Return', 'Individual Mixed Stem Return')]
+                    ('Auto-Tune Backing Vocals', 'Auto-Tune Backing Vocals'),
+                    ('Drum Replacement', 'Drum Replacement'),
+                    ('Instrumental Version', 'Instruemntal Version'),
+                    ('Show Ready Version', 'Show Ready Version'),
+                    ('A Capella Version', 'A Capella Version'),
+                    ('Group Mixed Stem Return', 'Group Mix Stem Return'),
+                    ('Individual Mixed Stem Return',
+                        'Individual Mixed Stem Return')]
 
-    order_type = models.CharField(max_length=15, null=False, blank=False, default="Mix")
-    package_type = models.CharField(max_length=1026, choices=package_type, blank=False, null=False, default=single)
+    order_type = models.CharField(
+        max_length=15, null=False, blank=False, default="Mix")
+    package_type = models.CharField(
+        max_length=1026, choices=package_type, blank=False,
+        null=False, default=single)
     deliver_by = models.DateField(blank=False, null=False)
-    stem_choices = models.CharField(max_length=1026, choices=STEM_CHOICES, blank=False, null=False, default=6)
-    revisions = models.CharField(max_length=1026, choices=REVISIONS, blank=False, null=False, default=3)
-    reference_link_type = models.CharField(max_length=1026, choices=reference_link_type, blank=True, null=True, default=general)
-    reference_link = models.URLField(blank=True, null=True)
-    mix_extras = models.CharField(max_length=1026, choices=MIX_EXTRAS, blank=False, null=False, default='')
-    contact = models.EmailField(blank=False, null=False, default='')
-    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, default=22.23)
+    stem_choices = models.CharField(
+        max_length=1026, choices=STEM_CHOICES, blank=False,
+        null=False, default=6)
+    revisions = models.CharField(
+        max_length=1026, choices=REVISIONS, blank=False,
+        null=False, default=3)
+    reference_link_type = models.CharField(
+        max_length=1026, choices=reference_link_type, blank=True,
+        null=True, default=general)
+    reference_link = models.URLField(
+        blank=True, null=True)
+    mix_extras = models.CharField(
+        max_length=1026, choices=MIX_EXTRAS, blank=False,
+        null=False, default='')
+    contact = models.EmailField(
+        blank=False, null=False, default='')
+    order_total = models.DecimalField(
+        max_digits=10, decimal_places=2, null=False,
+        blank=False, default=22.23)
 
     def __str__(self):
         return self.contact
@@ -71,7 +87,7 @@ class Master(models.Model):
     IND_STEMS = 'Individual track stems'
 
     STEM_CHOICES = [(GROUP_STEMS, 'max 5 grouped stems'),
-                    (IND_STEMS, 'individual track stems')]
+                        (IND_STEMS, 'individual track stems')]
 
     SIX = '6'
     THREE = '3'
