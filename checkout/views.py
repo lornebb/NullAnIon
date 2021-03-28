@@ -201,7 +201,7 @@ def checkout_production(request):
 
         template = 'checkout/checkout_complete.html'
 
-        return redirect(reverse('checkout_complete',
+        return redirect(reverse('checkout_complete_production',
                         args=[order_form_complete.order_number]),
                         context
                         )
@@ -230,11 +230,48 @@ def checkout_production(request):
 
 
 @login_required
-def checkout_complete(request, order_number):
+def checkout_complete_production(request, order_number):
     """
     Handle successful checkouts
     """
     order = Order_Production.objects.get(order_number=order_number)
+
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        # Attach the user's profile to the order
+        order.user_profile = profile
+        order.save()
+
+        profile_data = {
+            'default_phone_number': order.phone_number,
+            'default_email': order.email,
+        }
+        user_profile_form = UserProfileForm(profile_data, instance=profile)
+        if user_profile_form.is_valid():
+            user_profile_form.save()
+
+    messages.success(request, f'Order successfully processed! \
+        Your order number is {order_number}. A confirmation \
+        email will be sent to {order.email}.')
+
+    if 'bag' in request.session:
+        del request.session['bag']
+
+    context = {
+        'order': order,
+    }
+    print(order)
+    template = 'checkout/checkout_complete.html'
+    return render(request, template, context)
+
+
+
+@login_required
+def checkout_complete(request, order_number):
+    """
+    Handle successful checkouts
+    """
+    order = Order.objects.get(order_number=order_number)
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
