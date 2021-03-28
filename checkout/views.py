@@ -5,8 +5,8 @@ from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
-from .models import Order
-from .forms import OrderForm
+from .models import Order, Order_Production
+from .forms import OrderForm, OrderForm_Production
 
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
@@ -84,10 +84,6 @@ def checkout(request):
 
         pid = request.POST.get('client_secret').split('_secret')[0]
         order_form_complete.stripe_pid = pid
-        # order_form_complete.original_bag = json.dumps(bag)
-
-        # messages.success(request, f"Successfully added your \
-        #             {order_form_services.id} order to the basket.")
 
         total = grand_total
         stripe_total = round(float(total) * 100)
@@ -97,10 +93,7 @@ def checkout(request):
             currency=settings.STRIPE_CURRENCY,
         )
 
-        # order_form_complete = get_object_or_404(Order, Order=id)
-
         context = {
-            # 'order_form_to_fill': OrderForm,
             'order_form_complete': order_form_complete,
             'stripe_public_key': stripe_public_key,
             'stripe_secret_key': stripe_secret_key,
@@ -116,7 +109,6 @@ def checkout(request):
 
         template = 'checkout/checkout_complete.html'
 
-        # return render(request, template, context)
         return redirect(reverse('checkout_complete',
                         args=[order_form_complete.order_number]),
                         context
@@ -160,7 +152,6 @@ def checkout(request):
 
 def checkout_production(request):
     if request.method == 'POST':
-        # This is only for MIX & MASTER.
 
         if 'reference_link' in request.POST:
             reference_link = request.POST['reference_link']
@@ -169,64 +160,36 @@ def checkout_production(request):
             reference_link = False
             reference_link_type = False
 
-        if request.POST.getlist('mix_extras') != "":
-            mix_extras = request.POST.getlist('mix_extras')
+        if request.POST.getlist('production_type') != "":
+            production_type = request.POST.getlist('production_type')
         else:
-            mix_extras = None
+            production_type = None
 
         full_name = request.POST['full_name']
         email = request.POST['email']
         phone_number = request.POST['phone_number']
-        package_type = request.POST['package_type']
-        deliver_by = request.POST['deliver_by']
-        stem_choices = request.POST['stem_choices']
-        revisions = request.POST['revisions']
+        production_type = request.POST.getlist('production_type')
         reference_link_type = reference_link_type
         reference_link = reference_link
-        mix_extras = mix_extras
+        deliver_by = request.POST['deliver_by']
         contact = request.POST['contact']
-        order_total = request.POST['order_total']
-        grand_total = order_total
+        notes = request.POST['notes']
 
-        order_form_complete = Order.objects.create(
-            order_type="Mix",
+        order_form_complete = Order_Production.objects.create(
+            order_type="Production",
             full_name=full_name,
             email=email,
             phone_number=phone_number,
-            package_type=package_type,
+            production_type=production_type,
             deliver_by=deliver_by,
-            stem_choices=stem_choices,
-            revisions=revisions,
             reference_link_type=reference_link_type,
             reference_link=reference_link,
-            mix_extras=mix_extras,
             contact=contact,
-            order_total=order_total,
+            notes=notes,
         )
-
-        pid = request.POST.get('client_secret').split('_secret')[0]
-        order_form_complete.stripe_pid = pid
-        # order_form_complete.original_bag = json.dumps(bag)
-
-        # messages.success(request, f"Successfully added your \
-        #             {order_form_services.id} order to the basket.")
-
-        total = grand_total
-        stripe_total = round(float(total) * 100)
-        stripe.api_key = stripe_secret_key
-        intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=settings.STRIPE_CURRENCY,
-        )
-
-        # order_form_complete = get_object_or_404(Order, Order=id)
 
         context = {
-            # 'order_form_to_fill': OrderForm,
             'order_form_complete': order_form_complete,
-            'stripe_public_key': stripe_public_key,
-            'stripe_secret_key': stripe_secret_key,
-            'client_secret': intent.client_secret,
         }
 
         messages.success(request, f"Successfully completed order \
@@ -238,7 +201,6 @@ def checkout_production(request):
 
         template = 'checkout/checkout_complete.html'
 
-        # return render(request, template, context)
         return redirect(reverse('checkout_complete',
                         args=[order_form_complete.order_number]),
                         context
@@ -260,6 +222,7 @@ def checkout_production(request):
 
         template = 'checkout/checkout.html'
         context = {
+            'production_order': "production_order",
             'order_form_services': order_form_services,
             'order_form': order_form,
         }
@@ -271,7 +234,7 @@ def checkout_complete(request, order_number):
     """
     Handle successful checkouts
     """
-    order = Order.objects.get(order_number=order_number)
+    order = Order_Production.objects.get(order_number=order_number)
 
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
