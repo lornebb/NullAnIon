@@ -72,5 +72,7 @@ form.addEventListener('submit', function (ev) {
                 form.submit();
             }
         }
-    });
+    }).fail(function () {
+      location.reload();
+    })
 });

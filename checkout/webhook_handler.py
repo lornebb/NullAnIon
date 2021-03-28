@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 
 from .models import Order
-from services.models import Mix, Master, Production
+from profiles.models import UserProfile
 
 import json
 import time
@@ -34,6 +34,15 @@ class StripeWH_Handler:
         billing_details = intent.charges.data[0].billing_details
         grand_total = round(intent.charges.data[0].amount / 100, 2)
 
+        # update profile info
+        profile = None
+        username = intent.metadata.username
+        if username != 'AnonymousUser':
+            profile = UserProfile.objects.get(user__username=username)
+            profile.default_full_name = billing_details.full_name,
+            profile.default_email = billing_details.full_email,
+            profile.save()
+
         order_exists = False
         attempt = 1
         while attempt <= 5:
@@ -59,6 +68,7 @@ class StripeWH_Handler:
             try:
                 order = Order.objects.create(
                     full_name=billing_details.full_name,
+                    user_profile=profile,
                     email=billing_details.full_email,
                     grand_total=grand_total,
                     original_bag=bag,
