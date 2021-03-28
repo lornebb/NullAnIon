@@ -15,32 +15,32 @@
 
 <main class="site-content">
   <section class="container is-fluid">
-      <div class="columns">
-          <div class="column is-one-quarter">
-              {% include 'includes/info-main.html' %}
-              {% include 'includes/info-library.html' %}
-              {% include 'includes/info-mix-master.html' %}
-              {% include 'includes/info-other-services.html' %}
-          </div>
-          <div class="columnns">
-              <div class="column">
-                  <div class="title is-3">Thank You</div>
-                  <h1 class="title is-1">CHECKOUT SUCCESS</h1>
-                  <div> Your order information is contained here and will be emailed to <b> {{ order.email }} </b> also. </div>
-                  <div> Please take note of these intructions in order to get your files uploaded so work can begin. </div>
-                  <div> Order Number: {{ order.order_number }}</div>
-                  {{ order }}
-                  <p class="title">Upload your files to <a href="https://www.dropbox.com/request/274urgH1uszcVdFsOspJ" target="_blank">HERE</a></p>
-              </div>
-          </div>
-          {% if from_profile %}
-          <div class="columns">
+    <div class="columns">
+        <div class="column is-one-quarter">
+            {% include 'includes/info-main.html' %}
+            {% include 'includes/info-library.html' %}
+            {% include 'includes/info-mix-master.html' %}
+            {% include 'includes/info-other-services.html' %}
+        </div>
+        <div class="columnns">
             <div class="column">
-              <a class="button" href="{% url 'profile' %}"><span>Back to Profile</span></a>
+                <div class="title is-3">Thank You</div>
+                <h1 class="title is-1">CHECKOUT SUCCESS</h1>
+                <div> Your order information is contained here and will be emailed to <b> {{ order.email }} </b> also. </div>
+                <div> Please take note of these intructions in order to get your files uploaded so work can begin. </div>
+                <div> Order Number: {{ order.order_number }}</div>
+                {{ order }}
+                <p class="title">Upload your files to <a href="https://www.dropbox.com/request/274urgH1uszcVdFsOspJ" target="_blank">HERE</a></p>
             </div>
+        </div>
+        {% if from_profile %}
+        <div class="columns">
+          <div class="column">
+            <a class="button" href="{% url 'profile' %}"><span>Back to Profile</span></a>
           </div>
-          {% endif %}
-      </div>
+        </div>
+        {% endif %}
+    </div>
   </section>
 </main>
 
