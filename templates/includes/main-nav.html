@@ -39,7 +39,8 @@
         <div class="navbar-dropdown">
           {% if request.user.is_authenticated %}
             {% if request.user.is_superuser %}
-              <a href="" class="navbar-item">SU Management</a>
+              <span class="navbar-item"><b>SuperUser</b></span>
+              <hr class="navbar-divider">
             {% endif %}
             <a href="{% url 'profile' %}" class="navbar-item">My Profile</a>
             <a href="{% url 'account_logout' %}" class="navbar-item">Logout</a>
@@ -48,18 +49,6 @@
             <a href="{% url 'account_login' %}" class="navbar-item">Sign In</a>
           {% endif %}
         </div>      
-      </div>
-      <div class="navbar-item">
-        <div class="navbar-item">
-            <a class="navbar-item" href="">
-                CHECKOUT - 
-                {% if grand_total %}
-                  {{ grand_total|floatformat:2 }}
-                {% else %}
-                  0.00
-                {% endif %}
-            </a>
-        </div>
       </div>
     </div>
   </div>
