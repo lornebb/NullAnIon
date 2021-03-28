@@ -21,7 +21,7 @@ def profile(request):
 
     form = UserProfileForm(instance=profile)
     orders = profile.orders.all()
-    
+
     template = 'profiles/profile.html'
     context = {
         'form': form,
@@ -38,7 +38,7 @@ def order_history(request, order_number):
         f'This is a previous order confirmation #{order_number}.'
         'A confirmation email has already been sent at the time of order'
         ))
-    
+
     template = 'checkout/checkout_complete.html'
     context = {
         'order': order,
