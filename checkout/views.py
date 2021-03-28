@@ -38,7 +38,7 @@ def checkout(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
-        # This is only for MIX at the moment.
+        # This is only for MIX & MASTER.
 
         if 'reference_link' in request.POST:
             reference_link = request.POST['reference_link']
@@ -154,6 +154,114 @@ def checkout(request):
             'stripe_public_key': stripe_public_key,
             'stripe_secret_key': stripe_secret_key,
             'client_secret': intent.client_secret,
+        }
+        return render(request, template, context)
+
+
+def checkout_production(request):
+    if request.method == 'POST':
+        # This is only for MIX & MASTER.
+
+        if 'reference_link' in request.POST:
+            reference_link = request.POST['reference_link']
+            reference_link_type = request.POST['reference_link_type']
+        else:
+            reference_link = False
+            reference_link_type = False
+
+        if request.POST.getlist('mix_extras') != "":
+            mix_extras = request.POST.getlist('mix_extras')
+        else:
+            mix_extras = None
+
+        full_name = request.POST['full_name']
+        email = request.POST['email']
+        phone_number = request.POST['phone_number']
+        package_type = request.POST['package_type']
+        deliver_by = request.POST['deliver_by']
+        stem_choices = request.POST['stem_choices']
+        revisions = request.POST['revisions']
+        reference_link_type = reference_link_type
+        reference_link = reference_link
+        mix_extras = mix_extras
+        contact = request.POST['contact']
+        order_total = request.POST['order_total']
+        grand_total = order_total
+
+        order_form_complete = Order.objects.create(
+            order_type="Mix",
+            full_name=full_name,
+            email=email,
+            phone_number=phone_number,
+            package_type=package_type,
+            deliver_by=deliver_by,
+            stem_choices=stem_choices,
+            revisions=revisions,
+            reference_link_type=reference_link_type,
+            reference_link=reference_link,
+            mix_extras=mix_extras,
+            contact=contact,
+            order_total=order_total,
+        )
+
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        order_form_complete.stripe_pid = pid
+        # order_form_complete.original_bag = json.dumps(bag)
+
+        # messages.success(request, f"Successfully added your \
+        #             {order_form_services.id} order to the basket.")
+
+        total = grand_total
+        stripe_total = round(float(total) * 100)
+        stripe.api_key = stripe_secret_key
+        intent = stripe.PaymentIntent.create(
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+        )
+
+        # order_form_complete = get_object_or_404(Order, Order=id)
+
+        context = {
+            # 'order_form_to_fill': OrderForm,
+            'order_form_complete': order_form_complete,
+            'stripe_public_key': stripe_public_key,
+            'stripe_secret_key': stripe_secret_key,
+            'client_secret': intent.client_secret,
+        }
+
+        messages.success(request, f"Successfully completed order \
+                        {order_form_complete.id}. A confirmation \
+                        email will be sent to {order_form_complete.email}")
+
+        if 'bag' in request.session:
+            del request.session['bag']
+
+        template = 'checkout/checkout_complete.html'
+
+        # return render(request, template, context)
+        return redirect(reverse('checkout_complete',
+                        args=[order_form_complete.order_number]),
+                        context
+                        )
+    else:
+        order_form_services = request.session['bag']
+
+        if request.user.is_authenticated:
+            try:
+                profile = UserProfile.objects.get(user=request.user)
+                order_form = OrderForm(initial={
+                    'full_name': profile.user.get_full_name(),
+                    'email': profile.user.email,
+                })
+            except UserProfile.DoesNotExist:
+                order_form = OrderForm()
+        else:
+            order_form = OrderForm()
+
+        template = 'checkout/checkout.html'
+        context = {
+            'order_form_services': order_form_services,
+            'order_form': order_form,
         }
         return render(request, template, context)
 

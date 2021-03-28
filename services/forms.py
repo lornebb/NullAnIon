@@ -53,5 +53,5 @@ class ProductionForm(ModelForm):
 
         widgets = {
             'production_type': CheckboxSelectMultiple(),
-            'notes': Textarea(attrs={'cols': 1, 'rows': 1})
+            'notes': Textarea(attrs={'cols': 1, 'rows': 3})
                 }

@@ -2,7 +2,40 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from .forms import MixForm, MasterForm, ProductionForm
-from checkout.views import checkout
+from checkout.views import checkout, checkout_production
+
+
+def production_order(request):
+    if request.POST['reference_link'] != "":
+        reference_link_type = request.POST['reference_link_type']
+        reference_link = request.POST['reference_link']
+    else:
+        reference_link_type = None
+        reference_link = None
+
+    production_type = request.POST.getlist('production_type')
+    reference_link_type = reference_link_type
+    reference_link = reference_link
+    deliver_by = request.POST['deliver_by']
+    contact = request.POST['contact']
+    notes = request.POST['notes']
+
+    order = {
+        'order_type': "Production",
+        'production_type': production_type,
+        'deliver_by': deliver_by,
+        'reference_link_type': reference_link_type,
+        'reference_link': reference_link,
+        'contact': contact,
+        'notes': notes,
+    }
+
+    bag = request.session['bag'] = order
+
+    messages.success(request, f"Successfully added your \
+                            {bag['order_type']} order to the basket.")
+
+    return redirect(checkout_production)
 
 
 def order_form(request):
@@ -12,7 +45,6 @@ def order_form(request):
         # This is only for MIX at the moment.
 
         bag = request.session.get('bag', {})
-        print(f"Empty bag **************************************{bag}")
 
         if request.POST['reference_link'] != "":
             reference_link_type = request.POST['reference_link_type']
@@ -50,7 +82,6 @@ def order_form(request):
         }
 
         bag = request.session['bag'] = order
-        print(f"full bag **************************************{bag}")
 
         messages.success(request, f"Successfully added your \
                              {bag['order_type']} order to the basket.")
