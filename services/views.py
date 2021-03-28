@@ -1,12 +1,8 @@
-from django.http import HttpResponse
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from .forms import MixForm, MasterForm, ProductionForm
-from .models import Mix, Master, Production
-from checkout.forms import OrderForm
 from checkout.views import checkout
-
 
 
 def order_form(request):
@@ -56,19 +52,11 @@ def order_form(request):
         bag = request.session['bag'] = order
         print(f"full bag **************************************{bag}")
 
-        # order_form = OrderForm
-
-        # context = {
-            # 'order': order,
-            # 'bag': bag,
-            # 'order_form': order_form,
-        # }
-        # view = checkout
         messages.success(request, f"Successfully added your \
                              {bag['order_type']} order to the basket.")
 
         return redirect(checkout)
-    
+
     else:
         template = 'services/services.html'
         if request.GET.get("type") == "mix":
@@ -77,9 +65,9 @@ def order_form(request):
             mix_order_type = 'Mix Order'
 
             context = {
-            'mix_form' : mix_form,
-            'form_title' : form_title,
-            'mix_order_type' : mix_order_type,
+                'mix_form': mix_form,
+                'form_title': form_title,
+                'mix_order_type': mix_order_type,
             }
 
             return render(request, template, context)
@@ -88,24 +76,24 @@ def order_form(request):
             master_form = MasterForm()
             form_title = "Master"
             master_order_type = "Master Order"
-            
+
             context = {
-            'master_form' : master_form,
-            'form_title' : form_title,
-            'master_order_type': master_order_type,
+                'master_form': master_form,
+                'form_title': form_title,
+                'master_order_type': master_order_type,
             }
 
             return render(request, template, context)
-        
+
         if request.GET.get("type") == "production":
             production_form = ProductionForm()
             form_title = "Production"
             production_order_type = "Production Order"
 
             context = {
-            'production_form': production_form,
-            'form_title': form_title,
-            'production_order_type': production_order_type,
+                'production_form': production_form,
+                'form_title': form_title,
+                'production_order_type': production_order_type,
             }
 
             return render(request, template, context)
