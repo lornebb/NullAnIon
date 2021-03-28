@@ -8,6 +8,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Order
 from .forms import OrderForm
 
+from profiles.forms import UserProfileForm
+from profiles.models import UserProfile
+
 import stripe
 import json
 
@@ -133,10 +136,23 @@ def checkout(request):
             currency=settings.STRIPE_CURRENCY,
         )
 
+        if request.user.is_authenticated:
+            try:
+                profile = UserProfile.objects.get(user=request.user)
+                order_form = OrderForm(initial={
+                    'full_name': profile.user.get_full_name(),
+                    'email': profile.user.email,
+                    # 'phone_number': profile.user.phone_number
+                })
+            except UserProfile.DoesNotExist:
+                order_form = OrderForm()
+        else:
+            order_form = OrderForm()
+
         template = 'checkout/checkout.html'
         context = {
             'order_form_services': order_form_services,
-            'order_form': OrderForm,
+            'order_form': order_form,
             'stripe_public_key': stripe_public_key,
             'stripe_secret_key': stripe_secret_key,
             'client_secret': intent.client_secret,
@@ -150,6 +166,28 @@ def checkout_complete(request, order_number):
     Handle successful checkouts
     """
     order = Order.objects.get(order_number=order_number)
+
+    if request.user.is_authenticated:
+        profile = UserProfile.objects.get(user=request.user)
+        # Attach the user's profile to the order
+        order.user_profile = profile
+        order.save()
+
+        profile_data = {
+            'default_phone_number': order.phone_number,
+            'default_email': order.email,
+        }
+        user_profile_form = UserProfileForm(profile_data, instance=profile)
+        if user_profile_form.is_valid():
+            user_profile_form.save()
+
+    messages.success(request, f'Order successfully processed! \
+        Your order number is {order_number}. A confirmation \
+        email will be sent to {order.email}.')
+
+    if 'bag' in request.session:
+        del request.session['bag']
+
     context = {
         'order': order,
     }

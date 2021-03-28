@@ -32,6 +32,13 @@
                   {{ order }}
               </div>
           </div>
+          {% if from_profile %}
+          <div class="columns">
+            <div class="column">
+              <a class="button" href="{% url 'profile' %}"><span>Back to Profile</span></a>
+            </div>
+          </div>
+          {% endif %}
       </div>
   </section>
 </main>
