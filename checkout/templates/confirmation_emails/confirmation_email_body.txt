@@ -1,0 +1,35 @@
+Hail and well met {{ order.full_name }}.
+
+This is a confirmation email for your order at Nullanion.
+
+Your order information is:
+
+Order Number: {{ order.order_number }}
+
+Order Total: {{ order.order_total }}
+
+Type of order: 
+Package type: {{order.package_type }}
+Stems to upload: 
+Revisions:
+Mix Extras:
+
+Where we will send your {{order.package_type }} back to: {{ order.email }}
+
+Please UPLOAD your materials to this link:
+
+If possible, please upload them as a .zip or as a normal folder.
+Be sure to NAME the stems so they make sense for your engineer to work with them.
+Also be sure to name your folder (or include a text file) with appropiate information, such as BPM / KEY, if needed, 
+along with either your ACCOUNT NAME / ORDER NUMBER / or other identifier to link your stems with your order at Nullanion.com
+
+If you have any questions, please get in touch at any time at {{ contact_email }}.
+Please let us know as soon as possible if there is anything wrong with the above order details,
+or if you want to send more references, for example.
+
+Thank you for your order,
+
+Sincerely, 
+
+Nullanion.
+**Art is life**
