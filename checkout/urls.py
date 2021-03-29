@@ -13,5 +13,8 @@ urlpatterns = [
     path('wh/', webhook, name="webhook"),
     path('checkout_production',
          views.checkout_production,
-         name="checkout_production")
+         name="checkout_production"),
+    path('cache_checkout_data/',
+        views.cache_checkout_data,
+        name='cache_checkout_data'),
 ]
