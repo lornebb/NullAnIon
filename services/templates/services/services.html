@@ -14,7 +14,7 @@
 {% endblock %}
 
 {% block page_header %}
-<div class="columns">
+<div class="columns is-hidden-mobile">
     <div class="column">
 
     </div>
@@ -27,7 +27,7 @@
   <section class="container is-fluid">
     <div class="columns">
       <!-- LEFT info panel -->
-      <div class="column is-one-quarter">
+      <div class="column is-one-quarter is-hidden-mobile">
         {% include 'includes/info-main.html' %}
         {% if mix_form or master_form %}
           {% include 'includes/info-mix-master.html' %}

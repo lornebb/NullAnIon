@@ -38,3 +38,16 @@ body {
 .toast-capper {
   height: 2px;
 }
+
+.hero-background {
+  background: url("/static/images/nullanion-logo-simple-thick.svg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+.null-logo {
+  background: url("/static/images/nullanion-logo-simple-thick.svg");
+  height: 80px;
+  width: 330px;
+  /* display: block;
+  object-fit: fill; */
+}

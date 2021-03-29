@@ -2,24 +2,40 @@
 {% load static %}
 
 {% block page_header %}
-  <div class="columns">
-    <div class="column">
-
-    </div>
+<div class="columns is-hidden-mobile">
+  <div class="column">
   </div>
+</div>
 {% endblock %}
 
 {% block content %}
 <main class="site-content">
   <section class="container is-fluid">
     <div class="columns">
-      <div class="column is-one-quarter">
+      <!-- left sdie info panels -->
+      <div class="column is-one-quarter is-hidden-mobile">
         {% include 'includes/info-main.html' %}
         {% include 'includes/info-library.html' %}
         {% include 'includes/info-mix-master.html' %}
         {% include 'includes/info-other-services.html' %}
       </div>
-      <div class="column">            
+      <!-- right side - welcome screen -->
+      <div class="column">
+        <div class="level">
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">For artists that need excellence delivered on time.</p>
+              <p class="title">Welcome</p>
+            </div>
+          </div>
+        </div>
+        <div class="columns">
+          <div class="column">
+              <figure class="image image is-5by3">
+                <img src="/static/images/nullanion-logo-simple-thick.svg">
+              </figure>
+          </div>
+        </div>
       </div>
     </div>
   </section>
