@@ -3,18 +3,21 @@
 {% load crispy_forms_tags %}
 
 {% block extra_js %}
-  <!-- Fengyuan Chen's Datepicker -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous"></script>
+<!-- Fengyuan Chen's Datepicker -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css"
+  integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js"
+  integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg=="
+  crossorigin="anonymous"></script>
 {% endblock %}
 
 {% block extra_title %}
 {% if mix_form %}
-  - Mix Order
+- Mix Order
 {% elif master_form %}
-  - Master Order
+- Master Order
 {% elif production_form %}
-  - Production Order
+- Production Order
 {% endif %}
 {% endblock %}
 
@@ -127,7 +130,8 @@
                 <label for="id_reference_link">
                   Reference link
                 </label>
-                <input type="url" name="reference_link" maxlength="200" class="urlinput" id="id_reference_link" placeholder="https://www.">
+                <input type="url" name="reference_link" maxlength="200" class="urlinput" id="id_reference_link"
+                  placeholder="https://www.">
               </div>
             </div>
             <!-- reference link type -->
@@ -192,7 +196,7 @@
                 <input type="email" name="contact" maxlength="254" class="emailinput" required="" id="id_contact">
               </div>
             </div>
-            - - - - - - - - - - - - - - - - - - -- - -
+            <span class="title is-hidden-mobile">- - - - - - - - - - - - - - - - - - - - - -</span>
             <div id="div_id_order_total" class="ctrlHolder">
               <label for="id_order_total" class="requiredField">
                 Order total: $40.00
@@ -204,11 +208,135 @@
             {% elif master_form %}
 
             <!-- MASTER FORM -->
-            {{ master_form|crispy }}
-
+            <!-- order type -->
+            <div id="div_id_order_type" class="ctrlHolder is-invisible" >
+              <label for="id_order_type" class="requiredField">
+                Order type<span class="asteriskField">*</span>
+              </label>
+              <input type="text" name="order_type" value="Master" maxlength="15" class="textinput textInput"
+                required="" id="id_order_type">
+            </div>
+              <!-- package type -->
+            <div class="control mt-6">
+              <p class="subtitle">Package Type</p>
+              <label class="radio">
+                <input type="radio" name="package_type" required="" value="Single">
+                <span><i class="icon-single">
+                    <img src="/static/icons/single.svg" alt="icon single">
+                  </i>Single (&lt; 5mins)</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="package_type" required="" value="EP">
+                <span><i class="icon-single">
+                    <img src="/static/icons/ep.svg" alt="icon ep">
+                  </i>EP (&lt; 35mins)</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="package_type" required="" value="Album or LP">
+                <span><i class="icon-single">
+                    <img src="/static/icons/album.svg" alt="icon album">
+                  </i>Album / LP (&gt; 35mins)</span>
+              </label>
+            </div>
+            <!-- Deliver By -->
+            <div class="control mt-6">
+              <p class="subtitle">Delivery</p>
+              <label for="id_deliver_by">It needs to be finished by:</label>
+              {{master_form.deliver_by}}
+            </div>
+            <!-- stem choices -->
+            <div class="control mt-6">
+              <p class="subtitle">Stems</p>
+              <label for="stem_choices">How many stems to send:</label>
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="stem_choices" required="" value="max 5 groups">
+                  <span>5 grouped stems</span>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="stem_choices" required="" value="Individual track stems">
+                  <span>Individual Stems</span>
+                </label>
+              </div>
+            </div>
+            <!-- Revisions -->
+            <div class="control mt-6">
+              <p class="subtitle">Revisions</p>
+              <label for="revisions">How Many Revisions do you want on the edits?</label>
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" name="revisions" required="" value="3">
+                  <span><i class="icon-single">
+                    </i>3</span>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="revisions" required="" value="6">
+                  <span><i class="icon-single">
+                    </i>6</span>
+                </label>
+              </div>
+            </div>
+            <!-- reference link -->
+            <div class="control mt-6">
+              <p class="subtitle">Reference Links</p>
+              <div id="div_id_reference_link" class="ctrlHolder">
+                <label for="id_reference_link">
+                  Reference link
+                </label>
+                <input type="url" name="reference_link" maxlength="200" class="urlinput" id="id_reference_link"
+                  placeholder="https://www.">
+              </div>
+            </div>
+            <!-- reference link type -->
+            <div class="control mt-6">
+              <label for="id_reference_link_type">
+                Reference link type
+              </label>
+              <select name="reference_link_type" class="select" id="id_reference_link_type">
+                <option value="general" selected="">general</option>
+                <option value="energy">energy</option>
+                <option value="tone">tone</option>
+                <option value="instrument">instrument</option>
+              </select>
+            </div>
+            <!-- master extras -->
+            <div class="control mt-6">
+              <div id="div_id_master_extras" class="ctrlHolder">
+                <p class="subtitle">Master Extras</p>
+                <ul id="id_master_extras" class="checkboxselectmultiple">
+                  <li><label for="id_master_extras_1"><input type="checkbox" name="master_extras" value="Drum Replacement"
+                        class="checkboxselectmultiple" id="id_master_extras_1">
+                      Drum Replacement</label>
+                  </li>
+                  <li><label for="id_master_extras_2"><input type="checkbox" name="master_extras" value="Instrumental Version"
+                        class="checkboxselectmultiple" id="id_master_extras_2">
+                      Instruemntal Version</label>
+                  </li>
+                  <li><label for="id_master_extras_3"><input type="checkbox" name="master_extras" value="Show Ready Version"
+                        class="checkboxselectmultiple" id="id_master_extras_3">
+                      Show Ready Version</label>
+                  </li>
+                  <li><label for="id_master_extras_4"><input type="checkbox" name="master_extras" value="A Capella Version"
+                        class="checkboxselectmultiple" id="id_master_extras_4">
+                      A Capella Version</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- contact -->
+            <div class="control mt-6">
+              <p class="subtitle">Upload Link Email</p>
+              <div id="div_id_contact" class="ctrlHolder">
+                <label for="id_contact" class="requiredField">
+                  Contact email for stem upload link:<span class="asteriskField">*</span>
+                </label>
+                <input type="email" name="contact" maxlength="254" class="emailinput" required="" id="id_contact">
+              </div>
+            </div>
+            <span class="title is-hidden-mobile">- - - - - - - - - - - - - - - - - - - - - -</span>
             <div id="div_id_order_total" class="ctrlHolder">
               <label for="id_order_total" class="requiredField">
-                Order total<span class="asteriskField">*</span>$40.00
+                Order total $40.00
               </label>
               <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total"
                 hidden>
@@ -237,7 +365,7 @@
 <script>
   $(function () {
     $("#id_deliver_by").datepicker({
-      format:'dd/mm/yyyy',
+      format: 'dd/mm/yyyy',
     });
   });
 </script>
