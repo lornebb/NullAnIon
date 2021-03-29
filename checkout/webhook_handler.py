@@ -57,8 +57,8 @@ class StripeWH_Handler:
         username = intent.metadata.username
         if username != 'AnonymousUser':
             profile = UserProfile.objects.get(user__username=username)
-            profile.default_full_name = billing_details.full_name,
-            profile.default_email = billing_details.full_email,
+            profile.default_full_name = billing_details.name,
+            profile.default_email = billing_details.email,
             profile.save()
 
         order_exists = False
@@ -66,8 +66,8 @@ class StripeWH_Handler:
         while attempt <= 5:
             try:
                 order = Order.objects.get(
-                    full_name__iexact=billing_details.full_name,
-                    email__iexact=billing_details.full_email,
+                    full_name__iexact=billing_details.name,
+                    email__iexact=billing_details.email,
                     grand_total=grand_total,
                     original_bag=bag,
                     stripe_pid=pid,
@@ -87,9 +87,9 @@ class StripeWH_Handler:
             order = None
             try:
                 order = Order.objects.create(
-                    full_name=billing_details.full_name,
+                    full_name=billing_details.name,
                     user_profile=profile,
-                    email=billing_details.full_email,
+                    email=billing_details.email,
                     grand_total=grand_total,
                     original_bag=bag,
                     stripe_pid=pid,
