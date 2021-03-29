@@ -1,4 +1,5 @@
 from django.forms import ModelForm, Textarea, RadioSelect
+from django import forms
 from django.forms.widgets import CheckboxSelectMultiple
 from services.models import Mix, Master, Production
 
@@ -18,6 +19,8 @@ class MixForm(ModelForm):
             'revisions': RadioSelect(),
             'mix_extras': CheckboxSelectMultiple(),
         }
+    
+    deliver_by = forms.DateField(input_formats=['%d/%m/%Y'])
 
 
 class MasterForm(ModelForm):

@@ -1,24 +1,29 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-<!-- {% crispy mix_form mix_form.helper %} -->
+
+{% block extra_js %}
+  <!-- Fengyuan Chen's Datepicker -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous"></script>
+{% endblock %}
 
 {% block extra_title %}
-  {% if mix_form %}
-    - Mix Order
-  {% elif master_form %}
-    - Master Order
-  {% elif production_form %}
-    - Production Order
-  {% endif %}
+{% if mix_form %}
+  - Mix Order
+{% elif master_form %}
+  - Master Order
+{% elif production_form %}
+  - Production Order
+{% endif %}
 {% endblock %}
 
 {% block page_header %}
 <div class="columns is-hidden-mobile">
-    <div class="column">
+  <div class="column">
 
-    </div>
   </div>
+</div>
 {% endblock %}
 
 {% block content %}
@@ -30,9 +35,9 @@
       <div class="column is-one-quarter is-hidden-mobile">
         {% include 'includes/info-main.html' %}
         {% if mix_form or master_form %}
-          {% include 'includes/info-mix-master.html' %}
+        {% include 'includes/info-mix-master.html' %}
         {% elif production_form %}
-          {% include 'includes/info-production.html' %}
+        {% include 'includes/info-production.html' %}
         {% else %}
         {% endif %}
       </div>
@@ -41,52 +46,194 @@
         <!-- IF ELSE FOR TITLE like below -->
         <u><strong>Order a {{ form_title }}</strong></u>
         {% if production_form %}
-          <form action="{% url 'production_order' %}" method="POST" class="uniForm">
-        {% else %}
+        <form action="{% url 'production_order' %}" method="POST" class="uniForm">
+          {% else %}
           <form action="{% url 'services' %}" method="POST" class="uniForm">
-        {% endif %}
-        
-          {% csrf_token %}
-        
-        {% if mix_form %}   
+            {% endif %}
 
-          <!-- MIX FORM -->
-          {{ mix_form|crispy }}
+            {% csrf_token %}
 
-          <div id="div_id_order_total" class="ctrlHolder">
-            <label for="id_order_total" class="requiredField">
+            {% if mix_form %}
+
+            <!-- MIX FORM -->
+            <!-- package type -->
+            <div class="control">
+              <label class="radio">
+                <input type="radio" name="package_type" required="" value="Single">
+                <span><i class="icon-single">
+                    <img src="/static/icons/single.svg" alt="icon single">
+                  </i>Single (&lt; 5mins)</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="package_type" required="" value="EP">
+                <span><i class="icon-single">
+                    <img src="/static/icons/ep.svg" alt="icon ep">
+                  </i>EP (&lt; 35mins)</span>
+              </label>
+              <label class="radio">
+                <input type="radio" name="package_type" required="" value="Album or LP">
+                <span><i class="icon-single">
+                    <img src="/static/icons/album.svg" alt="icon album">
+                  </i>Album / LP (&gt; 35mins)</span>
+              </label>
+            </div>
+            <!-- Deliver By -->
+            {{mix_form.deliver_by}}
+            - - - - - - - - - -
+            <!-- <div id="div_id_deliver_by" class="ctrlHolder">
+              <label for="id_deliver_by" class="requiredField">
+                Deliver by<span class="asteriskField">*</span>
+              </label>
+              <input type="date" name="deilver_by" placeholder="select deliver by date" min="2021-03-03"
+                max="2023-01-01" required="" id="id_deliver_by"> -->
+              <!-- <input type="text" name="deliver_by" class="dateinput" required="" id="id_deliver_by"> -->
+            <!-- </div> -->
+            <!-- stem choices -->
+            - - - - - - - - - -
+            <div id="div_id_stem_choices" class="ctrlHolder">
+              <label for="id_stem_choices_0" class="requiredField">
+                Stem choices<span class="asteriskField">*</span>
+              </label>
+              <ul id="id_stem_choices" class="radioselect">
+                <li><label for="id_stem_choices_0"><input type="radio" name="stem_choices" value="6" class="radioselect"
+                      required="" id="id_stem_choices_0" checked="">
+                    6</label>
+                </li>
+                <li><label for="id_stem_choices_1"><input type="radio" name="stem_choices" value="40"
+                      class="radioselect" required="" id="id_stem_choices_1">
+                    40</label>
+                </li>
+                <li><label for="id_stem_choices_2"><input type="radio" name="stem_choices" value="40+"
+                      class="radioselect" required="" id="id_stem_choices_2">
+                    40+</label>
+                </li>
+              </ul>
+            </div>
+            <div id="div_id_revisions" class="ctrlHolder">
+              <label for="id_revisions_0" class="requiredField">
+                Revisions<span class="asteriskField">*</span>
+              </label>
+              <ul id="id_revisions" class="radioselect">
+                <li><label for="id_revisions_0"><input type="radio" name="revisions" value="3" class="radioselect"
+                      required="" id="id_revisions_0" checked="">
+                    3</label>
+                </li>
+                <li><label for="id_revisions_1"><input type="radio" name="revisions" value="6" class="radioselect"
+                      required="" id="id_revisions_1">
+                    6</label>
+                </li>
+              </ul>
+            </div>
+            <div id="div_id_reference_link_type" class="ctrlHolder">
+              <label for="id_reference_link_type">
+                Reference link type
+              </label>
+              <select name="reference_link_type" class="select" id="id_reference_link_type">
+                <option value="">---------</option>
+                <option value="general" selected="">general</option>
+                <option value="energy">energy</option>
+                <option value="tone">tone</option>
+                <option value="instrument">instrument</option>
+              </select>
+            </div>
+            <div id="div_id_reference_link" class="ctrlHolder">
+              <label for="id_reference_link">
+                Reference link
+              </label>
+              <input type="url" name="reference_link" maxlength="200" class="urlinput" id="id_reference_link">
+            </div>
+            <div id="div_id_mix_extras" class="ctrlHolder">
+              <label for="" class="requiredField">
+                Mix extras<span class="asteriskField">*</span>
+              </label>
+              <ul id="id_mix_extras" class="checkboxselectmultiple">
+                <li><label for="id_mix_extras_0"><input type="checkbox" name="mix_extras" value="Auto-Tune Lead Vocal"
+                      class="checkboxselectmultiple" id="id_mix_extras_0">
+                    Auto-Tune Lead Vocal</label>
+                </li>
+                <li><label for="id_mix_extras_1"><input type="checkbox" name="mix_extras"
+                      value="Auto-Tune Backing Vocals" class="checkboxselectmultiple" id="id_mix_extras_1">
+                    Auto-Tune Backing Vocals</label>
+                </li>
+                <li><label for="id_mix_extras_2"><input type="checkbox" name="mix_extras" value="Drum Replacement"
+                      class="checkboxselectmultiple" id="id_mix_extras_2">
+                    Drum Replacement</label>
+                </li>
+                <li><label for="id_mix_extras_3"><input type="checkbox" name="mix_extras" value="Instrumental Version"
+                      class="checkboxselectmultiple" id="id_mix_extras_3">
+                    Instruemntal Version</label>
+                </li>
+                <li><label for="id_mix_extras_4"><input type="checkbox" name="mix_extras" value="Show Ready Version"
+                      class="checkboxselectmultiple" id="id_mix_extras_4">
+                    Show Ready Version</label>
+                </li>
+                <li><label for="id_mix_extras_5"><input type="checkbox" name="mix_extras" value="A Capella Version"
+                      class="checkboxselectmultiple" id="id_mix_extras_5">
+                    A Capella Version</label>
+                </li>
+                <li><label for="id_mix_extras_6"><input type="checkbox" name="mix_extras"
+                      value="Group Mixed Stem Return" class="checkboxselectmultiple" id="id_mix_extras_6">
+                    Group Mix Stem Return</label>
+                </li>
+                <li><label for="id_mix_extras_7"><input type="checkbox" name="mix_extras"
+                      value="Individual Mixed Stem Return" class="checkboxselectmultiple" id="id_mix_extras_7">
+                    Individual Mixed Stem Return</label>
+                </li>
+              </ul>
+            </div>
+            <div id="div_id_contact" class="ctrlHolder">
+              <label for="id_contact" class="requiredField">
+                Contact<span class="asteriskField">*</span>
+              </label>
+              <input type="email" name="contact" maxlength="254" class="emailinput" required="" id="id_contact">
+            </div>
+            - - - - - - - - - - - - - - - - - - -- - -
+            <div id="div_id_order_total" class="ctrlHolder">
+              <label for="id_order_total" class="requiredField">
                 Order total<span class="asteriskField">*</span>$40.00
-            </label>
-            <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total" hidden>
-          </div>
+              </label>
+              <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total"
+                hidden>
+            </div>
 
-        {% elif master_form %}
+            {% elif master_form %}
 
-          <!-- MASTER FORM -->
-          {{ master_form|crispy }}
+            <!-- MASTER FORM -->
+            {{ master_form|crispy }}
 
-          <div id="div_id_order_total" class="ctrlHolder">
-            <label for="id_order_total" class="requiredField">
+            <div id="div_id_order_total" class="ctrlHolder">
+              <label for="id_order_total" class="requiredField">
                 Order total<span class="asteriskField">*</span>$40.00
-            </label>
-            <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total" hidden>
-          </div>
+              </label>
+              <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total"
+                hidden>
+            </div>
 
-        {% elif production_form %}
+            {% elif production_form %}
 
-          <!-- PRODUCTION FORM -->
-          {{ production_form|crispy }}
-      
-        {% endif %}
+            <!-- PRODUCTION FORM -->
+            {{ production_form|crispy }}
 
-          <div class="control">
-            <input class="button is-primary" type="submit" value="Submit">
-          </div>
-        </form>  
+            {% endif %}
+
+            <div class="control">
+              <input class="button is-primary" type="submit" value="Submit">
+            </div>
+          </form>
       </div>
     </div>
   </section>
 </main>
 
 
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+  $(function () {
+    $("#id_deliver_by").datepicker({
+      format:'dd/mm/yyyy',
+    });
+  });
+</script>
 {% endblock %}
