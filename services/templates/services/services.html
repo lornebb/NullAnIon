@@ -43,24 +43,37 @@
         <u><strong>Order a {{ form_title }}</strong></u>
         {% if production_form %}
           <form action="{% url 'production_order' %}" method="POST" class="uniForm">
+        {% else %}
+          <form action="{% url 'services' %}" method="POST" class="uniForm">
         {% endif %}
         
-        <form action="{% url 'services' %}" method="POST" class="uniForm">
           {% csrf_token %}
         
         {% if mix_form %}   
 
-            <!-- MIX FORM -->
-            {{ mix_form|crispy }}
+          <!-- MIX FORM -->
+          {{ mix_form|crispy }}
+
+          <div id="div_id_order_total" class="ctrlHolder">
+            <label for="id_order_total" class="requiredField">
+                Order total<span class="asteriskField">*</span>$40.00
+            </label>
+            <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total" hidden>
+          </div>
 
         {% elif master_form %}
-        
 
           <!-- MASTER FORM -->
           {{ master_form|crispy }}
 
+          <div id="div_id_order_total" class="ctrlHolder">
+            <label for="id_order_total" class="requiredField">
+                Order total<span class="asteriskField">*</span>$40.00
+            </label>
+            <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total" hidden>
+          </div>
+
         {% elif production_form %}
-        
 
           <!-- PRODUCTION FORM -->
           {{ production_form|crispy }}
@@ -70,8 +83,6 @@
           <div class="control">
             <input class="button is-primary" type="submit" value="Submit">
           </div>
-          <!-- redirects user back to same page once added to bag... redirect in bag/views.py-->
-          <!-- <input type="hidden" name="redirect_url" value="{{ request.path }}"> -->
         </form>  
       </div>
     </div>

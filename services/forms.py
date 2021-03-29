@@ -10,15 +10,13 @@ class MixForm(ModelForm):
                   'deliver_by', 'stem_choices',
                   'revisions', 'reference_link_type',
                   'reference_link', 'mix_extras',
-                  'contact', 'order_total',)
+                  'contact',)
 
         widgets = {
             'package_type': RadioSelect(),
             'stem_choices': RadioSelect(),
             'revisions': RadioSelect(),
             'mix_extras': CheckboxSelectMultiple(),
-            # 'order_total': DecimalField()
-            # 'deliver_by': DateField(),
         }
 
 
@@ -29,7 +27,7 @@ class MasterForm(ModelForm):
                   'deliver_by', 'stem_choices',
                   'revisions', 'reference_link_type',
                   'reference_link', 'mix_extras',
-                  'contact', 'order_total',)
+                  'contact',)
 
         widgets = {
             'package_type': RadioSelect(),
