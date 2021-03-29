@@ -197,7 +197,7 @@
               </div>
             </div>
             <span class="title is-hidden-mobile">- - - - - - - - - - - - - - - - - - - - - -</span>
-            <div id="div_id_order_total" class="ctrlHolder">
+            <div id="div_id_order_total" class="ctrlHolder mb-3 mt-3">
               <label for="id_order_total" class="requiredField">
                 Order total: $40.00
               </label>
@@ -209,14 +209,14 @@
 
             <!-- MASTER FORM -->
             <!-- order type -->
-            <div id="div_id_order_type" class="ctrlHolder is-invisible" >
+            <div id="div_id_order_type" class="ctrlHolder is-invisible">
               <label for="id_order_type" class="requiredField">
                 Order type<span class="asteriskField">*</span>
               </label>
-              <input type="text" name="order_type" value="Master" maxlength="15" class="textinput textInput"
-                required="" id="id_order_type">
+              <input type="text" name="order_type" value="Master" maxlength="15" class="textinput textInput" required=""
+                id="id_order_type">
             </div>
-              <!-- package type -->
+            <!-- package type -->
             <div class="control mt-6">
               <p class="subtitle">Package Type</p>
               <label class="radio">
@@ -304,20 +304,20 @@
               <div id="div_id_master_extras" class="ctrlHolder">
                 <p class="subtitle">Master Extras</p>
                 <ul id="id_master_extras" class="checkboxselectmultiple">
-                  <li><label for="id_master_extras_1"><input type="checkbox" name="master_extras" value="Drum Replacement"
-                        class="checkboxselectmultiple" id="id_master_extras_1">
+                  <li><label for="id_master_extras_1"><input type="checkbox" name="master_extras"
+                        value="Drum Replacement" class="checkboxselectmultiple" id="id_master_extras_1">
                       Drum Replacement</label>
                   </li>
-                  <li><label for="id_master_extras_2"><input type="checkbox" name="master_extras" value="Instrumental Version"
-                        class="checkboxselectmultiple" id="id_master_extras_2">
+                  <li><label for="id_master_extras_2"><input type="checkbox" name="master_extras"
+                        value="Instrumental Version" class="checkboxselectmultiple" id="id_master_extras_2">
                       Instruemntal Version</label>
                   </li>
-                  <li><label for="id_master_extras_3"><input type="checkbox" name="master_extras" value="Show Ready Version"
-                        class="checkboxselectmultiple" id="id_master_extras_3">
+                  <li><label for="id_master_extras_3"><input type="checkbox" name="master_extras"
+                        value="Show Ready Version" class="checkboxselectmultiple" id="id_master_extras_3">
                       Show Ready Version</label>
                   </li>
-                  <li><label for="id_master_extras_4"><input type="checkbox" name="master_extras" value="A Capella Version"
-                        class="checkboxselectmultiple" id="id_master_extras_4">
+                  <li><label for="id_master_extras_4"><input type="checkbox" name="master_extras"
+                        value="A Capella Version" class="checkboxselectmultiple" id="id_master_extras_4">
                       A Capella Version</label>
                   </li>
                 </ul>
@@ -334,7 +334,7 @@
               </div>
             </div>
             <span class="title is-hidden-mobile">- - - - - - - - - - - - - - - - - - - - - -</span>
-            <div id="div_id_order_total" class="ctrlHolder">
+            <div id="div_id_order_total" class="ctrlHolder mb-3 mt-3">
               <label for="id_order_total" class="requiredField">
                 Order total $40.00
               </label>
@@ -343,13 +343,117 @@
             </div>
 
             {% elif production_form %}
-
+           
             <!-- PRODUCTION FORM -->
-            {{ production_form|crispy }}
+
+            <!-- production type -->
+            <div class="control mt-6">
+              <p class="subtitle">Production Types</p>
+              <div class="level">
+                <div class="level-item has-text-centered">
+                  <label for="id_production_type_1"><input type="checkbox" name="production_type"
+                    value="Guitar" class="checkboxselectmultiple" id="id_production_type_1">
+                    <img src="/static/icons/guitar.svg">
+                      </label>
+                </div>
+                <div class="level-item has-text-centered">
+                  <label for="id_production_type_2"><input type="checkbox" name="production_type"
+                    value="Bass" class="checkboxselectmultiple" id="id_production_type_2">
+                    <img src="/static/icons/bass.svg">
+                      </label>
+                </div>
+                <div class="level-item has-text-centered">
+                  <label for="id_production_type_3"><input type="checkbox" name="production_type"
+                    value="synths" class="checkboxselectmultiple" id="id_production_type_3">
+                    <img src="/static/icons/synth.svg">
+                      </label>
+                </div> 
+              </div>
+              <div class="level">
+                <div class="level-item has-text-centered">
+                  <label for="id_production_type_4"><input type="checkbox" name="production_type"
+                    value="Keys" class="checkboxselectmultiple" id="id_production_type_4">
+                    <img src="/static/icons/keys.svg">
+                      </label>
+                </div>
+                <div class="level-item has-text-centered">
+                  <label for="id_production_type_5"><input type="checkbox" name="production_type"
+                    value="Drums" class="checkboxselectmultiple" id="id_production_type_5">
+                    <img src="/static/icons/drums.svg">
+                    </label>
+                </div>
+                <div class="level-item has-text-centered">
+                  <label for="id_production_type_6"><input type="checkbox" name="production_type"
+                    value="Beat Production" class="checkboxselectmultiple" id="id_production_type_6">
+                    <img src="/static/icons/production.svg">
+                    </label>
+                </div>
+              </div>
+            </div>
+            <!-- reference link -->
+            <div class="control mt-6">
+              <p class="subtitle">Reference Links</p>
+              <div id="div_id_reference_link" class="ctrlHolder">
+                <label for="id_reference_link">
+                  Reference link
+                </label>
+                <input type="url" name="reference_link" maxlength="200" class="urlinput" id="id_reference_link"
+                  placeholder="https://www.">
+              </div>
+            </div>
+            <!-- reference link type -->
+            <div class="control mt-6">
+              <label for="id_reference_link_type">
+                Reference link type
+              </label>
+              <select name="reference_link_type" class="select" id="id_reference_link_type">
+                <option value="general" selected="">general</option>
+                <option value="energy">energy</option>
+                <option value="tone">tone</option>
+                <option value="instrument">instrument</option>
+              </select>
+            </div>
+            <!-- Deliver By -->
+            <div class="control mt-6">
+              <p class="subtitle">Delivery</p>
+              <label for="id_deliver_by">It needs to be finished by:</label>
+              {{production_form.deliver_by}}
+            </div>
+            <!-- contact -->
+            <div class="control mt-6">
+              <p class="subtitle">Upload Link Email</p>
+              <div id="div_id_contact" class="ctrlHolder">
+                <label for="id_contact" class="requiredField">
+                  Contact email for stem upload link:<span class="asteriskField">*</span>
+                </label>
+                <input type="email" name="contact" maxlength="254" class="emailinput" required="" id="id_contact">
+              </div>
+            </div>
+            <div class="control mb-6 mt-6">
+              <div id="div_id_notes" class="ctrlHolder">
+                <label for="id_notes" class="requiredField">
+                  Notes<span class="asteriskField">*</span>
+                </label>
+                <textarea name="notes" cols="1" rows="3" maxlength="320" class="textarea" required=""
+                  id="id_notes"></textarea>
+              </div>
+            </div>
+            <span class="title is-hidden-mobile">- - - - - - - - - - - - - - - - - - - - - -</span>
+            <div id="" class="ctrlHolder mb-3 mt-3">
+              <label for="" class="">
+                It is free to submit a productino request. 
+                <br>
+                Please fill the notes box as much as possible,
+                <br> 
+                and we'll be in touch as soon as possible to make yoru order final.
+              </label>
+              <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total"
+                hidden>
+            </div>
 
             {% endif %}
 
-            <div class="control">
+            <div class="control mb-6">
               <input class="button is-primary" type="submit" value="Submit">
             </div>
           </form>
