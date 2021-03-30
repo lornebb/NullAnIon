@@ -37,15 +37,34 @@
       <!-- LEFT info panel -->
       <div class="column is-one-quarter is-hidden-mobile">
         {% include 'includes/info-main.html' %}
-        {% if mix_form or master_form %}
-        {% include 'includes/info-mix-master.html' %}
-        {% elif production_form %}
-        {% include 'includes/info-production.html' %}
-        {% else %}
+          {% if mix_form or master_form %}
+            {% include 'includes/info-mix-master.html' %}
+          {% elif production_form %}
+            {% include 'includes/info-production.html' %}
+          {% else %}
         {% endif %}
       </div>
       <!-- RIGHT content column -->
       <div class="column">
+        {% if user.is_authenticated %}
+        {% else %}
+        <div class="columns">
+          <div class="column is-half is-offset-one-quarter">
+            <article class="panel is-warning">
+              <p class="panel-heading">
+                Warning
+              </p>
+              <p class="panel-tabs">
+                <a href="{% url 'account_signup' %}" class="navbar-item">Create Account</a>
+                <a href="{% url 'account_login' %}" class="navbar-item">Sign In</a>
+              </p>
+              <div class="panel-block">
+                <p class="is-size-5 pt-3 has-text-weight-bold">You must be signed in to complete an order</p>
+              </div>
+            </article>
+          </div>
+        </div>
+        {% endif %}
         <!-- IF ELSE FOR TITLE like below -->
         <p class="title is-2 is-spaced has-text-centered"><u>{{ form_title }} Order Form</u></p>
         {% if production_form %}
@@ -61,11 +80,11 @@
               <!-- MIX FORM -->
               <!-- order type -->
               <div id="div_id_order_type" class="ctrlHolder is-invisible" style="display: none;">
-              <label for="id_order_type" class="requiredField">
-                Order type<span class="asteriskField">*</span>
-              </label>
-              <input type="text" name="order_type" value="Mix" maxlength="15" class="textinput textInput" required=""
-                id="id_order_type">
+                <label for="id_order_type" class="requiredField">
+                  Order type<span class="asteriskField">*</span>
+                </label>
+                <input type="text" name="order_type" value="Mix" maxlength="15" class="textinput textInput" required=""
+                  id="id_order_type">
               </div>
               <!-- package type -->
               <div class="control mt-6">
