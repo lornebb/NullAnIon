@@ -59,6 +59,14 @@
             {% if mix_form %}
 
               <!-- MIX FORM -->
+              <!-- order type -->
+              <div id="div_id_order_type" class="ctrlHolder is-invisible" style="display: none;">
+              <label for="id_order_type" class="requiredField">
+                Order type<span class="asteriskField">*</span>
+              </label>
+              <input type="text" name="order_type" value="Mix" maxlength="15" class="textinput textInput" required=""
+                id="id_order_type">
+              </div>
               <!-- package type -->
               <div class="control mt-6">
                 <p class="subtitle">Package Type</p>
@@ -209,7 +217,7 @@
 
               <!-- MASTER FORM -->
               <!-- order type -->
-              <div id="div_id_order_type" class="ctrlHolder is-invisible">
+              <div id="div_id_order_type" class="ctrlHolder is-invisible" style="display: none;">
                 <label for="id_order_type" class="requiredField">
                   Order type<span class="asteriskField">*</span>
                 </label>

@@ -6,6 +6,7 @@ from checkout.views import checkout, checkout_production
 
 
 def production_order(request):
+    """ a view to rendern production form post """
     if request.POST['reference_link'] != "":
         reference_link_type = request.POST['reference_link_type']
         reference_link = request.POST['reference_link']
@@ -39,10 +40,9 @@ def production_order(request):
 
 
 def order_form(request):
-    """a view to render the mixform / masterform or productionform"""
+    """a view to render the mixform / masterform"""
 
     if request.method == 'POST':
-        # This is only for MIX at the moment.
 
         bag = request.session.get('bag', {})
 
@@ -73,8 +73,10 @@ def order_form(request):
         contact = request.POST['contact']
         order_total = request.POST['order_total']
 
+        form_title = request.POST['order_type']
+
         order = {
-            'order_type': "Mix",
+            'order_type': form_title,
             'package_type': package_type,
             'deliver_by': deliver_by,
             'stem_choices': stem_choices,

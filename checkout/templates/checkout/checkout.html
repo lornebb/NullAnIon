@@ -23,7 +23,7 @@
             </div>
             <div class="columnns">
                 <div class="column">
-                    <div class="title is-3">Your Order</div>
+                    <div class="title is-3">Your {{order_form_services.order_type}} Order</div>
                     {% if production_order %}
                         <form action="{% url 'checkout_production' %}" method="POST" id="payment-form">
                     {% else %}
