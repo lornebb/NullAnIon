@@ -55,15 +55,15 @@ def checkout(request):
         full_name = request.POST['full_name']
         email = request.POST['email']
         phone_number = request.POST['phone_number']
-        package_type = request.POST['package_type']
-        deliver_by = request.POST['deliver_by']
-        stem_choices = request.POST['stem_choices']
-        revisions = request.POST['revisions']
+        package_type = request.POST.getlist('package_type')
+        deliver_by = request.POST.getlist('deliver_by')
+        stem_choices = request.POST.getlist('stem_choices')
+        revisions = request.POST.getlist('revisions')
         reference_link_type = reference_link_type
         reference_link = reference_link
         mix_extras = mix_extras
-        contact = request.POST['contact']
-        order_total = request.POST['order_total']
+        contact = request.POST.getlist('contact')
+        order_total = 40.00
         grand_total = order_total
 
         order_form_complete = Order.objects.create(
@@ -152,7 +152,6 @@ def checkout(request):
 
 def checkout_production(request):
     if request.method == 'POST':
-
         if 'reference_link' in request.POST:
             reference_link = request.POST['reference_link']
             reference_link_type = request.POST['reference_link_type']
@@ -168,12 +167,12 @@ def checkout_production(request):
         full_name = request.POST['full_name']
         email = request.POST['email']
         phone_number = request.POST['phone_number']
-        production_type = request.POST.getlist('production_type')
+        # production_type = request.POST.getlist('production_type')
         reference_link_type = reference_link_type
         reference_link = reference_link
-        deliver_by = request.POST['deliver_by']
-        contact = request.POST['contact']
-        notes = request.POST['notes']
+        deliver_by = request.POST.getlist('deliver_by')
+        contact = request.POST.getlist('contact')
+        notes = request.POST.getlist('notes')
 
         order_form_complete = Order_Production.objects.create(
             order_type="Production",
