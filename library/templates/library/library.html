@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'library/css/library.css' %}">
+{% endblock %}
+
 {% block page_header %}
 <div class="columns is-hidden-mobile">
     <div class="column">
@@ -28,13 +32,28 @@
             <div class="tile is-vertical is-8">
               <div class="tile">
                 <div class="tile is-parent">
-                  <article class="tile is-child">
-                    <figure class="image is-square">
-                      <a href="{{ songs.audio_link }}" target="_blank">
-                        <img src="{{ songs.image_url }}" alt="{{ songs.song_name }} artwork image">
-                      </a>
-                    </figure>
-                  </article>
+
+                  <!-- <article class="tile is-child image-tile"> -->
+                    <!-- img here -->
+                    <!-- <img src="{{ songs.image_url }}" alt="{{ songs.song_name }} artwork image" class="image-brew">
+                    <div class="overlay-brew">
+                      <figure class="image is-square"> 
+                        <a href="{{ songs.audio_link }}" target="_blank">
+                          <i class="icon-spotify"></i>
+                        </a>
+                      </figure>
+                    </div>
+                  </article> -->
+
+                  <div class="image-tile">
+                    <img src="{{ songs.image_url }}" alt="{{ songs.song_name }} artwork image" class="image-brew">
+                    <div class="overlay-brew">
+                    <a href="{{ songs.audio_link }}" target="_blank" class="icon" title="song link">
+                      <img src="{% static 'icons/spotify.svg' %}">
+                    </a>
+                    </div>
+                  </div>
+
                 </div>
                 <div class="tile is-parent is-vertical">
                   <article class="tile is-child notification">
