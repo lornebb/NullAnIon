@@ -49,7 +49,7 @@
         <!-- IF ELSE FOR TITLE like below -->
         <p class="title is-2 is-spaced has-text-centered"><u>{{ form_title }} Order Form</u></p>
         {% if production_form %}
-        <form action="{% url 'production_order' %}" method="POST" class="uniForm">
+          <form action="{% url 'production_order' %}" method="POST" class="uniForm">
           {% else %}
           <form action="{% url 'services' %}" method="POST" class="uniForm">
             {% endif %}
@@ -58,398 +58,397 @@
 
             {% if mix_form %}
 
-            <!-- MIX FORM -->
-            <!-- package type -->
-            <div class="control mt-6">
-              <p class="subtitle">Package Type</p>
-              <label class="radio">
-                <input type="radio" name="package_type" required="" value="Single">
-                <span><i class="icon-single">
-                    <img src="/static/icons/single.svg" alt="icon single">
-                  </i>Single (&lt; 5mins)</span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="package_type" required="" value="EP">
-                <span><i class="icon-single">
-                    <img src="/static/icons/ep.svg" alt="icon ep">
-                  </i>EP (&lt; 35mins)</span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="package_type" required="" value="Album or LP">
-                <span><i class="icon-single">
-                    <img src="/static/icons/album.svg" alt="icon album">
-                  </i>Album / LP (&gt; 35mins)</span>
-              </label>
-            </div>
-            <!-- Deliver By -->
-            <div class="control mt-6">
-              <p class="subtitle">Delivery</p>
-              <label for="id_deliver_by">It needs to be finished by:</label>
-              {{mix_form.deliver_by}}
-            </div>
-            <!-- stem choices -->
-            <div class="control mt-6">
-              <p class="subtitle">Stems</p>
-              <label for="stem_choices">How Many Stems to send:</label>
-              <div class="control">
+              <!-- MIX FORM -->
+              <!-- package type -->
+              <div class="control mt-6">
+                <p class="subtitle">Package Type</p>
                 <label class="radio">
-                  <input type="radio" name="stem_choices" required="" value="6">
-                  <span>6 Stems</span>
-                </label>
-                <label class="radio">
-                  <input type="radio" name="stem_choices" required="" value="40">
-                  <span>40 Stems</span>
-                </label>
-                <label class="radio">
-                  <input type="radio" name="stem_choices" required="" value="40+">
-                  <span>Unlimited Stems</span>
-                </label>
-              </div>
-            </div>
-            <!-- Revisions -->
-            <div class="control mt-6">
-              <p class="subtitle">Revisions</p>
-              <label for="revisions">How Many Revisions do you want on the edits?</label>
-              <div class="control">
-                <label class="radio">
-                  <input type="radio" name="revisions" required="" value="3">
+                  <input type="radio" name="package_type" required="" value="Single">
                   <span><i class="icon-single">
-                    </i>3</span>
+                      <img src="{% static 'icons/single.svg' %}" alt="icon single">
+                    </i>Single (&lt; 5mins)</span>
                 </label>
                 <label class="radio">
-                  <input type="radio" name="revisions" required="" value="6">
+                  <input type="radio" name="package_type" required="" value="EP">
                   <span><i class="icon-single">
-                    </i>6</span>
+                      <img src="{% static 'icons/ep.svg' %}" alt="icon ep">
+                    </i>EP (&lt; 35mins)</span>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="package_type" required="" value="Album or LP">
+                  <span><i class="icon-single">
+                      <img src="{% static 'icons/album.svg' %}" alt="icon album">
+                    </i>Album / LP (&gt; 35mins)</span>
                 </label>
               </div>
-            </div>
-            <!-- reference link -->
-            <div class="control mt-6">
-              <p class="subtitle">Reference Links</p>
-              <div id="div_id_reference_link" class="ctrlHolder">
-                <label for="id_reference_link">
-                  Reference link
+              <!-- Deliver By -->
+              <div class="control mt-6">
+                <p class="subtitle">Delivery</p>
+                <label for="id_deliver_by">It needs to be finished by:</label>
+                {{mix_form.deliver_by}}
+              </div>
+              <!-- stem choices -->
+              <div class="control mt-6">
+                <p class="subtitle">Stems</p>
+                <label for="stem_choices">How Many Stems to send:</label>
+                <div class="control">
+                  <label class="radio">
+                    <input type="radio" name="stem_choices" required="" value="6">
+                    <span>6 Stems</span>
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="stem_choices" required="" value="40">
+                    <span>40 Stems</span>
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="stem_choices" required="" value="40+">
+                    <span>Unlimited Stems</span>
+                  </label>
+                </div>
+              </div>
+              <!-- Revisions -->
+              <div class="control mt-6">
+                <p class="subtitle">Revisions</p>
+                <label for="revisions">How Many Revisions do you want on the edits?</label>
+                <div class="control">
+                  <label class="radio">
+                    <input type="radio" name="revisions" required="" value="3">
+                    <span><i class="icon-single">
+                      </i>3</span>
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="revisions" required="" value="6">
+                    <span><i class="icon-single">
+                      </i>6</span>
+                  </label>
+                </div>
+              </div>
+              <!-- reference link -->
+              <div class="control mt-6">
+                <p class="subtitle">Reference Links</p>
+                <div id="div_id_reference_link" class="ctrlHolder">
+                  <label for="id_reference_link">
+                    Reference link
+                  </label>
+                  <input type="url" name="reference_link" maxlength="200" class="urlinput" id="id_reference_link"
+                    placeholder="https://www.">
+                </div>
+              </div>
+              <!-- reference link type -->
+              <div class="control mt-6">
+                <label for="id_reference_link_type">
+                  Reference link type
                 </label>
-                <input type="url" name="reference_link" maxlength="200" class="urlinput" id="id_reference_link"
-                  placeholder="https://www.">
+                <select name="reference_link_type" class="select" id="id_reference_link_type">
+                  <option value="general" selected="">general</option>
+                  <option value="energy">energy</option>
+                  <option value="tone">tone</option>
+                  <option value="instrument">instrument</option>
+                </select>
               </div>
-            </div>
-            <!-- reference link type -->
-            <div class="control mt-6">
-              <label for="id_reference_link_type">
-                Reference link type
-              </label>
-              <select name="reference_link_type" class="select" id="id_reference_link_type">
-                <option value="general" selected="">general</option>
-                <option value="energy">energy</option>
-                <option value="tone">tone</option>
-                <option value="instrument">instrument</option>
-              </select>
-            </div>
-            <!-- mix extras -->
-            <div class="control mt-6">
-              <div id="div_id_mix_extras" class="ctrlHolder">
-                <p class="subtitle">Mix Extras</p>
-                <ul id="id_mix_extras" class="checkboxselectmultiple">
-                  <li><label for="id_mix_extras_0"><input type="checkbox" name="mix_extras" value="Auto-Tune Lead Vocal"
-                        class="checkboxselectmultiple" id="id_mix_extras_0">
-                      Auto-Tune Lead Vocal</label>
-                  </li>
-                  <li><label for="id_mix_extras_1"><input type="checkbox" name="mix_extras"
-                        value="Auto-Tune Backing Vocals" class="checkboxselectmultiple" id="id_mix_extras_1">
-                      Auto-Tune Backing Vocals</label>
-                  </li>
-                  <li><label for="id_mix_extras_2"><input type="checkbox" name="mix_extras" value="Drum Replacement"
-                        class="checkboxselectmultiple" id="id_mix_extras_2">
-                      Drum Replacement</label>
-                  </li>
-                  <li><label for="id_mix_extras_3"><input type="checkbox" name="mix_extras" value="Instrumental Version"
-                        class="checkboxselectmultiple" id="id_mix_extras_3">
-                      Instruemntal Version</label>
-                  </li>
-                  <li><label for="id_mix_extras_4"><input type="checkbox" name="mix_extras" value="Show Ready Version"
-                        class="checkboxselectmultiple" id="id_mix_extras_4">
-                      Show Ready Version</label>
-                  </li>
-                  <li><label for="id_mix_extras_5"><input type="checkbox" name="mix_extras" value="A Capella Version"
-                        class="checkboxselectmultiple" id="id_mix_extras_5">
-                      A Capella Version</label>
-                  </li>
-                  <li><label for="id_mix_extras_6"><input type="checkbox" name="mix_extras"
-                        value="Group Mixed Stem Return" class="checkboxselectmultiple" id="id_mix_extras_6">
-                      Group Mix Stem Return</label>
-                  </li>
-                  <li><label for="id_mix_extras_7"><input type="checkbox" name="mix_extras"
-                        value="Individual Mixed Stem Return" class="checkboxselectmultiple" id="id_mix_extras_7">
-                      Individual Mixed Stem Return</label>
-                  </li>
-                </ul>
+              <!-- mix extras -->
+              <div class="control mt-6">
+                <div id="div_id_mix_extras" class="ctrlHolder">
+                  <p class="subtitle">Mix Extras</p>
+                  <ul id="id_mix_extras" class="checkboxselectmultiple">
+                    <li><label for="id_mix_extras_0"><input type="checkbox" name="mix_extras" value="Auto-Tune Lead Vocal"
+                          class="checkboxselectmultiple" id="id_mix_extras_0">
+                        Auto-Tune Lead Vocal</label>
+                    </li>
+                    <li><label for="id_mix_extras_1"><input type="checkbox" name="mix_extras"
+                          value="Auto-Tune Backing Vocals" class="checkboxselectmultiple" id="id_mix_extras_1">
+                        Auto-Tune Backing Vocals</label>
+                    </li>
+                    <li><label for="id_mix_extras_2"><input type="checkbox" name="mix_extras" value="Drum Replacement"
+                          class="checkboxselectmultiple" id="id_mix_extras_2">
+                        Drum Replacement</label>
+                    </li>
+                    <li><label for="id_mix_extras_3"><input type="checkbox" name="mix_extras" value="Instrumental Version"
+                          class="checkboxselectmultiple" id="id_mix_extras_3">
+                        Instruemntal Version</label>
+                    </li>
+                    <li><label for="id_mix_extras_4"><input type="checkbox" name="mix_extras" value="Show Ready Version"
+                          class="checkboxselectmultiple" id="id_mix_extras_4">
+                        Show Ready Version</label>
+                    </li>
+                    <li><label for="id_mix_extras_5"><input type="checkbox" name="mix_extras" value="A Capella Version"
+                          class="checkboxselectmultiple" id="id_mix_extras_5">
+                        A Capella Version</label>
+                    </li>
+                    <li><label for="id_mix_extras_6"><input type="checkbox" name="mix_extras"
+                          value="Group Mixed Stem Return" class="checkboxselectmultiple" id="id_mix_extras_6">
+                        Group Mix Stem Return</label>
+                    </li>
+                    <li><label for="id_mix_extras_7"><input type="checkbox" name="mix_extras"
+                          value="Individual Mixed Stem Return" class="checkboxselectmultiple" id="id_mix_extras_7">
+                        Individual Mixed Stem Return</label>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-            <!-- contact -->
-            <div class="control mt-6">
-              <p class="subtitle">Upload Link Email</p>
-              <div id="div_id_contact" class="ctrlHolder">
-                <label for="id_contact" class="requiredField">
-                  Contact email for stem upload link:<span class="asteriskField">*</span>
+              <!-- contact -->
+              <div class="control mt-6">
+                <p class="subtitle">Upload Link Email</p>
+                <div id="div_id_contact" class="ctrlHolder">
+                  <label for="id_contact" class="requiredField">
+                    Contact email for stem upload link:<span class="asteriskField">*</span>
+                  </label>
+                  <input type="email" name="contact" maxlength="254" class="emailinput" required="" id="id_contact">
+                </div>
+              </div>
+              <span class="title is-hidden-mobile">- - - - - - - - - - - - - - - - - - - - - -</span>
+              <div id="div_id_order_total" class="ctrlHolder mb-3 mt-3">
+                <label for="id_order_total" class="requiredField">
+                  Order total: $40.00
                 </label>
-                <input type="email" name="contact" maxlength="254" class="emailinput" required="" id="id_contact">
+                <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total"
+                  hidden>
               </div>
-            </div>
-            <span class="title is-hidden-mobile">- - - - - - - - - - - - - - - - - - - - - -</span>
-            <div id="div_id_order_total" class="ctrlHolder mb-3 mt-3">
-              <label for="id_order_total" class="requiredField">
-                Order total: $40.00
-              </label>
-              <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total"
-                hidden>
-            </div>
 
             {% elif master_form %}
 
-            <!-- MASTER FORM -->
-            <!-- order type -->
-            <div id="div_id_order_type" class="ctrlHolder is-invisible">
-              <label for="id_order_type" class="requiredField">
-                Order type<span class="asteriskField">*</span>
-              </label>
-              <input type="text" name="order_type" value="Master" maxlength="15" class="textinput textInput" required=""
-                id="id_order_type">
-            </div>
-            <!-- package type -->
-            <div class="control mt-6">
-              <p class="subtitle">Package Type</p>
-              <label class="radio">
-                <input type="radio" name="package_type" required="" value="Single">
-                <span><i class="icon-single">
-                    <img src="/static/icons/single.svg" alt="icon single">
-                  </i>Single (&lt; 5mins)</span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="package_type" required="" value="EP">
-                <span><i class="icon-single">
-                    <img src="/static/icons/ep.svg" alt="icon ep">
-                  </i>EP (&lt; 35mins)</span>
-              </label>
-              <label class="radio">
-                <input type="radio" name="package_type" required="" value="Album or LP">
-                <span><i class="icon-single">
-                    <img src="/static/icons/album.svg" alt="icon album">
-                  </i>Album / LP (&gt; 35mins)</span>
-              </label>
-            </div>
-            <!-- Deliver By -->
-            <div class="control mt-6">
-              <p class="subtitle">Delivery</p>
-              <label for="id_deliver_by">It needs to be finished by:</label>
-              {{master_form.deliver_by}}
-            </div>
-            <!-- stem choices -->
-            <div class="control mt-6">
-              <p class="subtitle">Stems</p>
-              <label for="stem_choices">How many stems to send:</label>
-              <div class="control">
-                <label class="radio">
-                  <input type="radio" name="stem_choices" required="" value="max 5 groups">
-                  <span>5 grouped stems</span>
+              <!-- MASTER FORM -->
+              <!-- order type -->
+              <div id="div_id_order_type" class="ctrlHolder is-invisible">
+                <label for="id_order_type" class="requiredField">
+                  Order type<span class="asteriskField">*</span>
                 </label>
-                <label class="radio">
-                  <input type="radio" name="stem_choices" required="" value="Individual track stems">
-                  <span>Individual Stems</span>
-                </label>
+                <input type="text" name="order_type" value="Master" maxlength="15" class="textinput textInput" required=""
+                  id="id_order_type">
               </div>
-            </div>
-            <!-- Revisions -->
-            <div class="control mt-6">
-              <p class="subtitle">Revisions</p>
-              <label for="revisions">How Many Revisions do you want on the edits?</label>
-              <div class="control">
+              <!-- package type -->
+              <div class="control mt-6">
+                <p class="subtitle">Package Type</p>
                 <label class="radio">
-                  <input type="radio" name="revisions" required="" value="3">
+                  <input type="radio" name="package_type" required="" value="Single">
                   <span><i class="icon-single">
-                    </i>3</span>
+                      <img src="{% static 'icons/single.svg' %}" alt="icon single">
+                    </i>Single (&lt; 5mins)</span>
                 </label>
                 <label class="radio">
-                  <input type="radio" name="revisions" required="" value="6">
+                  <input type="radio" name="package_type" required="" value="EP">
                   <span><i class="icon-single">
-                    </i>6</span>
+                      <img src="{% static 'icons/ep.svg' %}" alt="icon ep">
+                    </i>EP (&lt; 35mins)</span>
+                </label>
+                <label class="radio">
+                  <input type="radio" name="package_type" required="" value="Album or LP">
+                  <span><i class="icon-single">
+                      <img src="{% static 'icons/album.svg' %}" alt="icon album">
+                    </i>Album / LP (&gt; 35mins)</span>
                 </label>
               </div>
-            </div>
-            <!-- reference link -->
-            <div class="control mt-6">
-              <p class="subtitle">Reference Links</p>
-              <div id="div_id_reference_link" class="ctrlHolder">
-                <label for="id_reference_link">
-                  Reference link
+              <!-- Deliver By -->
+              <div class="control mt-6">
+                <p class="subtitle">Delivery</p>
+                <label for="id_deliver_by">It needs to be finished by:</label>
+                {{master_form.deliver_by}}
+              </div>
+              <!-- stem choices -->
+              <div class="control mt-6">
+                <p class="subtitle">Stems</p>
+                <label for="stem_choices">How many stems to send:</label>
+                <div class="control">
+                  <label class="radio">
+                    <input type="radio" name="stem_choices" required="" value="max 5 groups">
+                    <span>5 grouped stems</span>
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="stem_choices" required="" value="Individual track stems">
+                    <span>Individual Stems</span>
+                  </label>
+                </div>
+              </div>
+              <!-- Revisions -->
+              <div class="control mt-6">
+                <p class="subtitle">Revisions</p>
+                <label for="revisions">How Many Revisions do you want on the edits?</label>
+                <div class="control">
+                  <label class="radio">
+                    <input type="radio" name="revisions" required="" value="3">
+                    <span><i class="icon-single">
+                      </i>3</span>
+                  </label>
+                  <label class="radio">
+                    <input type="radio" name="revisions" required="" value="6">
+                    <span><i class="icon-single">
+                      </i>6</span>
+                  </label>
+                </div>
+              </div>
+              <!-- reference link -->
+              <div class="control mt-6">
+                <p class="subtitle">Reference Links</p>
+                <div id="div_id_reference_link" class="ctrlHolder">
+                  <label for="id_reference_link">
+                    Reference link
+                  </label>
+                  <input type="url" name="reference_link" maxlength="200" class="urlinput" id="id_reference_link"
+                    placeholder="https://www.">
+                </div>
+              </div>
+              <!-- reference link type -->
+              <div class="control mt-6">
+                <label for="id_reference_link_type">
+                  Reference link type
                 </label>
-                <input type="url" name="reference_link" maxlength="200" class="urlinput" id="id_reference_link"
-                  placeholder="https://www.">
+                <select name="reference_link_type" class="select" id="id_reference_link_type">
+                  <option value="general" selected="">general</option>
+                  <option value="energy">energy</option>
+                  <option value="tone">tone</option>
+                  <option value="instrument">instrument</option>
+                </select>
               </div>
-            </div>
-            <!-- reference link type -->
-            <div class="control mt-6">
-              <label for="id_reference_link_type">
-                Reference link type
-              </label>
-              <select name="reference_link_type" class="select" id="id_reference_link_type">
-                <option value="general" selected="">general</option>
-                <option value="energy">energy</option>
-                <option value="tone">tone</option>
-                <option value="instrument">instrument</option>
-              </select>
-            </div>
-            <!-- master extras -->
-            <div class="control mt-6">
-              <div id="div_id_master_extras" class="ctrlHolder">
-                <p class="subtitle">Master Extras</p>
-                <ul id="id_master_extras" class="checkboxselectmultiple">
-                  <li><label for="id_master_extras_1"><input type="checkbox" name="master_extras"
-                        value="Drum Replacement" class="checkboxselectmultiple" id="id_master_extras_1">
-                      Drum Replacement</label>
-                  </li>
-                  <li><label for="id_master_extras_2"><input type="checkbox" name="master_extras"
-                        value="Instrumental Version" class="checkboxselectmultiple" id="id_master_extras_2">
-                      Instruemntal Version</label>
-                  </li>
-                  <li><label for="id_master_extras_3"><input type="checkbox" name="master_extras"
-                        value="Show Ready Version" class="checkboxselectmultiple" id="id_master_extras_3">
-                      Show Ready Version</label>
-                  </li>
-                  <li><label for="id_master_extras_4"><input type="checkbox" name="master_extras"
-                        value="A Capella Version" class="checkboxselectmultiple" id="id_master_extras_4">
-                      A Capella Version</label>
-                  </li>
-                </ul>
+              <!-- master extras -->
+              <div class="control mt-6">
+                <div id="div_id_master_extras" class="ctrlHolder">
+                  <p class="subtitle">Master Extras</p>
+                  <ul id="id_master_extras" class="checkboxselectmultiple">
+                    <li><label for="id_master_extras_1"><input type="checkbox" name="master_extras"
+                          value="Drum Replacement" class="checkboxselectmultiple" id="id_master_extras_1">
+                        Drum Replacement</label>
+                    </li>
+                    <li><label for="id_master_extras_2"><input type="checkbox" name="master_extras"
+                          value="Instrumental Version" class="checkboxselectmultiple" id="id_master_extras_2">
+                        Instruemntal Version</label>
+                    </li>
+                    <li><label for="id_master_extras_3"><input type="checkbox" name="master_extras"
+                          value="Show Ready Version" class="checkboxselectmultiple" id="id_master_extras_3">
+                        Show Ready Version</label>
+                    </li>
+                    <li><label for="id_master_extras_4"><input type="checkbox" name="master_extras"
+                          value="A Capella Version" class="checkboxselectmultiple" id="id_master_extras_4">
+                        A Capella Version</label>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-            <!-- contact -->
-            <div class="control mt-6">
-              <p class="subtitle">Upload Link Email</p>
-              <div id="div_id_contact" class="ctrlHolder">
-                <label for="id_contact" class="requiredField">
-                  Contact email for stem upload link:<span class="asteriskField">*</span>
+              <!-- contact -->
+              <div class="control mt-6">
+                <p class="subtitle">Upload Link Email</p>
+                <div id="div_id_contact" class="ctrlHolder">
+                  <label for="id_contact" class="requiredField">
+                    Contact email for stem upload link:<span class="asteriskField">*</span>
+                  </label>
+                  <input type="email" name="contact" maxlength="254" class="emailinput" required="" id="id_contact">
+                </div>
+              </div>
+              <span class="title is-hidden-mobile">- - - - - - - - - - - - - - - - - - - - - -</span>
+              <div id="div_id_order_total" class="ctrlHolder mb-3 mt-3">
+                <label for="id_order_total" class="requiredField">
+                  Order total $40.00
                 </label>
-                <input type="email" name="contact" maxlength="254" class="emailinput" required="" id="id_contact">
+                <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total"
+                  hidden>
               </div>
-            </div>
-            <span class="title is-hidden-mobile">- - - - - - - - - - - - - - - - - - - - - -</span>
-            <div id="div_id_order_total" class="ctrlHolder mb-3 mt-3">
-              <label for="id_order_total" class="requiredField">
-                Order total $40.00
-              </label>
-              <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total"
-                hidden>
-            </div>
 
             {% elif production_form %}
            
-            <!-- PRODUCTION FORM -->
-
-            <!-- production type -->
-            <div class="control mt-6">
-              <p class="subtitle">Production Types</p>
-              <div class="level">
-                <div class="level-item has-text-centered">
-                  <label for="id_production_type_1"><input type="checkbox" name="production_type"
-                    value="Guitar" class="checkboxselectmultiple" id="id_production_type_1">
-                    <img src="/static/icons/guitar.svg">
-                      </label>
+              <!-- PRODUCTION FORM -->
+              <!-- production type -->
+              <div class="control mt-6">
+                <p class="subtitle">Production Types</p>
+                <div class="level">
+                  <div class="level-item has-text-centered">
+                    <label for="id_production_type_1"><input type="checkbox" name="production_type"
+                      value="Guitar" class="checkboxselectmultiple" id="id_production_type_1">
+                      <img src="{% static 'icons/guitar.svg' %}">
+                        </label>
+                  </div>
+                  <div class="level-item has-text-centered">
+                    <label for="id_production_type_2"><input type="checkbox" name="production_type"
+                      value="Bass" class="checkboxselectmultiple" id="id_production_type_2">
+                      <img src="{% static 'icons/bass.svg' %}">
+                        </label>
+                  </div>
+                  <div class="level-item has-text-centered">
+                    <label for="id_production_type_3"><input type="checkbox" name="production_type"
+                      value="synths" class="checkboxselectmultiple" id="id_production_type_3">
+                      <img src="{% static 'icons/synth.svg' %}">
+                        </label>
+                  </div> 
                 </div>
-                <div class="level-item has-text-centered">
-                  <label for="id_production_type_2"><input type="checkbox" name="production_type"
-                    value="Bass" class="checkboxselectmultiple" id="id_production_type_2">
-                    <img src="/static/icons/bass.svg">
+                <div class="level">
+                  <div class="level-item has-text-centered">
+                    <label for="id_production_type_4"><input type="checkbox" name="production_type"
+                      value="Keys" class="checkboxselectmultiple" id="id_production_type_4">
+                      <img src="{% static 'icons/keys.svg' %}">
+                        </label>
+                  </div>
+                  <div class="level-item has-text-centered">
+                    <label for="id_production_type_5"><input type="checkbox" name="production_type"
+                      value="Drums" class="checkboxselectmultiple" id="id_production_type_5">
+                      <img src="{% static 'icons/drums.svg' %}">
                       </label>
+                  </div>
+                  <div class="level-item has-text-centered">
+                    <label for="id_production_type_6"><input type="checkbox" name="production_type"
+                      value="Beat Production" class="checkboxselectmultiple" id="id_production_type_6">
+                      <img src="{% static 'icons/production.svg' %}">
+                      </label>
+                  </div>
                 </div>
-                <div class="level-item has-text-centered">
-                  <label for="id_production_type_3"><input type="checkbox" name="production_type"
-                    value="synths" class="checkboxselectmultiple" id="id_production_type_3">
-                    <img src="/static/icons/synth.svg">
-                      </label>
-                </div> 
               </div>
-              <div class="level">
-                <div class="level-item has-text-centered">
-                  <label for="id_production_type_4"><input type="checkbox" name="production_type"
-                    value="Keys" class="checkboxselectmultiple" id="id_production_type_4">
-                    <img src="/static/icons/keys.svg">
-                      </label>
-                </div>
-                <div class="level-item has-text-centered">
-                  <label for="id_production_type_5"><input type="checkbox" name="production_type"
-                    value="Drums" class="checkboxselectmultiple" id="id_production_type_5">
-                    <img src="/static/icons/drums.svg">
-                    </label>
-                </div>
-                <div class="level-item has-text-centered">
-                  <label for="id_production_type_6"><input type="checkbox" name="production_type"
-                    value="Beat Production" class="checkboxselectmultiple" id="id_production_type_6">
-                    <img src="/static/icons/production.svg">
-                    </label>
+              <!-- reference link -->
+              <div class="control mt-6">
+                <p class="subtitle">Reference Links</p>
+                <div id="div_id_reference_link" class="ctrlHolder">
+                  <label for="id_reference_link">
+                    Reference link
+                  </label>
+                  <input type="url" name="reference_link" maxlength="200" class="urlinput" id="id_reference_link"
+                    placeholder="https://www.">
                 </div>
               </div>
-            </div>
-            <!-- reference link -->
-            <div class="control mt-6">
-              <p class="subtitle">Reference Links</p>
-              <div id="div_id_reference_link" class="ctrlHolder">
-                <label for="id_reference_link">
-                  Reference link
+              <!-- reference link type -->
+              <div class="control mt-6">
+                <label for="id_reference_link_type">
+                  Reference link type
                 </label>
-                <input type="url" name="reference_link" maxlength="200" class="urlinput" id="id_reference_link"
-                  placeholder="https://www.">
+                <select name="reference_link_type" class="select" id="id_reference_link_type">
+                  <option value="general" selected="">general</option>
+                  <option value="energy">energy</option>
+                  <option value="tone">tone</option>
+                  <option value="instrument">instrument</option>
+                </select>
               </div>
-            </div>
-            <!-- reference link type -->
-            <div class="control mt-6">
-              <label for="id_reference_link_type">
-                Reference link type
-              </label>
-              <select name="reference_link_type" class="select" id="id_reference_link_type">
-                <option value="general" selected="">general</option>
-                <option value="energy">energy</option>
-                <option value="tone">tone</option>
-                <option value="instrument">instrument</option>
-              </select>
-            </div>
-            <!-- Deliver By -->
-            <div class="control mt-6">
-              <p class="subtitle">Delivery</p>
-              <label for="id_deliver_by">It needs to be finished by:</label>
-              {{production_form.deliver_by}}
-            </div>
-            <!-- contact -->
-            <div class="control mt-6">
-              <p class="subtitle">Upload Link Email</p>
-              <div id="div_id_contact" class="ctrlHolder">
-                <label for="id_contact" class="requiredField">
-                  Contact email for stem upload link:<span class="asteriskField">*</span>
+              <!-- Deliver By -->
+              <div class="control mt-6">
+                <p class="subtitle">Delivery</p>
+                <label for="id_deliver_by">It needs to be finished by:</label>
+                {{production_form.deliver_by}}
+              </div>
+              <!-- contact -->
+              <div class="control mt-6">
+                <p class="subtitle">Upload Link Email</p>
+                <div id="div_id_contact" class="ctrlHolder">
+                  <label for="id_contact" class="requiredField">
+                    Contact email for stem upload link:<span class="asteriskField">*</span>
+                  </label>
+                  <input type="email" name="contact" maxlength="254" class="emailinput" required="" id="id_contact">
+                </div>
+              </div>
+              <div class="control mb-6 mt-6">
+                <div id="div_id_notes" class="ctrlHolder">
+                  <label for="id_notes" class="requiredField">
+                    Notes<span class="asteriskField">*</span>
+                  </label>
+                  <textarea name="notes" cols="1" rows="3" maxlength="320" class="textarea" required=""
+                    id="id_notes"></textarea>
+                </div>
+              </div>
+              <span class="title is-hidden-mobile">- - - - - - - - - - - - - - - - - - - - - -</span>
+              <div id="" class="ctrlHolder mb-3 mt-3">
+                <label for="" class="">
+                  It is free to submit a production request. 
+                  <br>
+                  Please fill the notes box with all the info,
+                  <br> 
+                  and we'll be in touch as soon as possible to make your order final.
                 </label>
-                <input type="email" name="contact" maxlength="254" class="emailinput" required="" id="id_contact">
+                <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total"
+                  hidden>
               </div>
-            </div>
-            <div class="control mb-6 mt-6">
-              <div id="div_id_notes" class="ctrlHolder">
-                <label for="id_notes" class="requiredField">
-                  Notes<span class="asteriskField">*</span>
-                </label>
-                <textarea name="notes" cols="1" rows="3" maxlength="320" class="textarea" required=""
-                  id="id_notes"></textarea>
-              </div>
-            </div>
-            <span class="title is-hidden-mobile">- - - - - - - - - - - - - - - - - - - - - -</span>
-            <div id="" class="ctrlHolder mb-3 mt-3">
-              <label for="" class="">
-                It is free to submit a productino request. 
-                <br>
-                Please fill the notes box as much as possible,
-                <br> 
-                and we'll be in touch as soon as possible to make yoru order final.
-              </label>
-              <input type="number" name="order_total" value="40.00" class="numberinput" required="" id="id_order_total"
-                hidden>
-            </div>
 
             {% endif %}
 
