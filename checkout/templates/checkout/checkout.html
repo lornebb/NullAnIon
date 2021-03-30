@@ -20,8 +20,6 @@
         <div class="columns">
             <div class="column is-one-quarter is-hidden-mobile">
                 {% include 'includes/info-main.html' %}
-                {% include 'includes/info-library.html' %}
-                {% include 'includes/info-mix-master.html' %}
             </div>
             <div class="columnns">
                 <div class="column">
@@ -32,69 +30,118 @@
                         <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                     {% endif %}
                         {% csrf_token %}
-                        <fieldset>
-                            <Legend>Your Order</Legend>
+                        <fieldset disabled>
+                            <!-- production / package type -->
+                            <div class="field">
                             {% if production_order %}
-                                <label for="production_type" class="subtitle">Production Type:</label>
+                                <label for="production_type" class="label">Production Type:</label>
                                 {% for type in order_form_services.production_type %}
-                                    <input name="production_type" class="title" value="{{ type }}" readonly>
+                                    <div class="control">
+                                        <input name="production_type" class="input" value="{{ type }}">
+                                    </div>
                                 {% endfor %}
                             {% else %}
-                                <label for="package_type" class="subtitle">Package Type:</label>
-                                <input name="package_type" class="title" value="{{ order_form_services.package_type }}" readonly>
+                                <label for="package_type" class="label">Package Type:</label>
+                                <div class="control">
+                                    <input name="package_type" class="input" value="{{ order_form_services.package_type }}">
+                                </div>
                             {% endif %}
-                            <br>
-                            <label for="deliver_by" class="subtitle">Deliver By:</label>
-                            <input name="deliver_by" class="title" value="{{ order_form_services.deliver_by }}" readonly>
-                            <br>
+                            </div>
+                            <!-- deliver by -->
+                            <div class="field">
+                                <label for="deliver_by" class="label">Deliver By:</label>
+                                <div class="control">
+                                    <input name="deliver_by" class="input" value="{{ order_form_services.deliver_by }}" readonly>
+                                </div>
+                            </div>
+                            <!-- stem choices -->
                             {% if production_order %}
                             {% else %}
-                                <label for="stem_choices" class="subtitle">You are sending </label>
-                                <input name="stem_choices" class="title" value="{{ order_form_services.stem_choices }} Stems" readonly>
+                            <div class="field">
+                                <label for="stem_choices" class="label">You are sending </label>
+                                <div class="control">
+                                    <input name="stem_choices" class="input" value="{{ order_form_services.stem_choices }} Stems">
+                                </div>
+                            </div>
                             {% endif %}
-                            <br>
+                            <!-- revisions -->
                             {% if production_order %}
                             {% else %}
-                                <label for="revisions" class="subtitle">Revisions:</label>
-                                <input name="revisions" class="title" value="{{ order_form_services.revisions }} Revisions" readonly>
+                                <div class="field">
+                                    <label for="revisions" class="label">Revisions:</label>
+                                    <div class="control">
+                                        <input name="revisions" class="input" value="{{ order_form_services.revisions }} Revisions">
+                                    </div>
+                                </div>
                             {% endif %}
-                            <br>
+                            <!-- references -->
                             {% if order_form_services.reference_link %}
-                                <label for="reference_link_type" class="subtitle">Reference Type:</label>
-                                <input name="reference_link_type" class="title" value="{{ order_form_services.reference_link_type }}" readonly>
-                                <br>
-                                <label for="reference_link" class="subtitle">Reference Link:</label>
-                                <input name="reference_link" class="title" value="{{ order_form_services.reference_link }}" readonly>
+                                <div class="field">
+                                    <label for="reference_link_type" class="label">Reference Type:</label>
+                                    <div class="control">
+                                        <input name="reference_link_type" class="input" value="{{ order_form_services.reference_link_type }}">
+                                    </div>    
+                                </div>
+                                <div class="field">
+                                    <label for="reference_link" class="label">Reference Link:</label>
+                                    <div class="control">
+                                        <input name="reference_link" class="input" value="{{ order_form_services.reference_link }}">
+                                    </div>
+                                </div>
                             {% else %}
-                                <p class="subtitle">You have not added any references for this mix.</p>
+                                <div class="field">
+                                    <label for="references" class="label">References</label>
+                                    <p class="label has-text-weight-light">No references added.</p>
+                                </div>
                             {% endif %}
-                            <br>
+                            <!-- mix and master extras -->
                             {% if production_order %}
                             {% else %}
                                 {% if order_form_services.mix_extras %}
-                                    <label for="mix_extras" class="subtitle">Mix Extras</label>
-                                    {% for extras in order_form_services.mix_extras %}
-                                        <input name="mix_extras" class="title" value="{{ extras }}" readonly>
-                                    {% endfor %}
+                                    <div class="field">
+                                        <label for="mix_extras" class="label">Extras:</label>
+                                        {% for extras in order_form_services.mix_extras %}
+                                        <div class="control">
+                                            <input name="mix_extras" class="input" value="{{ extras }}">
+                                        </div>    
+                                        {% endfor %}
+                                    </div>
                                 {% else %}
-                                    <div><strong>You have not requested any mix extras</strong></div>
-                                        <input name="mix_extras" class="subtitle" value="No Mix Extras" readonly>
+                                    <div class="field">
+                                        <label for="mix_extras" class="label">Extras</label>
+                                        <div class="control">
+                                            <input name="mix_extras" class="input" value="No Extras">
+                                        </div>    
+                                    </div>
                                 {% endif %}
                             {% endif %}
+                            <!-- production notes -->
                             {% if production_order %}
-                                <label for="notes" class="subtitle">Notes</label>
-                                <input name="notes" class="subtitle" value="{{ order_form_services.notes }}" readonly>
+                                <div class="field">
+                                    <label for="notes" class="label">Notes</label>
+                                    <div class="control">
+                                        <textarea class="textarea" placeholder="{{ order_form_services.notes }}"></textarea>
+                                        <input name="notes" class="input is-invisible" value="{{ order_form_services.notes }}">
+                                    </div>
+                                </div>
                             {% endif %}
-                            <br>
-                            <label for="contact" class="subtitle">File transfer contact email:</label>
-                            <input name="contact" class="title" value="{{ order_form_services.contact }}" readonly>
-                            <br>
+                            <!-- contact -->
+                            <div class="field">
+                                <label for="contact" class="label">File transfer contact email:</label>
+                                <div class="control">
+                                    <input name="contact" class="input" value="{{ order_form_services.contact }}">
+                                </div>
+                            </div>
+                            <!-- total price -->
                             {% if production_order %}
                             {% else %}
-                                <label for="order_total" class="subtitle">Total price:</label>
-                                <input name="order_total" class="subitle" value="{{ order_form_services.order_total }}" readonly>
+                                <div class="field">
+                                    <label for="order_total" class="label">Total price:</label>
+                                    <div class="control">
+                                        <input name="order_total" class="input" value="{{ order_form_services.order_total }}">
+                                    </div>
+                                </div>
                             {% endif %}
-                            <br>
                         </fieldset>
                         <fieldset>
                             {% if user.is_authenticated %}

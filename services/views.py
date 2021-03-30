@@ -57,6 +57,11 @@ def order_form(request):
             mix_extras = request.POST.getlist('mix_extras')
         else:
             mix_extras = None
+        
+        if request.POST.getlist('master_extras') != "":
+            mix_extras = request.POST.getlist('master_extras')
+        else:
+            mix_extras = None
 
         package_type = request.POST['package_type']
         deliver_by = request.POST['deliver_by']
