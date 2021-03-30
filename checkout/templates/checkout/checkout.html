@@ -178,6 +178,30 @@
                                                 <input type="tel" name="phone_number" value="{{ user.phone_number }}" minlength="10" maxlength="15" placeholder="Phone Number *" class="input is-focused" required="" id="id_phone_number">
                                             </div>
                                         </div>
+                                        <!-- payment -->
+                                        {% if production_order %}
+                                        {% else %}
+                                        <!-- <fieldset> -->
+                                            <p class="is-size-4 mt-6 title"><u>Card Details</u></p>
+                                            <!-- Stripe card element will go here -->
+                                            <div>
+                                                <div class="" id="card-element"></div>
+                                            </div>
+                                            <!-- used to display errors -->
+                                            <div>
+                                                <div class="" id="card-errors" role="alert"></div>
+                                            </div>
+                                            <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                                        <!-- </fieldset> -->
+                                        <!-- Stripe -->
+
+                                        <p class="has-text-weight-light">Your card will be charged in <strong>${{ grand_total|floatformat:2 }}</strong></p>
+                                        {% endif %}
+                                        <div class="field is-grouped pt-2">
+                                            <button class="button is-primary" type="submit" href="" id="submit-button">
+                                                Complete Order
+                                            </button>
+                                        </div>
                                     {% else %}
                                         <div class="field mt-6">
                                             <label>
@@ -193,30 +217,6 @@
                                         </div>
                                     {% endif %}
                                 </fieldset>
-                                <!-- payment -->
-                                {% if production_order %}
-                                {% else %}
-                                <fieldset>
-                                    <p class="is-size-4 mt-6 title"><u>Card Details</u></p>
-                                    <!-- Stripe card element will go here -->
-                                    <div>
-                                        <div class="" id="card-element"></div>
-                                    </div>
-                                    <!-- used to display errors -->
-                                    <div>
-                                        <div class="" id="card-errors" role="alert"></div>
-                                    </div>
-                                    <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                                </fieldset>
-                                <!-- Stripe -->
-
-                                <p class="has-text-weight-light">Your card will be charged in <strong>${{ grand_total|floatformat:2 }}</strong></p>
-                                {% endif %}
-                                <div class="field is-grouped pt-2">
-                                    <button class="button is-primary" type="submit" href="" id="submit-button">
-                                        Complete Order
-                                    </button>
-                                </div>
                             </form>
                         </div>
                     </div>
