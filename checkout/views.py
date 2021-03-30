@@ -68,11 +68,9 @@ def checkout(request):
         order_total = 40.00
         grand_total = order_total
 
-        d = datetime.strptime(deliver_by, '%m/%d/%Y')
+        d = datetime.strptime(deliver_by, '%d/%m/%Y')
         d_flip = d.strftime('%Y/%m/%d')
         deliver_by = d_flip.replace("/", "-")
-
-        print(deliver_by)
 
         order_form_complete = Order.objects.create(
             order_type=order_type,
@@ -178,9 +176,13 @@ def checkout_production(request):
         # production_type = request.POST.getlist('production_type')
         reference_link_type = reference_link_type
         reference_link = reference_link
-        deliver_by = request.POST.getlist('deliver_by')
-        contact = request.POST.getlist('contact')
-        notes = request.POST.getlist('notes')
+        deliver_by = request.POST['deliver_by']
+        contact = request.POST['contact']
+        notes = request.POST['notes']
+
+        d = datetime.strptime(deliver_by, '%d/%m/%Y')
+        d_flip = d.strftime('%Y/%m/%d')
+        deliver_by = d_flip.replace("/", "-")
 
         order_form_complete = Order_Production.objects.create(
             order_type="Production",
