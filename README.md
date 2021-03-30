@@ -111,7 +111,6 @@ Proving some experience and a legitiate web site to sell these services is the n
 
 - An easy to use design.
 - Access to all features on all screensizes.
-- Transparent pricing structure with visual representaition of quote amount.
 - Safe purchasing of products.
 - Feedback of purchase success / failure.
 - Communicate with business.
@@ -197,7 +196,7 @@ I used [Goodnotes](https://www.goodnotes.com/) to hand draw the wireframes and u
 
 ### Account Creation Flowchart
 
-Account creation is different to anything I hav done before as users don't need an account unless they are purchasing. So the account creation has to be executed during the checkout process. I drew a user flow to help easily explain this. This was hand made with [Goodnotes](https://www.goodnotes.com/).
+Account creation is different to anything I have done before as users don't need an account unless they are purchasing. So the account creation has to be executed during the checkout process. I drew a user flow to help easily explain this. This was hand made with [Goodnotes](https://www.goodnotes.com/).
 
 ![User-Flow-Account-Creation](static/wireframes/user-flow-account-creation.jpg)
 
@@ -213,7 +212,7 @@ Returning customers that want to check up on an order, or share notes / feedback
 
 ### Database Design
 
-Relational databse models were new to me, however, there were som every noticable similaries between what I wanted to save and present within the three serices, a quick chart in gSheets made it clearer to me how to proceed with building the models.
+Relational databse models were new to me, however, there were some very noticable similaries between what I wanted to save and present within the three serices, a quick chart in gSheets made it clearer to me how to proceed with building the models.
 
 ![Google Sheets Models similarities in relation](static/wireframes/dbrelation.jpg)
 
@@ -250,6 +249,7 @@ After reviewing these, it seems apparent to me to focus my attention on the mix,
 - uploading files from clients directly to the site.
 - Alternatively - auto generating dropbox links to send bespoke, named and private dropbox locations for upload.
 - integration with ProtonMail and ProtonCalendar for encryption of communication.
+- More services offered.
 
 [Back to Top](##Contents)
 
@@ -289,17 +289,21 @@ After reviewing these, it seems apparent to me to focus my attention on the mix,
 
 - [BOTO](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
 
+- [FLAKE8](https://flake8.pycqa.org/en/latest/)
+
 [Back to Top](##Contents)
 
 ## Planning
 
-Since a lot of the technologies I used in this project are brand new to me, planning in the intitial pahses were very important. Making sure that wireframes, user stories, user journies and expected outcome had their expectations managed, was my top priority.
+Since a lot of the technologies I used in this project are brand new to me, planning in the intitial phases were very important. Making sure that wireframes, user stories, user journies and expected outcome had their expectations managed, was my top priority.
 
 I knew I wanted to make a website to provide a portal for musicans to purchase these services, so as long as that goal is met then I'd be happy.
 
 A brand had to be created for the look and the intricicies of the service I wanted to provide had to be understood before any code was written.
 
 After that, the info panels on the left needed to be created to ensure users knew where they were and what was going on.
+
+[Back to Top](##Contents)
 
 ## Testing
 
@@ -327,8 +331,9 @@ The landing page is clean and free of clutter, so when a user lands there, they 
     3. View on list of songs.
 
 2. It is also possible at this point to click through on songs to their spotify origins:
-    1. Click on the artwork of the song.
-    2. Ensure that the link follows to a spotify listing in a new tab.
+    1. Hover over the artwork of the song.
+    2. Ensure that the image fades to a spotify icon, click.
+    3. Ensure that the link follows to a spotify listing in a new tab.
 
 - **Verdict**
 
@@ -342,7 +347,7 @@ The test works as planned and has therefore passed.
 
 - **Plan**
 
-When a user visits their desired order form page, following the form in a logic manner will be the most logical route to completing an order.
+When a user visits their desired order form page, following the form in a logical manner will be the most logical route to completing an order.
 
 - **Implementation**
 
@@ -352,6 +357,7 @@ Each form is created with bespoke icons to simplify the experience and streamlin
 
 1. Select a service from the services dropdown in the nav bar:
     1. Arrive on desired form, ensure that layout is of suitable readablity with icons displayed for options for radio selectors.
+        1. Ensure that, should you not already be logged in, a warning box appears at the top of the form, with links to log in or sign up. This is not needed for this test, but ensure that it is there.
     2. Fill out forms.
     3. Ensure that each required field is filled.
         1. If required field is not filled in, ensure that form can not be submitted.
@@ -359,7 +365,7 @@ Each form is created with bespoke icons to simplify the experience and streamlin
     4. Submit form.
     5. Sucessful submission will bring you to the checkout page.
         1. Ensure that order details that you just filled out have been carried onto the checkout page.
-        2. Ensure that the price displayed on the form page, is reflected in the checkout total price order field.
+        2. Ensure that the price displayed on the form page is reflected in the checkout total price order field.
 
 - **Verdict**
 
