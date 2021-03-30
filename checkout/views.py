@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
+from datetime import datetime
+
 from .models import Order, Order_Production
 from .forms import OrderForm, OrderForm_Production
 
@@ -65,6 +67,12 @@ def checkout(request):
         contact = request.POST['contact']
         order_total = 40.00
         grand_total = order_total
+
+        d = datetime.strptime(deliver_by, '%m/%d/%Y')
+        d_flip = d.strftime('%Y/%m/%d')
+        deliver_by = d_flip.replace("/", "-")
+
+        print(deliver_by)
 
         order_form_complete = Order.objects.create(
             order_type=order_type,

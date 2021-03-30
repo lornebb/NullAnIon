@@ -22,7 +22,7 @@ class Order(models.Model):
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     order_type = models.CharField(max_length=20, default='')
     package_type = models.CharField(max_length=50, default='')
-    deliver_by = models.DateTimeField(auto_now_add=True)
+    deliver_by = models.DateField(auto_now_add=False)
     stem_choices = models.CharField(
         max_length=1026, blank=False, null=False, default=6)
     revisions = models.CharField(
