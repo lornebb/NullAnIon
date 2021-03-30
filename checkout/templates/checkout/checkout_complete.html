@@ -32,6 +32,12 @@
                 <p class="is-size-3 has-text-weight-light">{{ order }}</p>
                 <label class="is-size-5 pt-3 has-text-weight-bold">Order Type: </label>
                 <p class="is-size-3 has-text-weight-light">{{ order.order_type }}</p>
+                <label class="is-size-5 pt-3 has-text-weight-bold">package type: </label>
+                <p class="is-size-3 has-text-weight-light">{{ order.package_type }}</p>
+                <label class="is-size-5 pt-3 has-text-weight-bold">Sending: </label>
+                <p class="is-size-3 has-text-weight-light">{{ order.stem_choices }}</p>
+                <label class="is-size-5 pt-3 has-text-weight-bold">Revisions: </label>
+                <p class="is-size-3 has-text-weight-light">{{ order.revisions }}</p>
                 <label class="is-size-5 pt-3 has-text-weight-bold">Delivered By: </label>
                 <p class="is-size-3 has-text-weight-light">{{ order.deliver_by }}</p>
                 <label class="is-size-5 pt-3 has-text-weight-bold">Extras: </label>
@@ -40,10 +46,24 @@
                 {% else %}
                   <p class="is-size-3 has-text-weight-light">No Extras</p>
                 {% endif %}
-                <label class="is-size-5 pt-3 has-text-weight-bold">Upload Your files to: </label>
-                <p class="is-size-3 has-text-weight-light"><a href="https://www.dropbox.com/request/274urgH1uszcVdFsOspJ" target="_blank">HERE</a></p>
                 <label class="is-size-5 pt-3 has-text-weight-bold">Contact Email: </label>
                 <p class="is-size-3 has-text-weight-light">{{ user.email }}</p>
+              </div>
+              <label class="is-size-5 pt-3 has-text-weight-bold">Upload Your files to: </label>
+              <p class="is-size-3 has-text-weight-light"><a href="https://www.dropbox.com/request/274urgH1uszcVdFsOspJ" target="_blank">THIS LINK</a></p>
+              <div class="content column is-half">
+                <p>
+                  Please UPLOAD your materials to the above link.
+                </p>
+                <ul>
+                  <li>If possible, please upload them as a .zip or as a normal folder.</li>
+                  <li>Be sure to NAME the stems so they make sense for your engineer to work with them.</li>
+                  <li>Also be sure to name your folder (or include a text file) with appropiate information, such as BPM / KEY, if needed, 
+                    along with either your ACCOUNT NAME / ORDER NUMBER / or other identifier to link your stems with your order at Nullanion.com</li>
+                  <li>If you have any questions, please get in touch at any time at info@nullanion.com.</li>
+                  <li>Please let us know as soon as possible if there is anything wrong with the above order details,
+                    or if you want to send more references, for example.</li>
+                </ul>
               </div>
               {% if from_profile %}
                 <label class="is-size-5 pt-3 has-text-weight-bold">Profile: </label>

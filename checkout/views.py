@@ -38,7 +38,6 @@ def checkout(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
-        # This is only for MIX & MASTER.
 
         if 'reference_link' in request.POST:
             reference_link = request.POST['reference_link']
@@ -52,22 +51,23 @@ def checkout(request):
         else:
             mix_extras = None
 
+        order_type = request.POST['order_type']
         full_name = request.POST['full_name']
         email = request.POST['email']
         phone_number = request.POST['phone_number']
-        package_type = request.POST.getlist('package_type')
-        deliver_by = request.POST.getlist('deliver_by')
-        stem_choices = request.POST.getlist('stem_choices')
-        revisions = request.POST.getlist('revisions')
+        package_type = request.POST['package_type']
+        deliver_by = request.POST['deliver_by']
+        stem_choices = request.POST['stem_choices']
+        revisions = request.POST['revisions']
         reference_link_type = reference_link_type
         reference_link = reference_link
         mix_extras = mix_extras
-        contact = request.POST.getlist('contact')
+        contact = request.POST['contact']
         order_total = 40.00
         grand_total = order_total
 
         order_form_complete = Order.objects.create(
-            order_type="Mix",
+            order_type=order_type,
             full_name=full_name,
             email=email,
             phone_number=phone_number,
@@ -132,7 +132,6 @@ def checkout(request):
                 order_form = OrderForm(initial={
                     'full_name': profile.user.get_full_name(),
                     'email': profile.user.email,
-                    # 'phone_number': profile.user.phone_number
                 })
             except UserProfile.DoesNotExist:
                 order_form = OrderForm()
@@ -147,6 +146,7 @@ def checkout(request):
             'stripe_secret_key': stripe_secret_key,
             'client_secret': intent.client_secret,
         }
+
         return render(request, template, context)
 
 

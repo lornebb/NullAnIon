@@ -32,67 +32,81 @@
                                 <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                             {% endif %}
                                 {% csrf_token %}
-                                <fieldset disabled>
+                                <fieldset>
+                                    <!-- order type -->
+                                    <div class="field">
+                                        <label class="is-size-5 pt-3 has-text-weight-bold">Order Type: </label>
+                                        <div class="control is-hidden">
+                                            <input name="order_type" class="input" value="{{ order_form_services.order_type }}" readonly>
+                                        </div>
+                                        <p class="is-size-3 has-text-weight-light">{{ order_form_services.order_type }}</p>
+                                    </div>
                                     <!-- production / package type -->
                                     <div class="field">
                                     {% if production_order %}
-                                        <label for="production_type" class="label">Production Type:</label>
+                                        <label class="is-size-5 pt-3 has-text-weight-bold">Production Type:</label>
                                         {% for type in order_form_services.production_type %}
-                                            <div class="control">
+                                            <div class="control is-hidden">
                                                 <input name="production_type" class="input" value="{{ type }}">
                                             </div>
                                         {% endfor %}
                                     {% else %}
-                                        <label for="package_type" class="label">Package Type:</label>
-                                        <div class="control">
-                                            <input name="package_type" class="input" value="{{ order_form_services.package_type }}">
+                                    <label class="is-size-5 pt-3 has-text-weight-bold">Package Type:</label>
+                                        <div class="control is-hidden">
+                                            <input name="package_type" class="input" value="{{ order_form_services.package_type }}" readonly>
                                         </div>
+                                        <p class="is-size-3 has-text-weight-light">{{ order_form_services.package_type }}</p>
                                     {% endif %}
                                     </div>
                                     <!-- deliver by -->
                                     <div class="field">
-                                        <label for="deliver_by" class="label">Deliver By:</label>
-                                        <div class="control">
+                                        <label class="is-size-5 pt-3 has-text-weight-bold">Deliver By:</label>
+                                        <div class="control is-hidden">
                                             <input name="deliver_by" class="input" value="{{ order_form_services.deliver_by }}" readonly>
                                         </div>
+                                        <p class="is-size-3 has-text-weight-light">{{ order_form_services.deliver_by }}</p>
                                     </div>
                                     <!-- stem choices -->
                                     {% if production_order %}
                                     {% else %}
                                     <div class="field">
-                                        <label for="stem_choices" class="label">You are sending </label>
-                                        <div class="control">
+                                        <label class="is-size-5 pt-3 has-text-weight-bold">You Are Sending:</label>
+                                        <div class="control is-hidden">
                                             <input name="stem_choices" class="input" value="{{ order_form_services.stem_choices }} Stems">
                                         </div>
+                                        <p class="is-size-3 has-text-weight-light">{{ order_form_services.stem_choices }}</p>
                                     </div>
                                     {% endif %}
                                     <!-- revisions -->
                                     {% if production_order %}
                                     {% else %}
                                         <div class="field">
-                                            <label for="revisions" class="label">Revisions:</label>
-                                            <div class="control">
-                                                <input name="revisions" class="input" value="{{ order_form_services.revisions }} Revisions">
+                                            <label class="is-size-5 pt-3 has-text-weight-bold">Revisions:</label>
+                                            <div class="control is-hidden">
+                                                <input name="revisions" class="input" value="{{ order_form_services.revisions }}">
                                             </div>
+                                            <p class="is-size-3 has-text-weight-light">{{ order_form_services.revisions }} Revisions</p>
                                         </div>
                                     {% endif %}
                                     <!-- references -->
                                     {% if order_form_services.reference_link %}
                                         <div class="field">
-                                            <label for="reference_link_type" class="label">Reference Type:</label>
-                                            <div class="control">
+                                            <label class="is-size-5 pt-3 has-text-weight-bold">Reference Type:</label>
+                                            <div class="control is-hidden">
                                                 <input name="reference_link_type" class="input" value="{{ order_form_services.reference_link_type }}">
-                                            </div>    
+                                            </div> 
+                                            <p class="is-size-3 has-text-weight-light">{{ order_form_services.reference_link_type }}</p>   
                                         </div>
                                         <div class="field">
-                                            <label for="reference_link" class="label">Reference Link:</label>
-                                            <div class="control">
+                                            <label class="is-size-5 pt-3 has-text-weight-bold">Reference Link:</label>
+                                            <div class="control is-hidden">
                                                 <input name="reference_link" class="input" value="{{ order_form_services.reference_link }}">
                                             </div>
+                                            <p class="is-size-3 has-text-weight-light">{{ order_form_services.reference_link }}</p>   
                                         </div>
                                     {% else %}
                                         <div class="field">
-                                            <label for="references" class="label">References</label>
+                                            <label class="is-size-5 pt-3 has-text-weight-bold">References:</label>
                                             <p class="label has-text-weight-light">No references added.</p>
                                         </div>
                                     {% endif %}
@@ -101,47 +115,51 @@
                                     {% else %}
                                         {% if order_form_services.mix_extras %}
                                             <div class="field">
-                                                <label for="mix_extras" class="label">Extras:</label>
+                                                <label class="is-size-5 pt-3 has-text-weight-bold">Extras:</label>
                                                 {% for extras in order_form_services.mix_extras %}
-                                                <div class="control">
+                                                <div class="control is-hidden">
                                                     <input name="mix_extras" class="input" value="{{ extras }}">
-                                                </div>    
+                                                </div>
+                                                <p class="is-size-3 has-text-weight-light"><span><b>*</b></span>{{ extras }}</p>    
                                                 {% endfor %}
                                             </div>
                                         {% else %}
                                             <div class="field">
-                                                <label for="mix_extras" class="label">Extras</label>
-                                                <div class="control">
+                                                <label class="is-size-5 pt-3 has-text-weight-bold">Extras:</label>
+                                                <div class="control is-hidden">
                                                     <input name="mix_extras" class="input" value="No Extras">
-                                                </div>    
+                                                </div>  
+                                                <p class="is-size-3 has-text-weight-light">No Extras</p>      
                                             </div>
                                         {% endif %}
                                     {% endif %}
                                     <!-- production notes -->
                                     {% if production_order %}
                                         <div class="field">
-                                            <label for="notes" class="label">Notes</label>
-                                            <div class="control">
+                                            <label class="is-size-5 pt-3 has-text-weight-bold">Notes:</label>
+                                            <div class="control is-hidden">
                                                 <textarea name="notes" class="textarea" placeholder="{{ order_form_services.notes }}"></textarea>
-                                                <!-- <input name="notes" class="input" value="{{ order_form_services.notes }}" readonly style="display: none;"> -->
                                             </div>
+                                            <p class="is-size-3 has-text-weight-light">{{ order_form_services.notes }}</p>   
                                         </div>
                                     {% endif %}
                                     <!-- contact -->
                                     <div class="field">
-                                        <label for="contact" class="label">File transfer contact email:</label>
-                                        <div class="control">
+                                        <label class="is-size-5 pt-3 has-text-weight-bold">File transfer contact email:</label>
+                                        <div class="control is-hidden">
                                             <input name="contact" class="input" value="{{ order_form_services.contact }}">
                                         </div>
+                                        <p class="is-size-3 has-text-weight-light">{{ order_form_services.contact }}</p>   
                                     </div>
                                     <!-- total price -->
                                     {% if production_order %}
                                     {% else %}
                                         <div class="field">
-                                            <label for="order_total" class="label">Total price:</label>
-                                            <div class="control">
+                                            <label class="is-size-5 pt-3 has-text-weight-bold">Total price:</label>
+                                            <div class="control is-hidden">
                                                 <input name="order_total" class="input" value="{{ order_form_services.order_total }}">
                                             </div>
+                                            <p class="is-size-3 has-text-weight-light">{{ order_form_services.order_total }}</p> 
                                         </div>
                                     {% endif %}
                                 </fieldset>

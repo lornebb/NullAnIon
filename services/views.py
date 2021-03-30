@@ -63,6 +63,7 @@ def order_form(request):
         else:
             mix_extras = None
 
+        order_type = request.POST['order_type']
         package_type = request.POST['package_type']
         deliver_by = request.POST['deliver_by']
         stem_choices = request.POST['stem_choices']
@@ -76,7 +77,7 @@ def order_form(request):
         form_title = request.POST['order_type']
 
         order = {
-            'order_type': form_title,
+            'order_type': order_type,
             'package_type': package_type,
             'deliver_by': deliver_by,
             'stem_choices': stem_choices,
