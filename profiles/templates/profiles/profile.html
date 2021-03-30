@@ -21,23 +21,23 @@
         {% include 'includes/info-main.html' %}
       </div>
       <div class="column">    
-        <p class="title">PROFILE</p>
+        <p class="is-size-4 mt-6 title"><u>Profile</u></p>
         <!-- USER DETAILS -->
         <div class="columns">
           <div class="column">
-            <p> User Name: <strong> {{ profile }} </strong></p>
-            <p> First Name: <strong> {{ user.first_name }} </strong></p>
-            <p> Last Name: <strong> {{ user.last_name }} </strong></p>
-            <p> email: <strong> {{ user.email }} </strong></p>
+            <label class="is-size-5 pt-3 has-text-weight-bold">User Name: </label>
+            <p class="is-size-3 has-text-weight-light">{{ user }}</p>
+            <label class="is-size-5 pt-3 has-text-weight-bold">Email: </label>
+            <p class="is-size-3 has-text-weight-light">{{ user.email }}</p>
           </div>
         </div>
         <div class="columns">
           <div class="column">
-            <h2 class="title is-2">Your information</h2>
-            <form action={% url 'profile' %} method="POST" id="profile-update-form">
+            <p class="is-size-4 mt-3 title"><u>Your Info</u></p>
+            <form action="{% url 'profile' %}" method="POST" id="profile-update-form">
               {% csrf_token %}
               {{ form|crispy }}
-              <button class="button" type="submit">Update</button>
+              <button class="button is-warning is-light" type="submit">Update</button>
             </form>
           </div>
         </div>
@@ -64,30 +64,18 @@
                           {{ order.order_number|truncatechars:6 }}
                         </a>
                       </td>
-                      <td>{{ order.date }}</td>
+                      <td>{{ order.deliver_by }}</td>
                       <td>
                         <ul class="">
-                          {% if order.mix_extras %}
-                            {% for mix in order.mix_extras %}
-                              <li>
-                                {{ mix }}
-                              </li>
-                            {% endfor %}
-                          {% endif %}
+                          {{ order.order_type }}
                         </ul>
                       </td>
-                      <td>$ {{ order.grand_total }}</td>
+                      <td>$ {{ order.order_total }}</td>
                     </tr>
                   {% endfor %}
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
-        <!-- CONVERSATION -->
-        <div class="columns">
-          <div class="column">
-            <p>Conversation</p>
           </div>
         </div>
       </div>
