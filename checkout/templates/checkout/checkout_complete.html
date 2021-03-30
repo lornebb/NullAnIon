@@ -24,21 +24,36 @@
         <div class="columnns">
             <div class="column">
                 <div class="title is-3">Thank You</div>
-                <h1 class="title is-1">CHECKOUT SUCCESS</h1>
+                <p class="title is-3">Checkout Success</p>
                 <div> Your order information is contained here and will be emailed to <b> {{ order.email }} </b> also. </div>
                 <div> Please take note of these intructions in order to get your files uploaded so work can begin. </div>
-                <div> Order Number: {{ order.order_number }}</div>
-                {{ order }}
-                <p class="title">Upload your files to <a href="https://www.dropbox.com/request/274urgH1uszcVdFsOspJ" target="_blank">HERE</a></p>
-            </div>
+                <p class="is-size-4 mt-6 title"><u>Order Details</u></p>
+                <label class="is-size-5 pt-3 has-text-weight-bold">Order Number: </label>
+                <p class="is-size-3 has-text-weight-light">{{ order }}</p>
+                <label class="is-size-5 pt-3 has-text-weight-bold">Order Type: </label>
+                <p class="is-size-3 has-text-weight-light">{{ order.order_type }}</p>
+                <label class="is-size-5 pt-3 has-text-weight-bold">Delivered By: </label>
+                <p class="is-size-3 has-text-weight-light">{{ order.deliver_by }}</p>
+                <label class="is-size-5 pt-3 has-text-weight-bold">Extras: </label>
+                {% if order.mix_extras != "['']" %}
+                    <p class="is-size-3 has-text-weight-light">{{ order.mix_extras }}</p>
+                {% else %}
+                  <p class="is-size-3 has-text-weight-light">No Extras</p>
+                {% endif %}
+                <label class="is-size-5 pt-3 has-text-weight-bold">Upload Your files to: </label>
+                <p class="is-size-3 has-text-weight-light"><a href="https://www.dropbox.com/request/274urgH1uszcVdFsOspJ" target="_blank">HERE</a></p>
+                <label class="is-size-5 pt-3 has-text-weight-bold">Contact Email: </label>
+                <p class="is-size-3 has-text-weight-light">{{ user.email }}</p>
+              </div>
+              {% if from_profile %}
+                <label class="is-size-5 pt-3 has-text-weight-bold">Profile: </label>
+                <div class="columns">
+                  <div class="column">
+                    <p class="is-size-3 has-text-weight-light"><a href="{% url 'profile' %}" class="button is-warning is-light">My Profile</a></p>
+                  </div>
+                </div>
+              {% endif %}
         </div>
-        {% if from_profile %}
-        <div class="columns">
-          <div class="column">
-            <a class="button" href="{% url 'profile' %}"><span>Back to Profile</span></a>
-          </div>
-        </div>
-        {% endif %}
     </div>
   </section>
 </main>
