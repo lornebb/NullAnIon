@@ -34,7 +34,7 @@ At Nullanion, one can order a mix or master of a song, EP or full length LP (Alb
     - [Existing Features](###Existing-Features)
     - [Features Left to Implement](###Features-Left-to-Implement)
 6. [Technologies Used](##Technologies-Used)
-7. [Planning + Testing](##Planning-+-Testing)
+7. [Testing](##Testing)
 8. [Bugs](##Bugs)
 9. [Deployment](##Deployment)
 10. [Deploying to Heroku](##Deploying-to-Heroku)
@@ -395,22 +395,54 @@ This is the crucial part of the experience, a safe and secure checkout and feedb
 
 - **Implimention**
 
-Using python and strip in the design and model forms ensureing form validation the form should not submit without the required fields and a log in required. The file upload link will give the user direct access to a secure upload folder for their files.
+Using python and stripe in the design and model forms ensuring form validation the form should not submit without the required fields and a log in required. The file upload link will give the user direct access to a secure upload folder for their files.
 
 - **Test**
 
 1. After completeing a mix / master form, follow through to checkout page.
-    1. At checkout page, try to complete order without entering any personal or financial details.
-    2. If that is unsucessful, sign in or register.
-        1. After sign in or register, ensure that you are redirected back to checkout page.
-    3. Back at checkout page, ensure that your order form data is still as you ordered it.
+    1. Complete an order form while NOT being logged in. Submit the order for and at the checkout page, try to complete order without entering any personal or financial details.
+        1. Ensure that the submit button or stripe card payment boxes are not present.
+    2. If that is unsucessful, sign in or register, either using the links provided on checkout, or navigate there using the nav bar.
+        1. After sign in or register, ensure that you are redirected to a profile page where you can update / check your contact information.
+    3. Navigate back to to the service you want and follow it through to checkout.
     4. Ensure that a personal detail form is now present and that a card details field is visible.
-        1. Try to checkout without filling any details in.
-    5. Fill out yoru personal details.
+        1. Try to checkout without filling any details in - ensure this is not possible by html valididation errors.
+    5. Fill out your personal details.
         1. Try to complete order without financial details entered.
-    6. Fill in your card details (4242 4242 4242 4242) and submit form.
-    7. Ensure that you are presented with a completed order page, a link to your dropbox to upload your files to, and an email address for contact, including instructions with how to upload your files.
-    8. Ensure that your inbox has an email with a greeting and the exact same details for file upload for files, from the same email address.
+    6. Fill in the trails card details (4242 4242 4242 4242) and submit form.
+    7. Ensure that you are presented with a loading screen before being redirected to a completed order page, a link to your dropbox to upload your files to, and an email address for contact, including instructions with how to upload your files.
+        1. Ensure that your order details are presented on this page also.
+    8. Ensure that your inbox has an email with a greeting and the exact same details for file upload for files.
+
+- **Verdict**
+
+The test works as planned and has therefore passed.
+
+[Back to Top](##contents)
+
+### View Previous Orders
+
+> As a user and as a returning customer, I want to be able to log in to an account to see my orders.
+
+- **Plan**
+
+After a user has submitted an order, they must be able to go and cheeck that order on their user profile, and see the instructions needed to complete or conatct the engineer working on their order, should they lose or misplace their confirmation email.
+
+- **Implimention**
+
+On completion of an order, the order is saved to the databasem along with a tag of the user that created it, meaning that on a user profile, that user can go back and see their previous orders.
+
+- **Test**
+
+1. After sucessfully completing and order (by following the steps above) and LOGGING OUT OF YOUR ACCOUNT:
+    1. Return to the site and click on ACCOUNT in the nav bar.
+        1. Ensure that you see CREATE ACCOUNT and SIGN IN only.
+    2. Select SIGN IN, and sign in.
+        2. This is a good opportunity to test / check other security features like forgot password, too.
+    3. On sign in ensure that you are redirected to your profile page.
+    4. Ensure that your contact and profile details are present.
+    5. Ensure that you see a form with your previous orders in it.
+    6. click the order number of your previous order, and ensure that the details remain the same.
 
 - **Verdict**
 
@@ -424,15 +456,15 @@ The test works as planned and has therefore passed.
 
 ### WebHook issues
 
-During development, espescially during the implimentation of the Stripe Webhooks, the webhook calling variables in heroku, my local env file and gitpod we're all different, losing track of these left very confusing issues on concequenting sessions. The mix up of variables, led to emails not being sent out, and some order confirmation emails to send hours and hours later. Once it was cleaned up, the system worked fine again, but it was days of confusion, then even more time deep diving into the repo history to find where the errors were coming from. 
+During development, espescially during the implimentation of the Stripe Webhooks, the webhook calling variables in heroku, my local env file and gitpod we're all different, losing track of these left very confusing issues on concequenting sessions. The mix up of variables, led to emails not being sent out, and some order confirmation emails to send hours and hours later. Once it was cleaned up, the system worked fine again, but it was days of confusion, then even more time deep diving into the repo history to find where the errors were coming from.
 
 ### JS / Jquery and the missing functions
 
-Creating the onclick function of the order form to fire the multitude of various checks and user feedback moments was made increasingly difficult as the simple jquery function ```useToggle()``` was throwing a console error as ```not a function```. After hours of peer led support and dozens of stack overflow articles later... I decided to build the function myself. Assuming that this was an unsupporrted Jquery function that had gone undocumented. It was about half way through the build that I realised the build of JQuery in teh CDN was a slim version. Changing this to a full-fat build fixed the problem. I couldn't believe it, but it happened.
+Creating the onclick function of the order form to fire the multitude of various checks and user feedback moments was made increasingly difficult as the simple jquery function ```useToggle()``` was throwing a console error as ```not a function```. After hours of peer-led support and dozens of stack overflow articles later... I decided to build the function myself. Assuming that this was an unsupporrted Jquery function that had gone undocumented. It was about half way through the build that I realised the build of JQuery I was calling in via CDN was a slim version. Changing this to a full-fat build fixed the problem. I couldn't believe it, but it happened.
 
 ### Broken admin order panel
 
-This bug took an entire week of my life. And, as above, it was a painfully simple error to fix. After making changes to the Order Model, migrating, and attempting to save new data to it, I came across a database error every single time I tried. I even couldnt access the orders from the admin screen. The error came back with a missing field in the database.
+This bug took an entire week of my life. And, as above, it was a painfully simple error to fix. After making changes to the Order Model, migrating, and attempting to save new data to it, I came across a database error every single time I tried to access that table. I even couldnt access the orders from the admin screen either. The error came back with a missing field in the database.
 
 Assuming it was a models error, I remade the models, migrated... no success.
 
@@ -444,22 +476,86 @@ So I deleted the postgres database and wiped the SQLite database. re-mirgrated..
 
 Honestly, this was a low point.
 
-To cut a long story short, it was a field I was asking to display in the admin panal was causing it. 5 characters. I couldn't believe it. Once this field was deleted in the admin panel, no more errors of this kind occured again, and my hair is thinner forever.
+To cut a long story short, it was a field I was asking to display in the admin panal that was causing it. 5 characters. I couldn't believe it. Once this field was deleted in the admin panel, no more errors of this kind occured again, and my hair is thinner forever.
 
 [Back to Top](##Contents)
 
 ## Deployment
 
-Nullanion was developed on VS Code code, using Git and GitHub for version control. the runnable version is hosted on Heroku with static and media files stored in an AWS S3 Bucket.
+Nullanion was developed on VS Code code, using Git and GitHub for version control. the runnable version is hosted on Heroku with static and media files stored in an AWS S3 Bucket. While the below will work on any computer, the commands are geared towards osXI on M1, as that is the build of machine this was conducted on.
+
+### Running locally
+
+For a local deployment you will need an IDE (I used VS Code, as mentioned above), and also PIP, Python3 (3.+) and Git.
+
+To ensure you have all the required tools on your machine use the following commands.
+
+Check your pip version with: ```python3 -m pip --version```
+
+Check your python version with: ```python -V```
+
+check what version of Git you are running with: ```git --version```.
+
+Download the repo above by clicking on the CODE button in the top right of the file tree, and selecting Download ZIP, now extract the files into your chosen location and open in your IDE.
+
+You will need to create a lightweight virtual environment for python with: ```python -m venv <name of env>```
+
+And every time you open the project, should you choose to close it, be sure to change back to this env, use: ```source <name of env>/bin/activate```.
+
+At this point, you will need to set up your env.py file, add it to the git ignore list to ensure it never ends up in version control, but this time the database url is optional, since you will want django to default to the SQLite3 database that comes with django. The settings in the settings.py file will make sure of this, if the env is not present.
+
+```python
+os.environ.setdefault('DEVELOPMENT', '1') # This 1 will ensure that you are always in development mode when working locally.
+os.environ.setdefault('SECRET_KEY', '')
+os.environ.setdefault('DATABASE_URL', '')
+os.environ.setdefault('AWS_ACCESS_KEY_ID', '')
+os.environ.setdefault('AWS_SECRET_ACCESS_KEY', '')
+os.environ.setdefault('STRIPE_PUBLIC_KEY', '')
+os.environ.setdefault('STRIPE_SECRET_KEY', '')
+os.environ.setdefault('STRIPE_WH_SECRET', '')
+```
+
+Notes on where these variables are found:
+
+- (Your stripe secret keys are found in your stripe account on your dashboard.)
+- (Email vars are found in your email provider. For gmail you will need to set up an app password.)
+- (Database key is found in your Heroku account once you have set up your Postgres database.)
+
+Before starting the server, make sure to make migrations, check then, then migrate with this:
+
+```python
+python3 manage.py makemigrations --dry-run
+# check that the output is desired, if so:
+
+python3 manage.py makemigrations
+#check that this was executed sucessfully, then:
+
+python3 manage.py migrate --plan
+#check that the plan is as desired, if so:
+
+python3 manage.py migrate
+#check that this was completed successfully.
+```
+
+Now the database has been created and migrated properly, you can run the server and run the project locally with the command:
+
+```python
+python3 manage.py runserver
+```
+
+Click on the link / copy and paste the port that has been opened in the CLI to open a browser tab with the project running in it.
+
+You are up and running!
 
 ### Deploying to Heroku
 
-Firstly, create a Heroku account. Select start a new app and chose the location closest to you. Select and appropriate name and create. At this point you need to select POSTGRES from the resources tab, then move to the deploy tab. Connect your github account and select your repo for automatic deployment. For extra documentation on this you can read it [here](https://dashboard.heroku.com/).
+Firstly, create a Heroku account. Select start a new app and choose the location closest to you as a server. Select an appropriate name and create it. At this point you need to select POSTGRES from the resources tab, then move to the deploy tab. Connect your github account and select your repo for automatic deployment. For extra documentation on this you can read it [here](https://dashboard.heroku.com/). You have no attached a database to your environment.
 
-Set up your config variables in the settings tab by selecting 'reveal config vars'. For this project change it to:
+While you are in Heroku, be sure to go to settings and REVEAL CONFIG VARS - make sure that Postgres has been added automatically by Heroku.
+
+Set up the rest of your config variables in Heroku for this project change each line to:
 
 ```python
-os.environ.setdefault('DEVELOPMENT', '')
 os.environ.setdefault('SECRET_KEY', '')
 os.environ.setdefault('DATABASE_URL', '')
 os.environ.setdefault('AWS_ACCESS_KEY_ID', '')
@@ -474,101 +570,51 @@ Notes on where these variables are found:
 - (Your stripe secret keys are found in your stripe account on your dashboard.)
 - (Email vars are found in your email provider.)
 - (Database key is found in your Heroku account once you have set up your Postgres database.)
+- (Your amazon AWS settings are explained below.)
 
-In order for these to all work together, a few setting will need to be configured in your Github repo and your requirements.txt file. First of all make sure to install DJ_database and psycopg2 with pip like this:
+In order for these to all work together, a few setting will need to be configured in your Github repo and your requirements.txt file. First of all make sure to install the required functionalities as written in the requirements.txt. (Especially DJ_database and psycopg2).
 
-```cli
-pip3 install dj_database_url
+```pip
+pip install -r requirements.txt
 ```
 
-and
+This should take care with any missing requirments in yoru machine. If any did not install, be sure to read what feedback your command line gives you with regards to why or where to get the dependancy.
 
-```cli
-pip3 install pycopg2-binary
+Now is a good time to update your new database with the local SQLite data by typing:
+
+```python
+python3 manage.py makemigrations --dry-run # add the --dry-run flag first to make sure the right thing is happening
 ```
 
-finally, to make sure heroku knows to install this in the environment (please do this every time there is a new installation):
+Assuming this shows no errors, follow up with
 
-```cli
-pip3 freeze --local > requirements.txt
-```
-
-After this has been done, make sure to point your database settings in django to the new database like this:
-
-```cli
-‘default’: dj_database_url.parse(‘URL from Postgres – found in Heroku config var’)
-```
-
-At this point, you should update your new database with the local SQLite data with
-
-```cli
-python3 manage.py migrate (add the --plan flag first to make sure the right thing is happening)
-```
-
-### Running locally
-
-For a local deployment you will need an IDE (I used VS Code, as mentioned above), and also PIP, Python3 (3.+) and Git.
-
-Check your pip version with:
-
-```cli
-py -3 -m pip --version
-```
-
-check your python version with:
-
-```cli
-python -m .mvenv <path to your venv>
-```
-
-Download the repo above, take it as a .zip folder and extract the files into your chosen location and open in your IDE.
-
-You will need to create a lightweight virtual environment for python with:
-
-```cli
-python -m venv <name of env>
-```
-
-and every time you open the project, to change to this env, use:
-
-```cli
-source <name of env>/bin/activate
-```
-
-at this point, the same as above, you will need to set up your env.py file, add it to the git ignore list to ensure it never ends up in version control, the same as above, but without the database url so django defaults to the SQLite3 database that comes with django.
-
-- SECRET_KEY
-- EMAIL_HOST_PASSWORD
-- EMAIL_HOST_USER
-- STRIPE_PUBLIC_KEY
-- STRIPE_SECRET_KEY
-- STRIPE_WH_SECRET
-
-All the variables above can be found in the same places. EMAIL_HOST_... from your email provider, STRIPE_... from your stripe account, and SECRET_KEY from django.settings.py.
-
-Before starting the server, make sure to make migrations, check then, then migrate with this:
-
-```cli
-python3 manage.py makemigrations --dry-run
-# check that the output is desired, if so:
-
+```python
 python3 manage.py makemigrations
-#check that this was executed sucessfully, then:
+```
 
-python3 manage.py migrate --plan
-#check that the plan is as desired, if so:
+Now the migrations are ready to be migrated. Follow up with this command:
 
+```python
+python3 manage.py migrate --plan #make sure that this returns no errors
+```
+
+Assuming that went well, finally use:
+
+```python
 python3 manage.py migrate
-#check that this was completed successfully.
 ```
 
-Now the database has been migrated properly, you can run the server and run the project locally with the command:
+Now you have all the data, you'll need access to it. So to create a superuser, use the command:
 
-```cli
-python3 manage.py runserver
+```python
+python3 manage.py createsuperuser
 ```
 
-Click on the link / copy and paste the port that has been opened in the CLI to open a browser tab with the project running in it.
+Follow the on screen instructions to create a username, email and password. Write these down, they will be needed to log in to the site and access the ```/admin``` panel in the project.
+
+#### AMAZON AWS
+
+We now need to get you set up with storing the static and media files on amazon AWS so Heroku knows where to look for them. There is no easy way to explain this to be honest, but the best place to start is [this tutorial](https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html) and, if you are the sort that likes to read the manual, [get on it](https://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html). Be sure to set up your bucket with PUBLIC ACCESS.
 
 [Back to Top](##Contents)
 
