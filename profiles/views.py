@@ -36,7 +36,7 @@ def order_history(request, order_number):
 
     messages.info(request, (
         f'This is a previous order confirmation #{order_number}.'
-        'A confirmation email has already been sent at the time of order'
+        ' A confirmation email has already been sent at the time of order.'
         ))
 
     template = 'checkout/checkout_complete.html'

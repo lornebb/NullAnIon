@@ -264,7 +264,6 @@ def checkout_complete_production(request, order_number):
     return render(request, template, context)
 
 
-
 @login_required
 def checkout_complete(request, order_number):
     """
@@ -285,10 +284,6 @@ def checkout_complete(request, order_number):
         user_profile_form = UserProfileForm(profile_data, instance=profile)
         if user_profile_form.is_valid():
             user_profile_form.save()
-
-    messages.success(request, f'Order successfully processed! \
-        Your order number is {order_number}. A confirmation \
-        email will be sent to {order.email}.')
 
     if 'bag' in request.session:
         del request.session['bag']
