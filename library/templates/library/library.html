@@ -45,14 +45,16 @@
                     </div>
                   </article> -->
 
-                  <div class="image-tile">
-                    <img src="{{ songs.image_url }}" alt="{{ songs.song_name }} artwork image" class="image-brew">
-                    <div class="overlay-brew">
-                    <a href="{{ songs.audio_link }}" target="_blank" class="icon" title="song link">
-                      <img src="{% static 'icons/spotify.svg' %}">
-                    </a>
+                  <article class="tile is-child">
+                    <div class="image-tile">
+                      <img src="{{ songs.image_url }}" alt="{{ songs.song_name }} artwork image" class="image-brew">
+                      <div class="overlay-brew">
+                      <a href="{{ songs.audio_link }}" target="_blank" class="icon" title="song link">
+                        <img src="{% static 'icons/spotify.svg' %}">
+                      </a>
+                      </div>
                     </div>
-                  </div>
+                  </article>
 
                 </div>
                 <div class="tile is-parent is-vertical">
