@@ -169,8 +169,6 @@ The main colour pallete is between these two tones:
 
 ### Styling
 
-[Back to Top](##Contents)
-
 ### Images & Backgrounds
 
 Images are mainly used as backgrounds to facilitate the flow of audio creation.
