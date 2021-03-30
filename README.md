@@ -1,6 +1,9 @@
 # Nullanion
 
+## Live site [HERE](https://nullanion.herokuapp.com/)
+
 ![Null Logo](static/images/nullanion-logo.svg)
+
 
 Nullanion offers music services for those that need quality, delivered on time.
 
@@ -74,39 +77,38 @@ The Nullanion project's purpose is to offer multiple music services to customers
 
 #### First-time user
 
-1. As a first-time user, I want to quickly and easily navigate around the site to understand what this company does / can do for me without needing to give any credentials.
-2. As a first-time user, I want to hear examples of work.
+1. As a user and as a first-time user, I want to quickly and easily navigate around the site to understand what this company does / can do for me without needing to give any credentials.
+2. As a user and as a first-time user, I want to hear examples of work.
 3. As a first-time user, I want to select a service and follow an easy to use form to customise my order.
-4. As a first-time user, I want to see clear changes to quote price, and transparent pricing so as to not feel slighted on price.
-5. As a first-time user, I want to make sure I create an account before I pay to ensure a relation between order and my account.
-6. As a first-time user, I want to make sure that after I pay, I get a confirmation of payment.
-7. As a first-time user, I want to make sure that after I have paid, my files can be uploaded securely.
-8. As a first-time user, I want to have an instant and easy communication process with the engineer working on my material.
+4. As a user and as a first-time user, I want to make sure I create an account before I pay to ensure a relation between order and my account.
+5. As a user and as a first-time user, I want to make sure that after I pay, I get a confirmation of payment.
+6. As a user and as a first-time user, I want to make sure that after I have paid, my files can be uploaded securely to a reputible source.
+7. As a user and as a first-time user, I want to have an instant and easy communication process with the engineer working on my material over email.
 
 #### Returning Customer
 
-1. As a returning customer, I want to be able to log in to an account to see the progress of my order.
-2. As a returning customer, I want to be able to easily communicate with my engineer.
-3. As a returning customer, I want to only share relevant personal details.
-4. As a returning customer, I want to have my personal details in my account to be private.
-5. As a returning customer, I want to take delivery of versions of my order easily.
-6. As a returning customer, I want to be able to share notes and suggested edits on versions easliy with the engineer.
+1. As a user and as a returning customer, I want to be able to log in to an account to see the progress of my order.
+2. As a user and as a returning customer, I want to be able to easily communicate with my engineer.
+3. As a user and as a returning customer, I want to only share relevant personal details.
+4. As a user and as a returning customer, I want to have my personal details in my account to be private.
+5. As a user and as a returning customer, I want to take delivery of versions of my order easily.
+6. As a user and as a returning customer, I want to be able to share notes and suggested edits on versions easliy with the engineer.
 
 #### Browsing customer
 
-1. As a browsing customer, I want to be able to look around the site without making an account.
-2. As a browsing customer, I want to be able to check out the services freely and see how much things would cost without committing to a price.
+1. As a user and as a browsing customer, I want to be able to look around the site without making an account.
+2. As a user and as a browsing customer, I want to be able to check out the services freely and see how much things would cost without committing to a price.
 
 #### Engineer (Super User)
 
-1. As an engineer, I want to be able to receive an order in an understandable format.
-2. As an engineer, I want to be able to access the user files to work on as soon as the order opens.
-3. As an engineer, I want to see a clear deadline for an order.
-4. As an engineer, I want to see reference text and links from the customer.
-5. As an engineer, I want to know what format the customer is expecting their order to come back in.
-6. As an engineer, I want to be able to communicate directly with the customer.
-7. As an engineer, I want to be able to upload versions to the customer.
-8. as an engineer, I want to be able to mark an order as completed/fulfilled.
+1. As a user and as an engineer, I want to be able to receive an order in an understandable format.
+2. As a user and as an engineer, I want to be able to access the user files to work on as soon as the order opens.
+3. As a user and as an engineer, I want to see a clear deadline for an order.
+4. As a user and as an engineer, I want to see reference text and links from the customer.
+5. As a user and as an engineer, I want to know what format the customer is expecting their order to come back in.
+6. As a user and as an engineer, I want to be able to communicate directly with the customer.
+7. As a user and as an engineer, I want to be able to upload versions to the customer.
+8. As a user and as an engineer, I want to be able to mark an order as completed/fulfilled.
 
 [Back to Top](##Contents)
 
@@ -222,6 +224,12 @@ Returning customers that want to check up on an order, or share notes / feedback
 
 ### Database Design
 
+Relational databse models were new to me, however, there were som every noticable similaries between what I wanted to save and present within the three serices, a quick chart in gSheets made it clearer to me how to proceed with building the models.
+
+![Google Sheets Models similarities in relation](static/wireframes/dbrelation.jpg)
+
+After reviewing these, it seems apparent to me to focus my attention on the mix, master and production models, leaving the sound design and sound track services as options for further development in the future.
+
 [Back to Top](##Contents)
 
 ## Features
@@ -247,6 +255,10 @@ Returning customers that want to check up on an order, or share notes / feedback
 - More services offered - such as live event engineer services or on-location studio tracking.
 - Collaboration portal.
 - Other art types showcased / service offers - eg artwork, music video etc
+- Darkmode
+- Interactive home page artworks.
+- more fluid pricing and auto updating pricing structre.
+- uploading files from clients directly to the site.
 
 [Back to Top](##Contents)
 
@@ -337,10 +349,6 @@ The test works as planned and has therefore passed.
 
 > As a first-time user, I want to select a service and follow an easy to use form to customise my order.
 
--also-
-
-> As a first-time user, I want to see clear changes to quote price, and transparent pricing so as to not feel slighted on price.
-
 - **Plan**
 
 When a user visits their desired order form page, following the form in a logic manner will be the most logical route to completing an order.
@@ -378,11 +386,11 @@ The test works as planned and has therefore passed.
 
 -also-
 
-> As a first-time user, I want to make sure that after I have paid, my files can be uploaded securely.
+> As a first-time user, I want to make sure that after I have paid, my files can be uploaded securely to a reputible source.
 
 -also-
 
-> As a first-time user, I want to have an instant and easy communication process with the engineer working on my material.
+> As a first-time user, I want to have an instant and easy communication process with the engineer working on my material over email.
 
 - **Plan**
 
@@ -417,6 +425,30 @@ The test works as planned and has therefore passed.
 
 ## Bugs
 
+### WebHook issues
+
+During development, espescially during the implimentation of the Stripe Webhooks, the webhook calling variables in heroku, my local env file and gitpod we're all different, losing track of these left very confusing issues on concequenting sessions. The mix up of variables, led to emails not being sent out, and some order confirmation emails to send hours and hours later. Once it was cleaned up, the system worked fine again, but it was days of confusion, then even more time deep diving into the repo history to find where the errors were coming from. 
+
+### JS / Jquery and the missing functions
+
+Creating the onclick function of the order form to fire the multitude of various checks and user feedback moments was made increasingly difficult as the simple jquery function ```useToggle()``` was throwing a console error as ```not a function```. After hours of peer led support and dozens of stack overflow articles later... I decided to build the function myself. Assuming that this was an unsupporrted Jquery function that had gone undocumented. It was about half way through the build that I realised the build of JQuery in teh CDN was a slim version. Changing this to a full-fat build fixed the problem. I couldn't believe it, but it happened.
+
+### Broken admin order panel
+
+This bug took an entire week of my life. And, as above, it was a painfully simple error to fix. After making changes to the Order Model, migrating, and attempting to save new data to it, I came across a database error every single time I tried. I even couldnt access the orders from the admin screen. The error came back with a missing field in the database.
+
+Assuming it was a models error, I remade the models, migrated... no success.
+
+Assuming it was a database error, I switched off the postgres link in my env, and tried on SQLite. No success.
+
+Assuming something had migrated in the history that was now corrupted, I rolled back a few days, again, no success.
+
+So I deleted the postgres database and wiped the SQLite database. re-mirgrated... no success.
+
+Honestly, this was a low point.
+
+To cut a long story short, it was a field I was asking to display in the admin panal was causing it. 5 characters. I couldn't believe it. Once this field was deleted in the admin panel, no more errors of this kind occured again, and my hair is thinner forever.
+
 [Back to Top](##Contents)
 
 ## Deployment
@@ -429,13 +461,16 @@ Firstly, create a Heroku account. Select start a new app and chose the location 
 
 Set up your config variables in the settings tab by selecting 'reveal config vars'. For this project change it to:
 
-- SECRET_KEY
-- DATABASE_URL
-- EMAIL_HOST_PASSWORD
-- EMAIL_HOST_USER
-- STRIPE_PUBLIC_KEY
-- STRIPE_SECRET_KEY
-- STRIPE_WH_SECRET
+```python
+os.environ.setdefault('DEVELOPMENT', '')
+os.environ.setdefault('SECRET_KEY', '')
+os.environ.setdefault('DATABASE_URL', '')
+os.environ.setdefault('AWS_ACCESS_KEY_ID', '')
+os.environ.setdefault('AWS_SECRET_ACCESS_KEY', '')
+os.environ.setdefault('STRIPE_PUBLIC_KEY', '')
+os.environ.setdefault('STRIPE_SECRET_KEY', '')
+os.environ.setdefault('STRIPE_WH_SECRET', '')
+```
 
 Notes on where these variables are found:
 
