@@ -154,7 +154,12 @@
                                         <p class="is-size-3 "> {{ user }}</p>
                                         <label class="is-size-5 pt-3 has-text-weight-bold">Email: </label>
                                         <p class="is-size-3 ">{{ user.email }}</p>
-                                        <p class="is-size-4 mt-6 title"><u>Payment Form</u></p>
+
+                                        {% if production_order %}
+                                            <p class="is-size-4 mt-6 title"><u>Contact Details</u></p>
+                                        {% else %}
+                                            <p class="is-size-4 mt-6 title"><u>Payment Form</u></p>
+                                        {% endif %}
                                         <div class="field">
                                             <label class="label">Full Name:</label>
                                             <div class="control">
@@ -189,6 +194,8 @@
                                     {% endif %}
                                 </fieldset>
                                 <!-- payment -->
+                                {% if production_order %}
+                                {% else %}
                                 <fieldset>
                                     <p class="is-size-4 mt-6 title"><u>Card Details</u></p>
                                     <!-- Stripe card element will go here -->
@@ -202,7 +209,9 @@
                                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
                                 </fieldset>
                                 <!-- Stripe -->
+
                                 <p class="has-text-weight-light">Your card will be charged in <strong>${{ grand_total|floatformat:2 }}</strong></p>
+                                {% endif %}
                                 <div class="field is-grouped pt-2">
                                     <button class="button is-primary" type="submit" href="" id="submit-button">
                                         Complete Order
