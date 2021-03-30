@@ -36,6 +36,7 @@ At Nullanion, one can order a mix or master of a song, EP or full length LP (Alb
 6. [Technologies Used](##Technologies-Used)
 7. [Testing](##Testing)
 8. [Bugs](##Bugs)
+    - [Persitant Bugs](##Persistant-bugs)
 9. [Deployment](##Deployment)
 10. [Deploying to Heroku](##Deploying-to-Heroku)
 11. [Deploy Locally](##Deploy-locally)
@@ -475,6 +476,22 @@ So I deleted the postgres database and wiped the SQLite database. re-mirgrated..
 Honestly, this was a low point.
 
 To cut a long story short, it was a field I was asking to display in the admin panal that was causing it. 5 characters. I couldn't believe it. Once this field was deleted in the admin panel, no more errors of this kind occured again, and my hair is thinner forever.
+
+[Back to Top](##Contents)
+
+## Persistant bugs
+
+### Duplicate orders
+
+The persistant bug in the project is an issue with duplicate orders being created, most likely due to the webhook handler not breaking if the order already exists. At the moment, database entires are filled in half by the checkout/views.py and the other half with Stripe data (such as PID and 'original bag') by the webhook handler. These duplicates also carry a default created on date, rather than the future date the user specifies. Luckily, data that the user enters IS saved in the original instance of the save by the view, so orders can still be carried out. However, this bug definitely needs to be streamlined before taking the store to a public facing position.
+
+### Slow load of images
+
+The slow loading of images in the library page is a bug that needs to be fixed, originally the data was going to be stored in dropbox as large .wav files would also be streamed through the site, and to allow any admin of the site to add content to the site without needing any coding experience. However, this seem inefficient for scale, as data load from dropbox is noticable slower than all other content on the site. The overlay to spotify play is also suffering due to this bug. So, in order to fix this, I need to impliment a way for admins to add images and files to the AWS bucket instead of linking images from all over the internet.
+
+### First load of user data not found
+
+There is another inconsistantly occuring, but still persistantly present bug observed by myself but also reported by testers involving their data and previous orders not being saved on account creation, and then sometimes concequently, not laoding or pre-loading into forms around the site. I think it has something to do with the way the user is redirected after creating an account (to the log in page instead their profile) and then concequently being redirected back to their profile after logging in (instead of the home page). These are features that ive tried to edit around to find the problem, ut left the current production build as redirect to profile after log in due to the ease of the user flow.
 
 [Back to Top](##Contents)
 
