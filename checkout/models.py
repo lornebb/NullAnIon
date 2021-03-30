@@ -79,7 +79,7 @@ class Order_Production(models.Model):
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
     order_type = models.CharField(max_length=20, default='Production')
-    production_type = models.CharField(max_length=50, choices=PRODUCTION_TYPE, default='')
+    production_type = models.CharField(max_length=1026, choices=PRODUCTION_TYPE, default='')
     deliver_by = models.DateField(auto_now_add=False)
 
     reference_link_type = models.CharField(

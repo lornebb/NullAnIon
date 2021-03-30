@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order
+from .models import Order, Order_Production
 
 
 class OrderAdmin(admin.ModelAdmin):
@@ -45,4 +45,37 @@ class OrderAdmin(admin.ModelAdmin):
                     'stripe_pid')
 
 
+class OrderAdminProduction(admin.ModelAdmin):
+    readonly_fields = ('order_number',)
+
+    fields = ('order_number',
+              'user_profile',
+              'full_name',
+              'email',
+              'phone_number',
+              'order_type',
+              'production_type',
+              'deliver_by',
+              'reference_link_type',
+              'reference_link',
+              'notes',
+              'contact',)
+
+    list_display = ('order_number',
+                    'user_profile',
+                    'full_name',
+                    'email',
+                    'phone_number',
+                    'order_type',
+                    'production_type',
+                    'deliver_by',
+                    'reference_link_type',
+                    'reference_link',
+                    'notes',
+                    'contact',
+                    'original_bag',
+                    'stripe_pid')
+
+
 admin.site.register(Order, OrderAdmin)
+admin.site.register(Order_Production, OrderAdminProduction)

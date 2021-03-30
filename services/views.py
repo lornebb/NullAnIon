@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 
 from .forms import MixForm, MasterForm, ProductionForm
+from services.models import Production
 from checkout.views import checkout, checkout_production
+
+from datetime import datetime
 
 
 def production_order(request):
@@ -14,6 +17,7 @@ def production_order(request):
         reference_link_type = None
         reference_link = None
 
+    order_type = "Production"
     production_type = request.POST.getlist('production_type')
     reference_link_type = reference_link_type
     reference_link = reference_link
@@ -24,12 +28,26 @@ def production_order(request):
     order = {
         'order_type': "Production",
         'production_type': production_type,
-        'deliver_by': deliver_by,
         'reference_link_type': reference_link_type,
         'reference_link': reference_link,
+        'deliver_by': deliver_by,
         'contact': contact,
         'notes': notes,
     }
+
+    d = datetime.strptime(deliver_by, '%d/%m/%Y')
+    d_flip = d.strftime('%Y/%m/%d')
+    deliver_by = d_flip.replace("/", "-")
+
+    Production.objects.create(
+        order_type=order_type,
+        production_type=production_type,
+        reference_link_type=reference_link_type,
+        reference_link=reference_link,
+        deliver_by=deliver_by,
+        contact=contact,
+        notes=notes
+    )
 
     bag = request.session['bag'] = order
 
