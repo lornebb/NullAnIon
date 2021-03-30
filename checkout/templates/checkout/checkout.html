@@ -16,193 +16,212 @@
 
 {% block content %}
 <main class="site-content">
-    <section class="container is-fluid">
-        <div class="columns">
-            <div class="column is-one-quarter is-hidden-mobile">
-                {% include 'includes/info-main.html' %}
-            </div>
-            <div class="columnns">
-                <div class="column">
-                    <div class="title is-3">Your {{order_form_services.order_type}} Order</div>
-                    {% if production_order %}
-                        <form action="{% url 'checkout_production' %}" method="POST" id="payment-form">
-                    {% else %}
-                        <form action="{% url 'checkout' %}" method="POST" id="payment-form">
-                    {% endif %}
-                        {% csrf_token %}
-                        <fieldset disabled>
-                            <!-- production / package type -->
-                            <div class="field">
+    <section>
+        <div class="container is-fluid">
+            <div class="columns">
+                <div class="column is-one-quarter is-hidden-mobile">
+                    {% include 'includes/info-main.html' %}
+                </div>
+                <div class="columnns">
+                    <div class="container is-fluid">
+                        <div class="column">
+                            <div class="title is-3">Your {{order_form_services.order_type}} Order</div>
                             {% if production_order %}
-                                <label for="production_type" class="label">Production Type:</label>
-                                {% for type in order_form_services.production_type %}
-                                    <div class="control">
-                                        <input name="production_type" class="input" value="{{ type }}">
-                                    </div>
-                                {% endfor %}
+                                <form action="{% url 'checkout_production' %}" method="POST" id="payment-form">
                             {% else %}
-                                <label for="package_type" class="label">Package Type:</label>
-                                <div class="control">
-                                    <input name="package_type" class="input" value="{{ order_form_services.package_type }}">
-                                </div>
+                                <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                             {% endif %}
-                            </div>
-                            <!-- deliver by -->
-                            <div class="field">
-                                <label for="deliver_by" class="label">Deliver By:</label>
-                                <div class="control">
-                                    <input name="deliver_by" class="input" value="{{ order_form_services.deliver_by }}" readonly>
-                                </div>
-                            </div>
-                            <!-- stem choices -->
-                            {% if production_order %}
-                            {% else %}
-                            <div class="field">
-                                <label for="stem_choices" class="label">You are sending </label>
-                                <div class="control">
-                                    <input name="stem_choices" class="input" value="{{ order_form_services.stem_choices }} Stems">
-                                </div>
-                            </div>
-                            {% endif %}
-                            <!-- revisions -->
-                            {% if production_order %}
-                            {% else %}
-                                <div class="field">
-                                    <label for="revisions" class="label">Revisions:</label>
-                                    <div class="control">
-                                        <input name="revisions" class="input" value="{{ order_form_services.revisions }} Revisions">
-                                    </div>
-                                </div>
-                            {% endif %}
-                            <!-- references -->
-                            {% if order_form_services.reference_link %}
-                                <div class="field">
-                                    <label for="reference_link_type" class="label">Reference Type:</label>
-                                    <div class="control">
-                                        <input name="reference_link_type" class="input" value="{{ order_form_services.reference_link_type }}">
-                                    </div>    
-                                </div>
-                                <div class="field">
-                                    <label for="reference_link" class="label">Reference Link:</label>
-                                    <div class="control">
-                                        <input name="reference_link" class="input" value="{{ order_form_services.reference_link }}">
-                                    </div>
-                                </div>
-                            {% else %}
-                                <div class="field">
-                                    <label for="references" class="label">References</label>
-                                    <p class="label has-text-weight-light">No references added.</p>
-                                </div>
-                            {% endif %}
-                            <!-- mix and master extras -->
-                            {% if production_order %}
-                            {% else %}
-                                {% if order_form_services.mix_extras %}
+                                {% csrf_token %}
+                                <fieldset disabled>
+                                    <!-- production / package type -->
                                     <div class="field">
-                                        <label for="mix_extras" class="label">Extras:</label>
-                                        {% for extras in order_form_services.mix_extras %}
-                                        <div class="control">
-                                            <input name="mix_extras" class="input" value="{{ extras }}">
-                                        </div>    
+                                    {% if production_order %}
+                                        <label for="production_type" class="label">Production Type:</label>
+                                        {% for type in order_form_services.production_type %}
+                                            <div class="control">
+                                                <input name="production_type" class="input" value="{{ type }}">
+                                            </div>
                                         {% endfor %}
-                                    </div>
-                                {% else %}
-                                    <div class="field">
-                                        <label for="mix_extras" class="label">Extras</label>
+                                    {% else %}
+                                        <label for="package_type" class="label">Package Type:</label>
                                         <div class="control">
-                                            <input name="mix_extras" class="input" value="No Extras">
-                                        </div>    
+                                            <input name="package_type" class="input" value="{{ order_form_services.package_type }}">
+                                        </div>
+                                    {% endif %}
                                     </div>
-                                {% endif %}
-                            {% endif %}
-                            <!-- production notes -->
-                            {% if production_order %}
-                                <div class="field">
-                                    <label for="notes" class="label">Notes</label>
-                                    <div class="control">
-                                        <textarea class="textarea" placeholder="{{ order_form_services.notes }}"></textarea>
-                                        <input name="notes" class="input is-invisible" value="{{ order_form_services.notes }}">
+                                    <!-- deliver by -->
+                                    <div class="field">
+                                        <label for="deliver_by" class="label">Deliver By:</label>
+                                        <div class="control">
+                                            <input name="deliver_by" class="input" value="{{ order_form_services.deliver_by }}" readonly>
+                                        </div>
                                     </div>
-                                </div>
-                            {% endif %}
-                            <!-- contact -->
-                            <div class="field">
-                                <label for="contact" class="label">File transfer contact email:</label>
-                                <div class="control">
-                                    <input name="contact" class="input" value="{{ order_form_services.contact }}">
-                                </div>
-                            </div>
-                            <!-- total price -->
-                            {% if production_order %}
-                            {% else %}
-                                <div class="field">
-                                    <label for="order_total" class="label">Total price:</label>
-                                    <div class="control">
-                                        <input name="order_total" class="input" value="{{ order_form_services.order_total }}">
+                                    <!-- stem choices -->
+                                    {% if production_order %}
+                                    {% else %}
+                                    <div class="field">
+                                        <label for="stem_choices" class="label">You are sending </label>
+                                        <div class="control">
+                                            <input name="stem_choices" class="input" value="{{ order_form_services.stem_choices }} Stems">
+                                        </div>
                                     </div>
+                                    {% endif %}
+                                    <!-- revisions -->
+                                    {% if production_order %}
+                                    {% else %}
+                                        <div class="field">
+                                            <label for="revisions" class="label">Revisions:</label>
+                                            <div class="control">
+                                                <input name="revisions" class="input" value="{{ order_form_services.revisions }} Revisions">
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    <!-- references -->
+                                    {% if order_form_services.reference_link %}
+                                        <div class="field">
+                                            <label for="reference_link_type" class="label">Reference Type:</label>
+                                            <div class="control">
+                                                <input name="reference_link_type" class="input" value="{{ order_form_services.reference_link_type }}">
+                                            </div>    
+                                        </div>
+                                        <div class="field">
+                                            <label for="reference_link" class="label">Reference Link:</label>
+                                            <div class="control">
+                                                <input name="reference_link" class="input" value="{{ order_form_services.reference_link }}">
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="field">
+                                            <label for="references" class="label">References</label>
+                                            <p class="label has-text-weight-light">No references added.</p>
+                                        </div>
+                                    {% endif %}
+                                    <!-- mix and master extras -->
+                                    {% if production_order %}
+                                    {% else %}
+                                        {% if order_form_services.mix_extras %}
+                                            <div class="field">
+                                                <label for="mix_extras" class="label">Extras:</label>
+                                                {% for extras in order_form_services.mix_extras %}
+                                                <div class="control">
+                                                    <input name="mix_extras" class="input" value="{{ extras }}">
+                                                </div>    
+                                                {% endfor %}
+                                            </div>
+                                        {% else %}
+                                            <div class="field">
+                                                <label for="mix_extras" class="label">Extras</label>
+                                                <div class="control">
+                                                    <input name="mix_extras" class="input" value="No Extras">
+                                                </div>    
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                    <!-- production notes -->
+                                    {% if production_order %}
+                                        <div class="field">
+                                            <label for="notes" class="label">Notes</label>
+                                            <div class="control">
+                                                <textarea class="textarea" placeholder="{{ order_form_services.notes }}"></textarea>
+                                                <input name="notes" class="input is-invisible" value="{{ order_form_services.notes }}">
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    <!-- contact -->
+                                    <div class="field">
+                                        <label for="contact" class="label">File transfer contact email:</label>
+                                        <div class="control">
+                                            <input name="contact" class="input" value="{{ order_form_services.contact }}">
+                                        </div>
+                                    </div>
+                                    <!-- total price -->
+                                    {% if production_order %}
+                                    {% else %}
+                                        <div class="field">
+                                            <label for="order_total" class="label">Total price:</label>
+                                            <div class="control">
+                                                <input name="order_total" class="input" value="{{ order_form_services.order_total }}">
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </fieldset>
+                                <!-- about you -->
+                                <fieldset>
+                                    {% if user.is_authenticated %}
+                                        <p class="is-size-4 mt-6 title"><u>About you</u></p>
+                                        <div class="label">You are logged in as {{ user }}</div>
+                                        <label class="is-size-5 pt-3 has-text-weight-bold">Username:</label>
+                                        <p class="is-size-3 "> {{ user }}</p>
+                                        <label class="is-size-5 pt-3 has-text-weight-bold">Email: </label>
+                                        <p class="is-size-3 ">{{ user.email }}</p>
+
+                                        <p class="is-size-4 mt-6 title"><u>Payment Form</u></p>
+
+
+                                        <div class="field">
+                                            <label class="label">Full Name:</label>
+                                            <div class="control">
+                                                <input class="input is-focused" name="full_name" value="{{ user.full_name }}" maxlength="50" autofocus="" type="text" placeholder="Full Name *" required="" id="id_full_name">
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label class="label">Email:</label>
+                                            <div id="div_id_email" class="control">
+                                                <input type="text" name="email" value="{{ user.email }}" maxlength="254" placeholder="Email Address *" class="input is-focused" required="" id="id_email">
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <label class="label">Phone (10 numbers min):</label>
+                                            <div id="div_id_phone" class="control">
+                                                <input type="tel" name="phone_number" value="{{ user.phone_number }}" minlength="10" maxlength="15" placeholder="Phone Number *" class="input is-focused" required="" id="id_phone_number">
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div class="field mt-6">
+                                            <label>
+                                                <a href="{% url 'account_signup' %}">Create Account</a>
+                                                or
+                                                <a href="{% url 'account_login' %}">Login</a>
+                                                to confirm this order.
+                                            </label>
+                                            <div class="control is-grouped">
+                                                <a class="button is-primary" href="{% url 'account_signup' %}">Create Account</a>
+                                                <a class="button is-primary" href="{% url 'account_login' %}">Log In</a>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </fieldset>
+                                <!-- payment -->
+                                <fieldset>
+                                    <p class="is-size-4 mt-6 title"><u>Card Details</u></p>
+                                    <!-- Stripe card element will go here -->
+                                    <div>
+                                        <div class="" id="card-element"></div>
+                                    </div>
+                                    <!-- used to display errors -->
+                                    <div>
+                                        <div class="" id="card-errors" role="alert"></div>
+                                    </div>
+                                    <input type="hidden" value="{{ client_secret }}" name="client_secret">
+                                </fieldset>
+                                <!-- Stripe -->
+                                <p class="has-text-weight-light">Your card will be charged in <strong>${{ grand_total|floatformat:2 }}</strong></p>
+                                <div class="field is-grouped pt-2">
+                                    <button class="button is-primary" type="submit" href="" id="submit-button">
+                                        Complete Order
+                                    </button>
                                 </div>
-                            {% endif %}
-                        </fieldset>
-                        <fieldset>
-                            {% if user.is_authenticated %}
-                                <legend><u>About you</u></legend>
-                                <label>You are logged in as {{ user }}</label>
-                                <p>Username on profile: {{ user }}</p>
-                                <p>Email on profile: {{ user.email }}</p>
-
-                                
-
-                                <p class="subtitle"><strong>Payment Form</strong></p>
-
-                                {{ order_form.full_name |as_crispy_field }}
-                                {{ order_form.email |as_crispy_field }}
-                                {{ order_form.phone_number |as_crispy_field }}
-
-                            {% else %}
-                                <label>
-                                    <a href="{% url 'account_signup' %}">Create Account</a>
-                                    or
-                                    <a href="{% url 'account_login' %}">Login</a>
-                                    to confirm this order
-                                </label>
-                            {% endif %}
-                        </fieldset>
-                        <br>
-                        <fieldset>
-                            <legend class="title">Payment</legend>
-                            <!-- Stripe card element will go here -->
-                            <div>
-                                <div class="" id="card-element"></div>
-                            </div>
-                            <!-- used to display errors -->
-                            <div>
-                                <div class="" id="card-errors" role="alert"></div>
-                            </div>
-                            <input type="hidden" value="{{ client_secret }}" name="client_secret">
-                        </fieldset>
-                        <!-- Stripe -->
-                        <div class="field is-grouped">
-                            <a class="button is-primary" href="">
-                                Adjust order
-                            </a>
-                            <button class="button is-primary" type="submit" href="" id="submit-button">
-                                Complete Order
-                            </button>
+                            </form>
                         </div>
-                        <p>
-                            <span>
-                                Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong>
-                            </span>
-                        </p>
-                    </form>
+                    </div>
                 </div>
             </div>
+            <div id="loading-overlay">
+                <h1 class="loading-icon">
+                    <span class="nullanicon"></span>
+                </h1>
+            </div>
         </div>
-    <div id="loading-overlay">
-        <h1 class="loading-icon">
-            <span class="nullanicon"></span>
-        </h1>
-    </div>
     </section>
 </main>
 {% endblock %}
