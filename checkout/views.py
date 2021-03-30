@@ -173,7 +173,6 @@ def checkout_production(request):
         full_name = request.POST['full_name']
         email = request.POST['email']
         phone_number = request.POST['phone_number']
-        # production_type = request.POST.getlist('production_type')
         reference_link_type = reference_link_type
         reference_link = reference_link
         deliver_by = request.POST['deliver_by']

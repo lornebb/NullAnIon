@@ -63,11 +63,12 @@ class StripeWH_Handler:
 
         order_exists = False
         attempt = 1
-        while attempt <= 5:
+        while attempt <= 10:
             try:
                 order = Order.objects.get(
                     full_name__iexact=billing_details.name,
                     email__iexact=billing_details.email,
+                    order_total=grand_total,
                     grand_total=grand_total,
                     original_bag=bag,
                     stripe_pid=pid,
