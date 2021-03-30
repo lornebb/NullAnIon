@@ -554,4 +554,6 @@ Click on the link / copy and paste the port that has been opened in the CLI to o
 
 - The sticky footer in bulma fix code was inspired by [Philip Walton](https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/)
 
+- Datepicker element was found on this tutotirla by [Vitor Freitas](https://simpleisbetterthancomplex.com/tutorial/2019/01/03/how-to-use-date-picker-with-django.html).
+
 [Back to Top](##Contents)
