@@ -32,19 +32,6 @@
             <div class="tile is-vertical is-8">
               <div class="tile">
                 <div class="tile is-parent">
-
-                  <!-- <article class="tile is-child image-tile"> -->
-                    <!-- img here -->
-                    <!-- <img src="{{ songs.image_url }}" alt="{{ songs.song_name }} artwork image" class="image-brew">
-                    <div class="overlay-brew">
-                      <figure class="image is-square"> 
-                        <a href="{{ songs.audio_link }}" target="_blank">
-                          <i class="icon-spotify"></i>
-                        </a>
-                      </figure>
-                    </div>
-                  </article> -->
-
                   <article class="tile is-child">
                     <div class="image-tile">
                       <img src="{{ songs.image_url }}" alt="{{ songs.song_name }} artwork image" class="image-brew">
@@ -68,8 +55,11 @@
                     </div>
                   </article>
                   <article class="tile is-child notification">
-                    <p class="title">{{ songs.category }}</p>
-                    <p class="subtitle">also: {{ songs.category_secondary }}</p>
+                    <label class="is-size-5 pt-3 has-text-weight-bold">Credit: </label>
+                    <p class="is-size-3 has-text-weight-light">{{ songs.category }}</p>
+                    {% if songs.category_secondary %}
+                      <p class="subtitle">also: {{ songs.category_secondary }}</p>
+                    {% endif %}
                   </article>
                 </div>
                 
