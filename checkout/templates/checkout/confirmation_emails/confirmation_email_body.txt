@@ -6,12 +6,7 @@ Your order information is:
 
 Order Number: {{ order.order_number }}
 
-Type of order: {{order.order_type }} 
-
 Order Total: $40.00
-
-
-Where we will send your completed order back to: {{ order.email }}
 
 Please UPLOAD your materials to this link: https://www.dropbox.com/request/274urgH1uszcVdFsOspJ
 
