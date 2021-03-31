@@ -493,6 +493,10 @@ The slow loading of images in the library page is a bug that needs to be fixed, 
 
 There is another inconsistantly occuring, but still persistantly present bug observed by myself but also reported by testers involving their data and previous orders not being saved on account creation, and then sometimes concequently, not laoding or pre-loading into forms around the site. I think it has something to do with the way the user is redirected after creating an account (to the log in page instead their profile) and then concequently being redirected back to their profile after logging in (instead of the home page). These are features that ive tried to edit around to find the problem, ut left the current production build as redirect to profile after log in due to the ease of the user flow.
 
+### Inconsistant Order Confirmation emails
+
+Right up until production deployment, the webhook, as above, was operating inconsistantly and creating duplicate orders with missing data but sending order confirmations correctly. However, currently it is not sending order confirmation emails, nor creating duplicate copies of data in the database. This bug is still persistant.
+
 [Back to Top](##Contents)
 
 ## Deployment
