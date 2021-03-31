@@ -147,11 +147,11 @@ class Production(models.Model):
         max_length=1026, choices=PRODUCTION_TYPE, blank=False, null=False)
     reference_link_type = models.CharField(
         max_length=1026, choices=reference_link_type,
-        blank=False, null=False, default=general)
-    reference_link = models.URLField(blank=True, null=False)
+        blank=False, null=True, default=general)
+    reference_link = models.URLField(blank=True, null=True)
     deliver_by = models.DateField(blank=False, null=False)
     contact = models.EmailField(blank=False, null=False, default='')
-    notes = models.CharField(max_length=320)
+    notes = models.CharField(max_length=320, null=False)
 
     def __str__(self):
         return self.contact
